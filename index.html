@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Дом без ошибок</title>
+<meta name="description" content="Прототип лендинга курса Мареты Новиковой">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Forum&family=Manrope:wght@300;400;500;600&display=swap">
+<style>
+/* Layout: тёмный "вечерний" интерьер. Фон-фотография меняется при листании (сцены), поверх - спокойные блоки текста; одно яркое место - слово с фото внутри букв на первом экране. */
+:root {
+  --ink: #15120f;          /* фон, тёплый графит */
+  --panel: #1d1915;        /* подложка блоков */
+  --panel-2: #26211b;
+  --ivory: #ece5d8;        /* основной текст */
+  --mute: #a99f90;         /* второстепенный текст */
+  --brass: #c4a46e;        /* латунь, только акценты */
+  --line: rgba(236,229,216,.14);
+  --veil: rgba(21,18,15,.78);
+  --f-display: "Forum", "Times New Roman", serif;
+  --f-body: "Manrope", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "Manrope", "Segoe UI", system-ui, sans-serif;
+  --gutter: clamp(16px, 5vw, 64px);
+  --maxw: 1180px;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--ink); color: var(--ivory);
+  font-family: var(--f-body); font-size: 17px; line-height: 1.6; font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+h1, h2, h3 { font-family: var(--f-display); font-weight: 400; line-height: 1.08; margin: 0; text-wrap: balance; }
+h2 { font-size: clamp(34px, 5vw, 58px); }
+h3 { font-size: clamp(22px, 2.4vw, 28px); }
+p { margin: 0; }
+.label { font-family: var(--f-mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--brass); }
+.wrap { max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); }
+:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; }
+
+/* --- черновик --- */
+.draft { background: var(--brass); color: var(--ink); font-size: 13px; text-align: center; padding: 8px var(--gutter); font-weight: 500; }
+
+/* --- шапка --- */
+.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  padding: 14px var(--gutter);
+  background: linear-gradient(var(--ink), rgba(21,18,15,0));
+}
+.logo { font-family: var(--f-display); font-size: 20px; letter-spacing: .28em; text-transform: uppercase; text-decoration: none; }
+.logo small { display: block; font-family: var(--f-mono); font-size: 10px; letter-spacing: .2em; color: var(--mute); }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 16px 26px; border: 1px solid var(--brass); color: var(--ink); background: var(--brass);
+  font: 600 15px/1 var(--f-body); letter-spacing: .02em; text-decoration: none; cursor: pointer;
+  transition: background .25s, color .25s;
+}
+.btn:hover { background: transparent; color: var(--brass); }
+.btn.ghost { background: transparent; color: var(--ivory); border-color: var(--line); }
+.btn.ghost:hover { border-color: var(--brass); color: var(--brass); }
+.top .btn { padding: 11px 18px; font-size: 13px; }
+
+/* --- сцены: фото на фоне меняется при листании --- */
+.scenes { position: fixed; inset: 0; z-index: -1; }
+.scenes img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  opacity: 0; transition: opacity 1.4s ease; filter: saturate(.85);
+}
+.scenes img.on { opacity: .34; }
+.scenes::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 30%, rgba(21,18,15,.35), var(--ink) 85%); }
+
+/* --- первый экран --- */
+.hero { position: relative; min-height: min(92vh, 860px); display: grid; align-items: end; overflow: hidden; }
+.hero .slides { position: absolute; inset: 0; }
+.hero .slides img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  opacity: 0; transform: scale(1.06); transition: opacity 1.6s ease, transform 7s ease-out;
+}
+.hero .slides img.on { opacity: 1; transform: scale(1); }
+.hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(21,18,15,.2) 0%, rgba(21,18,15,.55) 45%, var(--ink) 100%), linear-gradient(90deg, rgba(21,18,15,.6), rgba(21,18,15,0) 70%); }
+.hero-in { position: relative; z-index: 2; padding-block: 0 clamp(36px, 6vw, 72px); display: grid; gap: 22px; }
+.mark {
+  font-family: var(--f-display); font-size: clamp(96px, 24vw, 330px); line-height: .82; letter-spacing: .04em;
+  background-image: url(img/hero2.jpg); background-size: cover; background-position: 50% 50%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  -webkit-text-stroke: 1px rgba(236,229,216,.35);
+  filter: brightness(1.25) contrast(1.05);
+  animation: drift 24s ease-in-out infinite alternate;
+  user-select: none; margin-left: -.04em;
+}
+@keyframes drift { from { background-position: 20% 40%; } to { background-position: 80% 60%; } }
+.hero .label {
+  justify-self: start; color: var(--ivory); font-size: 13px; font-weight: 600;
+  padding: 9px 14px; background: rgba(21,18,15,.72); border: 1px solid rgba(196,164,110,.55);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+}
+.hero h1, .hero .lead { text-shadow: 0 2px 18px rgba(0,0,0,.65); }
+.hero h1 { font-size: clamp(30px, 4.4vw, 54px); max-width: 17ch; }
+.hero .lead { max-width: 54ch; color: var(--ivory); opacity: .88; font-size: clamp(16px, 1.6vw, 19px); }
+.hero .acts { display: flex; flex-wrap: wrap; gap: 12px; }
+.dots { display: flex; gap: 8px; }
+.dots button { width: 34px; height: 3px; padding: 0; border: 0; background: var(--line); cursor: pointer; }
+.dots button.on { background: var(--brass); }
+
+/* --- общие секции --- */
+section.block {
+  position: relative; z-index: 2; padding-block: clamp(72px, 11vw, 140px);
+  background: var(--ink); box-shadow: 0 -40px 80px rgba(0,0,0,.55);
+}
+section.block:nth-of-type(even) { background: var(--panel); }
+.head { display: grid; gap: 16px; max-width: 760px; margin-bottom: clamp(32px, 5vw, 56px); }
+.head p { color: var(--mute); max-width: 60ch; }
+.panel { background: var(--panel-2); border: 1px solid var(--line); }
+
+/* --- экраны-перебивки: фото закрепляется, следующий блок наезжает сверху --- */
+.screen { position: relative; height: 170vh; z-index: 1; }
+.screen .pin { position: sticky; top: 0; height: 100vh; overflow: hidden; display: grid; place-items: center; }
+.screen .pin img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  transform: scale(calc(1.28 - var(--p, 0) * .28)); filter: brightness(calc(.45 + var(--p, 0) * .4));
+  will-change: transform;
+}
+.screen .word {
+  position: relative; z-index: 2; text-align: center; padding-inline: var(--gutter);
+  font-family: var(--f-display); font-size: clamp(64px, 15vw, 220px); line-height: .9;
+  color: transparent; -webkit-text-stroke: 1.5px rgba(236,229,216,.9);
+  opacity: calc(.2 + var(--p, 0) * 1.6);
+  transform: translateY(calc((1 - var(--p, 0)) * 90px)) scale(calc(.9 + var(--p, 0) * .1));
+}
+.screen .cap {
+  position: absolute; z-index: 2; left: var(--gutter); bottom: clamp(24px, 6vh, 64px);
+  font-family: var(--f-mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--ivory);
+}
+
+/* --- появление блоков при прокрутке --- */
+.js .rise { transition: opacity 1s cubic-bezier(.2,.7,.2,1), transform 1s cubic-bezier(.2,.7,.2,1), clip-path 1.2s cubic-bezier(.2,.7,.2,1); }
+.js .rise:not(.in) { opacity: 0; transform: translateY(70px); }
+.js figure.rise:not(.in), .js .plan.rise:not(.in) { clip-path: inset(100% 0 0 0); transform: none; opacity: 1; }
+.js figure.rise.in, .js .plan.rise.in { clip-path: inset(0 0 0 0); }
+/* заголовки "печатаются" по словам */
+.js .type .w { display: inline-block; opacity: 0; transform: translateY(.45em); filter: blur(8px); transition: opacity .6s ease, transform .7s cubic-bezier(.2,.7,.2,1), filter .6s ease; }
+.js .type.in .w { opacity: 1; transform: none; filter: none; }
+/* уголки-рамки прорисовываются */
+.frame { position: relative; }
+.frame::before, .frame::after { content: ""; position: absolute; width: 0; height: 0; border-color: var(--brass); border-style: solid; transition: width .9s ease .3s, height .9s ease .3s; pointer-events: none; }
+.frame::before { top: -8px; left: -8px; border-width: 1px 0 0 1px; }
+.frame::after { bottom: -8px; right: -8px; border-width: 0 1px 1px 0; }
+.frame.in::before, .frame.in::after { width: 42px; height: 42px; }
+@media (prefers-reduced-motion: reduce) {
+  .js .type .w { opacity: 1; transform: none; filter: none; }
+  .frame::before, .frame::after { width: 42px; height: 42px; }
+  .js .rise:not(.in) { opacity: 1; transform: none; clip-path: none; }
+  .screen { height: auto; } .screen .pin { position: relative; height: 60vh; }
+}
+
+/* узнаёшь себя */
+.situations { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.situations div { background: var(--veil); padding: 28px 26px; font-family: var(--f-display); font-size: 22px; line-height: 1.3; min-width: 0; }
+.situations div span { display: block; margin-top: 12px; font-family: var(--f-body); font-size: 15px; color: var(--mute); line-height: 1.5; }
+
+/* история: планировка до / после */
+.story { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 3vw, 32px); }
+.plan { margin: 0; background: #f4f1ea; padding: 14px; min-width: 0; }
+.plan img { width: 100%; aspect-ratio: 4 / 4.4; object-fit: cover; object-position: top; }
+.plan figcaption { color: #2a241d; font-family: var(--f-mono); font-size: 12px; letter-spacing: .06em; padding-top: 10px; display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.story-text { margin-top: clamp(28px, 4vw, 44px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 28px; }
+.story-text p { color: var(--ivory); opacity: .9; }
+.quote { font-family: var(--f-display); font-size: clamp(24px, 2.8vw, 32px); line-height: 1.25; border-left: 1px solid var(--brass); padding-left: 22px; }
+
+/* формат */
+.format { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 24px; }
+.format .panel { padding: clamp(24px, 3vw, 36px); display: grid; gap: 14px; align-content: start; min-width: 0; }
+.big { font-family: var(--f-display); font-size: clamp(56px, 7vw, 88px); line-height: 1; color: var(--brass); }
+
+/* программа */
+.program { display: grid; gap: 0; border-top: 1px solid var(--line); }
+.program details { border-bottom: 1px solid var(--line); }
+.program summary {
+  list-style: none; cursor: pointer; display: grid; grid-template-columns: 52px 1fr auto; gap: 16px; align-items: baseline;
+  padding: 20px 4px;
+}
+.program summary::-webkit-details-marker { display: none; }
+.program .n { font-family: var(--f-mono); font-size: 13px; color: var(--brass); }
+.program .t { font-family: var(--f-display); font-size: clamp(20px, 2.2vw, 25px); line-height: 1.25; }
+.program .d { font-family: var(--f-mono); font-size: 12px; color: var(--mute); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.program details[open] summary .t { color: var(--brass); }
+.program .body { padding: 0 4px 22px 72px; color: var(--mute); max-width: 72ch; }
+@media (max-width: 560px) {
+  .program summary { grid-template-columns: 36px 1fr; }
+  .program .d { grid-column: 2; }
+  .program .body { padding-left: 4px; }
+}
+
+/* что соберёшь */
+.kit { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 12px; counter-reset: k; }
+.kit div { padding: 22px; border: 1px solid var(--line); background: var(--veil); min-width: 0; }
+.kit b { display: block; font-family: var(--f-display); font-weight: 400; font-size: 21px; margin-bottom: 6px; }
+.kit span { color: var(--mute); font-size: 15px; }
+
+/* работы учениц */
+.works { display: grid; grid-template-columns: repeat(12, 1fr); gap: 10px; }
+.works figure { margin: 0; position: relative; overflow: hidden; min-width: 0; }
+.works img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s ease; }
+.works figure:hover img { transform: scale(1.04); }
+.works figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 30px 14px 12px; background: linear-gradient(transparent, rgba(21,18,15,.85)); font-family: var(--f-mono); font-size: 11px; letter-spacing: .08em; }
+.works .a { grid-column: span 7; aspect-ratio: 4/3; } .works .b { grid-column: span 5; aspect-ratio: 4/4.8; }
+.works .c { grid-column: span 4; aspect-ratio: 3/4; } .works .d { grid-column: span 4; aspect-ratio: 3/4; } .works .e { grid-column: span 4; aspect-ratio: 3/4; }
+.works .f { grid-column: span 5; aspect-ratio: 4/4.4; } .works .g { grid-column: span 7; aspect-ratio: 4/3; }
+@media (max-width: 720px) { .works > figure { grid-column: span 12 !important; aspect-ratio: 4/3 !important; } }
+.note { margin-top: 14px; font-size: 13px; color: var(--mute); }
+
+/* автор */
+.author { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(24px, 5vw, 64px); align-items: center; }
+.portrait { aspect-ratio: 4/5; border: 1px dashed var(--brass); display: grid; place-items: center; text-align: center; padding: 24px; color: var(--mute); font-size: 14px; background: var(--veil); }
+.author .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); gap: 22px; margin-top: 28px; }
+.author .facts b { display: block; font-family: var(--f-display); font-weight: 400; font-size: 40px; color: var(--brass); line-height: 1; }
+.author .facts span { font-size: 14px; color: var(--mute); }
+@media (max-width: 760px) { .author { grid-template-columns: 1fr; } .portrait { max-width: 360px; } }
+
+/* цена */
+.price { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); border: 1px solid var(--brass); }
+.price > div { padding: clamp(26px, 4vw, 48px); min-width: 0; }
+.price ul { margin: 18px 0 0; padding: 0; list-style: none; display: grid; gap: 12px; }
+.price li { padding-left: 26px; position: relative; }
+.price li::before { content: ""; position: absolute; left: 0; top: .72em; width: 12px; height: 1px; background: var(--brass); }
+.price .cost { background: var(--panel); display: grid; align-content: center; gap: 18px; }
+.price .sum { font-family: var(--f-display); font-size: clamp(56px, 7vw, 84px); line-height: 1; font-variant-numeric: tabular-nums; }
+.price .sub { color: var(--mute); font-size: 15px; }
+@media (max-width: 760px) { .price { grid-template-columns: 1fr; } }
+
+/* вопросы */
+.faq details { border-bottom: 1px solid var(--line); }
+.faq summary { cursor: pointer; padding: 20px 4px; font-family: var(--f-display); font-size: clamp(20px, 2vw, 24px); list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; color: var(--brass); font-family: var(--f-mono); }
+.faq details[open] summary::after { content: "-"; }
+.faq p { padding: 0 4px 22px; color: var(--mute); max-width: 70ch; }
+
+/* финал */
+.final { text-align: left; display: grid; gap: 24px; justify-items: start; }
+.final h2 { max-width: 18ch; }
+
+footer { border-top: 1px solid var(--line); padding-block: 36px 90px; color: var(--mute); font-size: 13px; }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 32px; justify-content: space-between; }
+footer a { color: var(--mute); }
+
+/* кнопка на телефоне */
+.dock { display: none; }
+@media (max-width: 720px) {
+  .top .btn { display: none; }
+  .dock { display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px)); background: rgba(21,18,15,.92); border-top: 1px solid var(--line); }
+  .dock .btn { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mark { animation: none; }
+  .hero .slides img, .scenes img { transition: none; }
+  html { scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+
+<div class="draft">Прототип для согласования с Маретой. Фото - визуализации учениц курса, на сайт только с их согласия. Срок доступа и формулировки сверяются с офертой.</div>
+
+<header class="top">
+  <a class="logo" href="#top">Марета<small>Новикова · дизайн интерьера</small></a>
+  <a class="btn" href="#price">Хочу продуманный интерьер</a>
+</header>
+
+<main id="top">
+  <section class="hero" aria-label="Курс Дом без ошибок">
+    <div class="slides">
+      <img class="on" src="img/hero1.jpg" alt="Гостиная в тёплых тонах, визуализация ученицы курса">
+      <img src="img/hero2.jpg" alt="Кухня-гостиная с островом, визуализация ученицы курса">
+      <img src="img/hero3.jpg" alt="Кухня со столовой зоной, визуализация ученицы курса">
+      <img src="img/hero4.jpg" alt="Спальня с люстрой, визуализация ученицы курса">
+    </div>
+    <div class="wrap hero-in">
+      <div class="mark" aria-hidden="true">Дом</div>
+      <p class="label">Курс Мареты Новиковой · 14 уроков · 18 990 ₽</p>
+      <h1>Шкаф за 300 тысяч, из которого всё падает. Такие ошибки закладываются ещё до ремонта.</h1>
+      <p class="lead">Курс, на котором ты сама продумаешь интерьер своей квартиры или дома: планировку, свет, розетки, цвет и материалы. До того как начнутся траты и работа бригады.</p>
+      <div class="acts">
+        <a class="btn" href="#price">Хочу продуманный интерьер</a>
+        <a class="btn ghost" href="#program">Посмотреть программу</a>
+      </div>
+      <div class="dots" role="group" aria-label="Фото первого экрана">
+        <button class="on" aria-label="Фото 1"></button><button aria-label="Фото 2"></button><button aria-label="Фото 3"></button><button aria-label="Фото 4"></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" data-scene="kitchen" aria-labelledby="h-you">
+    <div class="wrap">
+      <div class="head rise">
+        <p class="label">Если ремонт впереди</p>
+        <h2 id="h-you">Узнаёшь себя?</h2>
+      </div>
+      <div class="situations rise">
+        <div>Ключи уже получили, а с чего начинать - непонятно<span>Сохранено сто картинок в Pinterest, но собрать из них свою квартиру не получается.</span></div>
+        <div>На плане всё помещается<span>Но непонятно, будет ли удобно жить: где сушить бельё, куда ставить пылесос, как открывается дверь шкафа.</span></div>
+        <div>Мастера ждут решений<span>Электрик спрашивает, где розетки, а ты ещё не знаешь, какая будет кухня.</span></div>
+        <div>Дизайн-проект не по карману<span>Хочется сделать красиво и правильно самой, но страшно ошибиться в том, что потом не переделать.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="screen" aria-hidden="true"><div class="pin"><img src="img/w-living.jpg" alt="" loading="lazy"><div class="word">Планировка</div><div class="cap">сначала удобство, потом красота</div></div></div>
+  <section class="block" data-scene="plan" aria-labelledby="h-story">
+    <div class="wrap">
+      <div class="head rise">
+        <p class="label">Реальная консультация</p>
+        <h2 id="h-story">Клиентке нужна была только расстановка мебели</h2>
+        <p>Марета посмотрела планировку частного дома и увидела ошибки, которые потом стоили бы перестройки. Работу бригады остановили и сделали планировку заново.</p>
+      </div>
+      <div class="story rise">
+        <figure class="plan">
+          <img src="img/plan-before.jpg" alt="Исходная планировка дома с размерами" loading="lazy">
+          <figcaption><span>ДО · исходный план</span><span>кухня-столовая 40,49 м²</span></figcaption>
+        </figure>
+        <figure class="plan">
+          <img src="img/plan-after.jpg" alt="Планировка после консультации: мастер-спальня, гардеробная, детская на вырост" loading="lazy">
+          <figcaption><span>ПОСЛЕ · планировка Мареты</span><span>+ гардеробная 5,38 м²</span></figcaption>
+        </figure>
+      </div>
+      <div class="story-text">
+        <p class="quote rise">Сначала нужно проработать планировку хотя бы в 2D. Тогда мы правильно расставим мебель и зонирование, и только потом передадим архитектору финальные правки.</p>
+        <p class="rise">Мастер-спальня получила свою гардеробную и санузел. Детскую заложили "на вырост", для двух детей. Кухню и гостиную поменяли местами: теперь еду подают прямо на террасу, а не носят мимо дивана. Этому курс и учит - видеть такие решения в своей квартире до ремонта.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="screen" aria-hidden="true"><div class="pin"><img src="img/w-bed.jpg" alt="" loading="lazy"><div class="word">Свет</div><div class="cap">спальня · визуализация ученицы</div></div></div>
+  <section class="block" data-scene="bed" aria-labelledby="h-format">
+    <div class="wrap">
+      <div class="head rise">
+        <p class="label">Для тех, у кого нет времени на лекции</p>
+        <h2 id="h-format">Короткие уроки. Это специально</h2>
+        <p>Когда Марета училась сама, лекции шли по два часа, и к концу никто не помнил начало. Поэтому здесь выжимка: посмотрела урок, сразу применила к своей квартире. Многие пересматривают уроки, когда начинают чертить, и слышат в них уже больше.</p>
+      </div>
+      <div class="format">
+        <div class="panel rise frame">
+          <div class="big" data-to="8">8</div>
+          <h3>видеоуроков без воды</h3>
+          <p class="sub" style="color:var(--mute)">Обмер, прихожая, кухня-гостиная, спальня, детская, ванная, цвет и визуализация.</p>
+        </div>
+        <div class="panel rise frame">
+          <div class="big" data-to="6">6</div>
+          <h3>практикумов с PDF</h3>
+          <p style="color:var(--mute)">Перегородки, сантехника, свет, розетки, выключатели и финальная проверка. Схемы, примеры и задания, которые можно распечатать.</p>
+        </div>
+        <div class="panel rise frame">
+          <div class="big">2D/3D</div>
+          <h3>в простой программе</h3>
+          <p style="color:var(--mute)">Планировку делаешь в Remplanner. Работать в нём учат встроенные видео самой программы, а курс учит думать как дизайнер. Для заданий хватает скриншотов, платный экспорт не нужен.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="screen" aria-hidden="true"><div class="pin"><img src="img/hero2.jpg" alt="" loading="lazy"><div class="word">14 уроков</div><div class="cap">кухня-гостиная · визуализация ученицы</div></div></div>
+  <section class="block" id="program" data-scene="kitchen" aria-labelledby="h-program">
+    <div class="wrap">
+      <div class="head rise">
+        <p class="label">Программа</p>
+        <h2 id="h-program">14 уроков: от первого обмера до разговора с бригадой</h2>
+      </div>
+      <div class="program rise">
+        <details><summary><span class="n">01</span><span class="t">Начало: обмеры и первый план</span><span class="d">видео + задание</span></summary><div class="body">Как снять размеры квартиры и собрать обмерный план. PDF, который можно распечатать и взять с собой на замер.</div></details>
+        <details><summary><span class="n">02</span><span class="t">Прихожая: удобный вход и хранение</span><span class="d">видео + задание</span></summary><div class="body">Где хранить одежду, обувь и сумки, как не упереться дверью в шкаф.</div></details>
+        <details><summary><span class="n">03</span><span class="t">Кухня-гостиная: красиво и удобно</span><span class="d">видео + задание</span></summary><div class="body">Зонирование, расстановка техники, обеденная зона и маршруты, чтобы не ходить с тарелками мимо дивана.</div></details>
+        <details><summary><span class="n">04</span><span class="t">Спальня: отдых и хранение</span><span class="d">видео + задание</span></summary><div class="body">Кровать, проходы, шкафы и прикроватные зоны. Почему размер матраса и каркаса - не одно и то же.</div></details>
+        <details><summary><span class="n">05</span><span class="t">Детская: сон, учёба и игры</span><span class="d">видео + задание</span></summary><div class="body">Планировка детской сейчас и "на вырост".</div></details>
+        <details><summary><span class="n">06</span><span class="t">Ванная: комфорт в каждом сантиметре</span><span class="d">видео + задание</span></summary><div class="body">Душ или ванна, стиральная машина, хранение. Варианты на маленькой площади.</div></details>
+        <details><summary><span class="n">07</span><span class="t">Цвет и материалы: палитра и мудборд</span><span class="d">видео + задание</span></summary><div class="body">Как собрать палитру из понравившейся фотографии и сочетать дерево, камень и ткани.</div></details>
+        <details><summary><span class="n">08</span><span class="t">Визуализация: примерь интерьер до ремонта</span><span class="d">видео + задание</span></summary><div class="body">От 3D-вида планировки к картинке будущей комнаты.</div></details>
+        <details><summary><span class="n">09</span><span class="t">Демонтаж, возведение и согласования</span><span class="d">текст + PDF</span></summary><div class="body">План демонтажа и новых перегородок, какие вопросы задать специалисту по перепланировке.</div></details>
+        <details><summary><span class="n">10</span><span class="t">Сантехника: от расстановки до подключений</span><span class="d">текст + PDF</span></summary><div class="body">Перенос приборов, выводы воды и канализации, задание для сантехника.</div></details>
+        <details><summary><span class="n">11</span><span class="t">Освещение: свет для жизни</span><span class="d">текст + PDF</span></summary><div class="body">Сценарии света, рабочий и декоративный свет, план светильников.</div></details>
+        <details><summary><span class="n">12</span><span class="t">Розетки: сначала техника и мебель</span><span class="d">текст + PDF</span></summary><div class="body">Почему розетки ставят после выбора техники и как отдать понятный план электрику.</div></details>
+        <details><summary><span class="n">13</span><span class="t">Выключатели: понятное управление светом</span><span class="d">текст + PDF</span></summary><div class="body">Группы света, проходные выключатели, нумерация для электрика.</div></details>
+        <details><summary><span class="n">14</span><span class="t">Финальная проверка: готов ли проект к ремонту</span><span class="d">текст + PDF</span></summary><div class="body">Поиск мебели по фото, список покупок, выбор бригады и вопросы, которые нужно закрыть до начала работ.</div></details>
+        <details><summary><span class="n">+</span><span class="t">Бонусы: реальные проекты</span><span class="d">5 PDF</span></summary><div class="body">Полные проекты, в том числе квартира 45 м² и детская, чтобы видеть, как выглядит готовый результат.</div></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" data-scene="dining" aria-labelledby="h-kit">
+    <div class="wrap">
+      <div class="head rise">
+        <p class="label">На выходе</p>
+        <h2 id="h-kit">Что ты соберёшь для своей квартиры</h2>
+        <p>Не папку случайных картинок, а связанный план, с которым можно идти в магазин и к мастерам.</p>
+      </div>
+      <div class="kit rise">
+        <div><b>Обмерный план</b><span>Размеры, окна, двери, стояки</span></div>
+        <div><b>Планировку</b><span>Мебель и техника по местам</span></div>
+        <div><b>План света</b><span>Светильники и сценарии</span></div>
+        <div><b>План розеток</b><span>Под конкретную технику</span></div>
+        <div><b>Палитру и мудборд</b><span>Цвета, материалы, фактуры</span></div>
+        <div><b>Визуализацию</b><span>Как будет выглядеть комната</span></div>
+        <div><b>Список покупок</b><span>С ценами и аналогами</span></div>
+        <div><b>Вопросы бригаде</b><span>Что закрыть до старта работ</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="screen" aria-hidden="true"><div class="pin"><img src="img/w-bath.jpg" alt="" loading="lazy"><div class="word">Материалы</div><div class="cap">ванная · визуализация ученицы</div></div></div>
+  <section class="block" data-scene="bath" aria-labelledby="h-works">
+    <div class="wrap">
+      <div class="head rise">
+        <p class="label">Работы учениц</p>
+        <h2 id="h-works">Так выглядят проекты тех, кто прошёл курс</h2>
+      </div>
+      <div class="works">
+        <figure class="a rise"><img src="img/w-living.jpg" alt="Гостиная с ТВ-зоной" loading="lazy"><figcaption>Гостиная · визуализация ученицы</figcaption></figure>
+        <figure class="b rise"><img src="img/w-bath.jpg" alt="Ванная с мрамором" loading="lazy"><figcaption>Ванная · визуализация ученицы</figcaption></figure>
+        <figure class="c rise"><img src="img/w-hall.jpg" alt="Прихожая" loading="lazy"><figcaption>Прихожая</figcaption></figure>
+        <figure class="d rise"><img src="img/w-bath2.jpg" alt="Санузел с камнем" loading="lazy"><figcaption>Санузел</figcaption></figure>
+        <figure class="e rise"><img src="img/w-room.jpg" alt="Детская" loading="lazy"><figcaption>Детская</figcaption></figure>
+        <figure class="f rise"><img src="img/w-bed.jpg" alt="Спальня" loading="lazy"><figcaption>Спальня</figcaption></figure>
+        <figure class="g rise"><img src="img/w-kids.jpg" alt="Детская на двоих" loading="lazy"><figcaption>Детская на двоих</figcaption></figure>
+      </div>
+      <p class="note">Имена авторов добавим после их согласия на публикацию.</p>
+    </div>
+  </section>
+
+  <section class="block" data-scene="plan" aria-labelledby="h-author">
+    <div class="wrap author">
+      <div class="portrait rise frame">Здесь будет портрет Мареты<br>(в белом пиджаке)</div>
+      <div class="rise">
+        <p class="label">Автор курса</p>
+        <h2 id="h-author" style="margin-top:14px">Марета Новикова</h2>
+        <p style="margin-top:20px;max-width:58ch;opacity:.9">Дизайнер интерьеров, руководитель студии. На консультациях Марета чаще всего видит одно и то же: люди начинают ремонт с красивой картинки, а не с планировки. Курс построен так же, как она работает с клиентами: сначала удобство, потом красота.</p>
+        <div class="facts">
+          <div><b data-to="2.5" data-suf=" млн">2,5 млн</b><span>просмотров у ролика про шкаф, который не работает</span></div>
+          <div><b data-to="3" data-suf=" года">3 года</b><span>в профессии и много реальных проектов</span></div>
+          <div><b>5-6</b><span>квартир сейчас в реализации</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="screen" aria-hidden="true"><div class="pin"><img src="img/w-dining.jpg" alt="" loading="lazy"><div class="word">Твой дом</div><div class="cap">столовая · визуализация ученицы</div></div></div>
+  <section class="block" id="price" data-scene="dining" aria-labelledby="h-price">
+    <div class="wrap">
+      <div class="head rise">
+        <p class="label">Участие</p>
+        <h2 id="h-price">Один курс. Всё внутри</h2>
+      </div>
+      <div class="price rise frame">
+        <div>
+          <h3>"Дом без ошибок"</h3>
+          <ul>
+            <li>14 уроков: видео, тексты и практикумы с PDF</li>
+            <li>Задания на твоей квартире</li>
+            <li>Чат с ученицами курса</li>
+            <li>5 реальных проектов в бонусах</li>
+            <li>Доступ навсегда</li>
+          </ul>
+        </div>
+        <div class="cost">
+          <div class="sum" data-to="18990" data-suf=" ₽">18 990 ₽</div>
+          <p class="sub">Есть рассрочка.</p>
+          <a class="btn" href="#price">Хочу продуманный интерьер</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" data-scene="bed" aria-labelledby="h-faq">
+    <div class="wrap">
+      <div class="head rise">
+        <p class="label">Вопросы</p>
+        <h2 id="h-faq">О чём спрашивают перед покупкой</h2>
+      </div>
+      <div class="faq rise">
+        <details><summary>Я никогда не занималась дизайном. Получится?</summary><p>Курс сделан для своего ремонта, а не для профессии. Каждый урок - один шаг на твоей квартире, по порядку.</p></details>
+        <details><summary>В какой программе работать? Нужно платить?</summary><p>Основная программа - Remplanner, в ней есть свои обучающие видео. Для заданий хватает скриншотов, платный экспорт не нужен.</p></details>
+        <details><summary>Подойдёт для дома или большой квартиры?</summary><p>Курс рассчитан на типовые квартиры от 20 до 150 м². Для частного дома или нестандартного объекта лучше индивидуальная консультация.</p></details>
+        <details><summary>У меня свободная планировка. С чего начать?</summary><p>С урока про демонтаж и перегородки: там разобрано, что можно менять и какие вопросы задать специалисту по перепланировке.</p></details>
+        <details><summary>Сколько времени займёт курс?</summary><p>Уроки короткие, проходить можно в своём темпе. Доступ не ограничен по времени.</p></details>
+        <details><summary>Можно потом отдать планы мастерам?</summary><p>Да, планы помогают объяснить мастерам, что ты хочешь. Расчёты, согласования и монтаж делают профильные специалисты.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" data-scene="kitchen" aria-labelledby="h-final">
+    <div class="wrap final rise">
+      <h2 id="h-final">Продумай свой дом, пока всё ещё можно поменять на бумаге</h2>
+      <a class="btn" href="#price">Хочу продуманный интерьер</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>ИП Новикова Марета Валикоевна · ИНН 233304079958</span>
+    <span><a href="#price">Оферта</a> · <a href="#price">Политика конфиденциальности</a></span>
+    <span>Instagram принадлежит компании Meta, деятельность которой запрещена в РФ</span>
+  </div>
+</footer>
+
+<div class="dock"><a class="btn" href="#price">Хочу продуманный интерьер · 18 990 ₽</a></div>
+
+<script>
+(function () {
+  var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // слайдер первого экрана
+  var slides = document.querySelectorAll(".hero .slides img");
+  var dots = document.querySelectorAll(".dots button");
+  var mark = document.querySelector(".mark");
+  var srcs = ["img/hero2.jpg", "img/hero3.jpg", "img/hero4.jpg", "img/hero1.jpg"];
+  var i = 0, timer = null;
+  function show(n) {
+    i = (n + slides.length) % slides.length;
+    slides.forEach(function (s, k) { s.classList.toggle("on", k === i); });
+    dots.forEach(function (d, k) { d.classList.toggle("on", k === i); });
+    if (mark) mark.style.backgroundImage = "url(" + srcs[i] + ")";
+  }
+  function start() { if (!reduce) timer = setInterval(function () { show(i + 1); }, 3200); }
+  dots.forEach(function (d, k) { d.addEventListener("click", function () { clearInterval(timer); show(k); start(); }); });
+  start();
+
+  // заголовки по словам
+  document.querySelectorAll(".hero h1, h2").forEach(function (h) {
+    var words = h.textContent.trim().split(/\s+/);
+    h.setAttribute("aria-label", h.textContent.trim());
+    h.innerHTML = words.map(function (w, k) { return '<span class="w" aria-hidden="true" style="transition-delay:' + (k * 70) + 'ms">' + w + '</span>'; }).join(" ");
+    h.classList.add("type");
+  });
+  // счётчики
+  function countUp(el) {
+    var to = parseFloat(el.dataset.to), suf = el.dataset.suf || "", dec = (el.dataset.to.split(".")[1] || "").length;
+    var t0 = null, dur = 1400;
+    function fmt(v) { var s = v.toFixed(dec).replace(".", ","); return s.replace(/\B(?=(\d{3})+(?!\d))/g, " ") + suf; }
+    if (reduce) { el.textContent = fmt(to); return; }
+    function step(ts) { if (!t0) t0 = ts; var k = Math.min(1, (ts - t0) / dur); k = 1 - Math.pow(1 - k, 3); el.textContent = fmt(to * k); if (k < 1) requestAnimationFrame(step); }
+    requestAnimationFrame(step);
+  }
+  var fx = document.querySelectorAll(".type, .frame, [data-to]");
+  if ("IntersectionObserver" in window) {
+    var fo = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add("in");
+        if (e.target.dataset.to) countUp(e.target);
+        fo.unobserve(e.target);
+      });
+    }, { rootMargin: "0px 0px -15% 0px" });
+    fx.forEach(function (el) { fo.observe(el); });
+  } else { fx.forEach(function (el) { el.classList.add("in"); }); }
+
+  // появление блоков
+  document.documentElement.classList.add("js");
+  var rises = document.querySelectorAll(".rise");
+  rises.forEach(function (el) {
+    var kids = el.parentElement ? Array.prototype.indexOf.call(el.parentElement.children, el) : 0;
+    el.style.transitionDelay = Math.min(kids, 6) * 90 + "ms";
+  });
+  if ("IntersectionObserver" in window) {
+    var ro = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); ro.unobserve(e.target); } });
+    }, { rootMargin: "0px 0px -12% 0px" });
+    rises.forEach(function (el) {
+      if (el.getBoundingClientRect().top < innerHeight) el.classList.add("in"); else ro.observe(el);
+    });
+  } else { rises.forEach(function (el) { el.classList.add("in"); }); }
+
+  // экраны-перебивки: прогресс прокрутки в переменную --p
+  var screens = document.querySelectorAll(".screen");
+  var ticking = false;
+  function upd() {
+    ticking = false;
+    var h = innerHeight;
+    screens.forEach(function (s) {
+      var r = s.getBoundingClientRect();
+      var p = (h - r.top) / (r.height);
+      p = Math.max(0, Math.min(1, p));
+      s.style.setProperty("--p", p.toFixed(3));
+    });
+  }
+  if (!reduce) {
+    addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(upd); } }, { passive: true });
+    addEventListener("resize", upd);
+    upd();
+  } else { screens.forEach(function (s) { s.style.setProperty("--p", "1"); }); }
+})();
+</script>
+</body>
+</html>
