@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <title>Курс Мареты Новиковой</title>
-<meta name="description" content="Прототип лендинга курса Мареты Новиковой">
+<meta name="description" content="Курс Мареты Новиковой: продумай интерьер своей квартиры до ремонта - планировка, свет, розетки, цвет и материалы.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Piazzolla:ital,opsz,wght@0,8..30,300..700;1,8..30,400&family=Onest:wght@300;400;500;600&display=swap">
@@ -30,7 +30,7 @@
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
-  margin: 0; background: var(--ink); color: var(--ivory);
+  margin: 0; overflow-x: hidden; background: var(--ink); color: var(--ivory);
   font-family: var(--f-body); font-size: 17px; line-height: 1.6; font-weight: 400;
   -webkit-font-smoothing: antialiased;
 }
@@ -88,7 +88,7 @@ p { margin: 0; }
 .hero-in { position: relative; z-index: 2; padding-block: 0 clamp(36px, 6vw, 72px); display: grid; gap: 22px; }
 .mark {
   font-family: var(--f-display); font-size: clamp(96px, 24vw, 330px); line-height: .82; letter-spacing: .04em;
-  background-image: url(img/hero2.jpg); background-size: cover; background-position: 50% 50%;
+  background-image: url(img/hero1.jpg); background-size: cover; background-position: 50% 50%;
   -webkit-background-clip: text; background-clip: text; color: transparent;
   -webkit-text-stroke: 1px rgba(236,229,216,.35);
   filter: brightness(1.25) contrast(1.05);
@@ -120,7 +120,7 @@ section.block:nth-of-type(even) { background: var(--panel); }
 .panel { background: var(--panel-2); border: 1px solid var(--line); }
 
 /* --- экраны-перебивки: фото закрепляется, следующий блок наезжает сверху --- */
-.screen { position: relative; height: 170vh; z-index: 1; }
+.screen { position: relative; height: 150vh; z-index: 1; }
 .screen .pin { position: sticky; top: 0; height: 100vh; overflow: hidden; display: grid; place-items: center; }
 .screen .pin img {
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
@@ -272,6 +272,7 @@ footer a { color: var(--mute); }
 
 /* кнопка на телефоне */
 .dock { display: none; }
+[hidden] { display: none !important; }
 @media (max-width: 720px) {
   .top .btn { display: none; }
   .dock { display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px)); background: rgba(21,18,15,.92); border-top: 1px solid var(--line); }
@@ -293,10 +294,10 @@ footer a { color: var(--mute); }
 </header>
 
 <main id="top">
-  <section class="hero" aria-label="Курс Дом без ошибок">
+  <section class="hero" aria-label="Курс Мареты Новиковой: продумай дом до ремонта">
     <div class="slides">
       <img class="on" src="img/hero1.jpg" alt="Светлая гостиная со столовой, визуализация ученицы курса">
-      <img src="img/hero2.jpg" alt="Детская на двоих, визуализация ученицы курса">
+      <img src="img/hero2.jpg" alt="Светлая детская в бежевых тонах, визуализация ученицы курса">
       <img src="img/hero3.jpg" alt="Кухня со столовой зоной, визуализация ученицы курса">
       <img src="img/hero4.jpg" alt="Спальня с люстрой, визуализация ученицы курса">
     </div>
@@ -525,10 +526,10 @@ footer a { color: var(--mute); }
           </ul>
         </div>
         <div class="cost">
-          <div class="sum" data-to="18990" data-suf=" ₽">18 990 ₽</div>
+          <div class="sum">18 990 ₽</div>
           <p class="sub">Есть рассрочка.</p>
           <p class="anchor">Для сравнения: планировка, электрика и визуализации в студии Мареты стоят 4 000 ₽ за м². Для квартиры 60 м² это 240 000 ₽. На курсе ты делаешь это для своей квартиры сама.</p>
-          <a class="btn" href="#price">Хочу продуманный интерьер</a>
+          <a class="btn" href="#pay" data-pay>Перейти к оплате</a>
         </div>
       </div>
     </div>
@@ -566,12 +567,12 @@ footer a { color: var(--mute); }
 <footer>
   <div class="wrap">
     <span>ИП Новикова Марета Валикоевна · ИНН 233304079958</span>
-    <span><a href="#price">Оферта</a> · <a href="#price">Политика конфиденциальности</a></span>
+    <span>Оферта · Политика конфиденциальности (ссылки появятся после публикации документов)</span>
     <span>Instagram принадлежит компании Meta, деятельность которой запрещена в РФ</span>
   </div>
 </footer>
 
-<div class="dock"><a class="btn" href="#price">Хочу продуманный интерьер · 18 990 ₽</a></div>
+<div class="dock" hidden><a class="btn" href="#price">Записаться на курс</a></div>
 
 <script>
 (function () {
@@ -580,18 +581,22 @@ footer a { color: var(--mute); }
   var slides = document.querySelectorAll(".hero .slides img");
   var dots = document.querySelectorAll(".dots button");
   var mark = document.querySelector(".mark");
-  var srcs = ["img/hero2.jpg", "img/hero3.jpg", "img/hero4.jpg", "img/hero1.jpg"];
-  var i = 0, timer = null;
+ var i = 0, timer = null;
   function show(n) {
     i = (n + slides.length) % slides.length;
     slides.forEach(function (s, k) { s.classList.toggle("on", k === i); });
     dots.forEach(function (d, k) { d.classList.toggle("on", k === i); });
-    if (mark) mark.style.backgroundImage = "url(" + srcs[i] + ")";
+    if (mark) mark.style.backgroundImage = "url(" + slides[i].getAttribute("src") + ")";
   }
   function start() { if (!reduce) timer = setInterval(function () { show(i + 1); }, 3200); }
   dots.forEach(function (d, k) { d.addEventListener("click", function () { clearInterval(timer); show(k); start(); }); });
   start();
 
+  // нижняя кнопка на телефоне: только после первого экрана
+  var dock = document.querySelector(".dock"), hero = document.querySelector(".hero");
+  if (dock && hero && "IntersectionObserver" in window) {
+    new IntersectionObserver(function (es) { dock.hidden = es[0].isIntersecting; }).observe(hero);
+  } else if (dock) { dock.hidden = false; }
   // заголовки по словам
   document.querySelectorAll(".hero h1, h2").forEach(function (h) {
     var words = h.textContent.trim().split(/\s+/);
