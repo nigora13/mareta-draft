@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>Дом без ошибок</title>
+<title>Курс Мареты Новиковой</title>
 <meta name="description" content="Прототип лендинга курса Мареты Новиковой">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -165,6 +165,14 @@ section.block:nth-of-type(even) { background: var(--panel); }
 .situations div { background: var(--veil); padding: 28px 26px; font-family: var(--f-display); font-size: 22px; line-height: 1.3; min-width: 0; }
 .situations div span { display: block; margin-top: 12px; font-family: var(--f-body); font-size: 15px; color: var(--mute); line-height: 1.5; }
 
+/* как думает Марета: три комнаты из рилс */
+.think { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 20px; }
+.think article { border: 1px solid var(--line); background: var(--panel-2); padding: clamp(22px, 3vw, 32px); display: grid; gap: 14px; align-content: start; min-width: 0; }
+.think .was { color: var(--mute); font-size: 15px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+.think ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.think li { padding-left: 22px; position: relative; font-size: 15px; }
+.think li::before { content: ""; position: absolute; left: 0; top: .7em; width: 10px; height: 1px; background: var(--brass); }
+
 /* история: планировка до / после */
 .compare { position: relative; max-width: 860px; margin-inline: auto; background: #f4f1ea; border: 14px solid #f4f1ea; aspect-ratio: 1 / 1.05; overflow: hidden; touch-action: pan-y; --x: 50%; }
 .compare img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #f4f1ea; }
@@ -243,6 +251,7 @@ section.block:nth-of-type(even) { background: var(--panel); }
 .price .cost { background: var(--panel); display: grid; align-content: center; gap: 18px; }
 .price .sum { font-family: var(--f-display); font-size: clamp(56px, 7vw, 84px); line-height: 1; font-variant-numeric: tabular-nums; }
 .price .sub { color: var(--mute); font-size: 15px; }
+.price .anchor { font-size: 14px; color: var(--mute); border-top: 1px solid var(--line); padding-top: 14px; }
 @media (max-width: 760px) { .price { grid-template-columns: 1fr; } }
 
 /* вопросы */
@@ -277,7 +286,6 @@ footer a { color: var(--mute); }
 </head>
 <body>
 
-<div class="draft">Прототип для согласования с Маретой. Фото - визуализации учениц курса, на сайт только с их согласия. Срок доступа и формулировки сверяются с офертой.</div>
 
 <header class="top">
   <a class="logo" href="#top">Марета<small>Новикова · дизайн интерьера</small></a>
@@ -287,16 +295,15 @@ footer a { color: var(--mute); }
 <main id="top">
   <section class="hero" aria-label="Курс Дом без ошибок">
     <div class="slides">
-      <img class="on" src="img/hero1.jpg" alt="Гостиная в тёплых тонах, визуализация ученицы курса">
-      <img src="img/hero2.jpg" alt="Кухня-гостиная с островом, визуализация ученицы курса">
+      <img class="on" src="img/hero1.jpg" alt="Светлая гостиная со столовой, визуализация ученицы курса">
+      <img src="img/hero2.jpg" alt="Детская на двоих, визуализация ученицы курса">
       <img src="img/hero3.jpg" alt="Кухня со столовой зоной, визуализация ученицы курса">
       <img src="img/hero4.jpg" alt="Спальня с люстрой, визуализация ученицы курса">
     </div>
     <div class="wrap hero-in">
       <div class="mark" aria-hidden="true">Дом</div>
-      <p class="label">Курс Мареты Новиковой · 14 уроков · 18 990 ₽</p>
-      <h1>Шкаф за 300 тысяч, из которого всё падает. Такие ошибки закладываются ещё до ремонта.</h1>
-      <p class="lead">Курс, на котором ты сама продумаешь интерьер своей квартиры или дома: планировку, свет, розетки, цвет и материалы. До того как начнутся траты и работа бригады.</p>
+      <h1>Продумай свой дом до ремонта</h1>
+      <p class="lead">Курс Мареты Новиковой для своей квартиры: планировка, свет, розетки, цвет и материалы. Короткие уроки и задания на твоём жилье.</p>
       <div class="acts">
         <a class="btn" href="#price">Хочу продуманный интерьер</a>
         <a class="btn ghost" href="#program">Посмотреть программу</a>
@@ -311,13 +318,56 @@ footer a { color: var(--mute); }
     <div class="wrap">
       <div class="head rise">
         <p class="label">Если ремонт впереди</p>
-        <h2 id="h-you">Узнаёшь себя?</h2>
+        <h2 id="h-you">Шкаф за 300 тысяч, из которого всё падает</h2>
+        <p>Такие решения закладываются ещё на плане, до того как приходит бригада. Узнаёшь себя?</p>
       </div>
       <div class="situations rise">
         <div>Ключи уже получили, а с чего начинать - непонятно<span>Сохранено сто картинок в Pinterest, но собрать из них свою квартиру не получается.</span></div>
         <div>На плане всё помещается<span>Но непонятно, будет ли удобно жить: где сушить бельё, куда ставить пылесос, как открывается дверь шкафа.</span></div>
         <div>Мастера ждут решений<span>Электрик спрашивает, где розетки, а ты ещё не знаешь, какая будет кухня.</span></div>
         <div>Дизайн-проект не по карману<span>Хочется сделать красиво и правильно самой, но страшно ошибиться в том, что потом не переделать.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" data-scene="kitchen" aria-labelledby="h-think">
+    <div class="wrap">
+      <div class="head rise">
+        <p class="label">Из роликов Мареты</p>
+        <h2 id="h-think">Стандартные решения делают неудобной даже дорогую квартиру</h2>
+        <p>Три комнаты, которые чаще всего делают "как у всех". И как их продумывает Марета.</p>
+      </div>
+      <div class="think">
+        <article class="rise">
+          <h3>Шкаф до потолка</h3>
+          <p class="was">Сотни тысяч рублей за шкаф, а в итоге лестница в комнате, чтобы что-то достать, и вечный бардак на полках.</p>
+          <ul>
+            <li>Внизу большой модуль под одеяла и подушки</li>
+            <li>Для белья выкатные секции: открыла и всё видно</li>
+            <li>Под потолком пантограф, который сам опускается вниз</li>
+            <li>Весь шкаф работает без лестницы</li>
+          </ul>
+        </article>
+        <article class="rise">
+          <h3>Кухня</h3>
+          <p class="was">Встроенный холодильник маленький, угловой модуль неудобный, на нижних полках всё теряется.</p>
+          <ul>
+            <li>Отдельно стоящий холодильник, а сверху хранение</li>
+            <li>Вместо неудобного угла высокий шкаф</li>
+            <li>Внизу только выкатные ящики</li>
+            <li>Одна большая мойка вместо двойной</li>
+          </ul>
+        </article>
+        <article class="rise">
+          <h3>Спальня</h3>
+          <p class="was">Расстановка как из 90-х: дверь бьётся о тумбу, одежда живёт на стуле.</p>
+          <ul>
+            <li>За дверью шкаф для одежды на каждый день</li>
+            <li>Вместо тумбы столик, дверь открывается свободно</li>
+            <li>Ниша для зарядки и косметики</li>
+            <li>Нижняя ниша под чемодан</li>
+          </ul>
+        </article>
       </div>
     </div>
   </section>
@@ -465,18 +515,19 @@ footer a { color: var(--mute); }
       </div>
       <div class="price rise frame">
         <div>
-          <h3>"Дом без ошибок"</h3>
+          <h3>Курс Мареты Новиковой</h3>
           <ul>
             <li>14 уроков: видео, тексты и практикумы с PDF</li>
             <li>Задания на твоей квартире</li>
-            <li>Чат с ученицами курса</li>
+            <li>Чат курса, где можно задать вопрос</li>
             <li>5 реальных проектов в бонусах</li>
-            <li>Доступ навсегда</li>
+            <li>Доступ без ограничения по времени</li>
           </ul>
         </div>
         <div class="cost">
           <div class="sum" data-to="18990" data-suf=" ₽">18 990 ₽</div>
           <p class="sub">Есть рассрочка.</p>
+          <p class="anchor">Для сравнения: планировка, электрика и визуализации в студии Мареты стоят 4 000 ₽ за м². Для квартиры 60 м² это 240 000 ₽. На курсе ты делаешь это для своей квартиры сама.</p>
           <a class="btn" href="#price">Хочу продуманный интерьер</a>
         </div>
       </div>
@@ -494,7 +545,10 @@ footer a { color: var(--mute); }
         <details><summary>В какой программе работать? Нужно платить?</summary><p>Основная программа - Remplanner, в ней есть свои обучающие видео. Для заданий хватает скриншотов, платный экспорт не нужен.</p></details>
         <details><summary>Подойдёт для дома или большой квартиры?</summary><p>Курс рассчитан на типовые квартиры от 20 до 150 м². Для частного дома или нестандартного объекта лучше индивидуальная консультация.</p></details>
         <details><summary>У меня свободная планировка. С чего начать?</summary><p>С урока про демонтаж и перегородки: там разобрано, что можно менять и какие вопросы задать специалисту по перепланировке.</p></details>
-        <details><summary>Сколько времени займёт курс?</summary><p>Уроки короткие, проходить можно в своём темпе. Доступ не ограничен по времени.</p></details>
+        <details><summary>Сколько времени займёт курс?</summary><p>В среднем 1-1,5 месяца в своём темпе. Уроки короткие, а доступ не ограничен по времени: можно вернуться к нужному уроку, когда начнётся ремонт.</p></details>
+        <details><summary>Нужен мощный компьютер?</summary><p>Нет. Хватит обычного ноутбука: программа для планировки не требует мощного железа.</p></details>
+        <details><summary>А если я застряну на задании?</summary><p>В курсе есть чат, где можно задать вопрос. Марета отвечает ученицам, а самым активным может дать личный разбор.</p></details>
+        <details><summary>Это точно мой курс?</summary><p>Если ремонт впереди и ты хочешь сама понимать, что и где будет стоять, - да. Если хочешь полностью отдать проект дизайнеру, лучше заказать его в студии.</p></details>
         <details><summary>Можно потом отдать планы мастерам?</summary><p>Да, планы помогают объяснить мастерам, что ты хочешь. Расчёты, согласования и монтаж делают профильные специалисты.</p></details>
       </div>
     </div>
@@ -502,7 +556,8 @@ footer a { color: var(--mute); }
 
   <section class="block" data-scene="kitchen" aria-labelledby="h-final">
     <div class="wrap final rise">
-      <h2 id="h-final">Продумай свой дом, пока всё ещё можно поменять на бумаге</h2>
+      <h2 id="h-final">Ремонт всё равно начнётся. Вопрос, кто примет решения: ты заранее или бригада на месте</h2>
+      <p style="color:var(--mute);max-width:56ch">Передвинуть стену на плане - это минута. На объекте - недели и деньги.</p>
       <a class="btn" href="#price">Хочу продуманный интерьер</a>
     </div>
   </section>
