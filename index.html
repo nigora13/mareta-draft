@@ -173,6 +173,33 @@ section.block:nth-of-type(even) { background: var(--panel); }
 .think li { padding-left: 22px; position: relative; font-size: 15px; }
 .think li::before { content: ""; position: absolute; left: 0; top: .7em; width: 10px; height: 1px; background: var(--brass); }
 
+/* гардеробные */
+.wardrobe { margin-top: clamp(36px, 5vw, 56px); display: grid; gap: 16px; }
+.wr-strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.wr-strip figure { margin: 0; overflow: hidden; aspect-ratio: 3 / 4; }
+.wr-strip img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s ease; }
+.wr-strip figure:hover img { transform: scale(1.05); }
+@media (max-width: 720px) {
+  .wr-strip { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 72%; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; }
+  .wr-strip figure { scroll-snap-align: start; }
+}
+
+/* 3D-туры */
+.tour { display: grid; gap: 16px; }
+.tour-stage { background: #000; aspect-ratio: 16 / 9; }
+.tour-stage iframe { width: 100%; height: 100%; border: 0; display: block; }
+@media (max-width: 720px) { .tour-stage { aspect-ratio: 4 / 5; } }
+.tour-bar { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; }
+.tour-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.tour-pills button, .tour-more {
+  font: 500 13px/1 var(--f-body); padding: 10px 14px; cursor: pointer;
+  background: transparent; color: var(--ivory); border: 1px solid var(--line);
+}
+.tour-pills button[aria-selected="true"] { border-color: var(--brass); color: var(--brass); }
+.tour-pills button:hover, .tour-more:hover { border-color: var(--brass); }
+.tour-more { color: var(--mute); }
+.tour-link { color: var(--brass); font-size: 14px; text-decoration: none; margin-left: auto; }
+
 /* история: планировка до / после */
 .compare { position: relative; max-width: 860px; margin-inline: auto; background: #f4f1ea; border: 14px solid #f4f1ea; aspect-ratio: 1 / 1.05; overflow: hidden; touch-action: pan-y; --x: 50%; }
 .compare img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #f4f1ea; }
@@ -370,6 +397,15 @@ footer a { color: var(--mute); }
           </ul>
         </article>
       </div>
+      <div class="wardrobe">
+        <p class="label rise">Так выглядит продуманная гардеробная</p>
+        <div class="wr-strip">
+          <figure class="rise"><img src="img/wr1.jpg" alt="Гардеробная: штанги, полки с подсветкой, место под чемоданы" loading="lazy"></figure>
+          <figure class="rise"><img src="img/wr2.jpg" alt="Гардеробная: выкатные ящики и полки для белья с подсветкой" loading="lazy"></figure>
+          <figure class="rise"><img src="img/wr3.jpg" alt="Гардеробная: две штанги по высоте и полки под коробки" loading="lazy"></figure>
+          <figure class="rise"><img src="img/wr4.jpg" alt="Гардеробная: полки для сумок и подсвеченные полки для обуви" loading="lazy"></figure>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -491,6 +527,26 @@ footer a { color: var(--mute); }
     </div>
   </section>
 
+  <section class="block" id="tours" aria-labelledby="h-tours">
+    <div class="wrap">
+      <div class="head rise">
+        <p class="label">Проекты Мареты в 3D</p>
+        <h2 id="h-tours">Пройдись по проекту, как будто ты уже внутри</h2>
+        <p>Это 3D-туры реальных проектов Мареты. Выбери проект, крути комнату пальцем или мышкой и смотри, как решения работают вместе.</p>
+      </div>
+      <div class="tour rise frame">
+        <div class="tour-stage">
+          <iframe id="tour-frame" title="3D-тур по проекту Мареты" loading="lazy" allow="fullscreen; xr-spatial-tracking; gyroscope; accelerometer" allowfullscreen></iframe>
+        </div>
+        <div class="tour-bar">
+          <div class="tour-pills" id="tour-pills" role="tablist" aria-label="Проекты"></div>
+          <button type="button" class="tour-more" id="tour-more">Показать все проекты</button>
+          <a id="tour-open" class="tour-link" target="_blank" rel="noopener">Открыть на весь экран ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="block" data-scene="plan" aria-labelledby="h-author">
     <div class="wrap author">
       <div class="portrait rise frame">Здесь будет портрет Мареты<br>(в белом пиджаке)</div>
@@ -528,7 +584,7 @@ footer a { color: var(--mute); }
         <div class="cost">
           <div class="sum">18 990 ₽</div>
           <p class="sub">Есть рассрочка.</p>
-          <p class="anchor">Для сравнения: планировка, электрика и визуализации в студии Мареты стоят 4 000 ₽ за м². Для квартиры 60 м² это 240 000 ₽. На курсе ты делаешь это для своей квартиры сама.</p>
+          <p class="anchor">Для сравнения: планировка, электрика и визуализации в студии Мареты стоят 4 000 ₽ за м². На курсе ты делаешь это для своей квартиры сама.</p>
           <a class="btn" href="#pay" data-pay>Перейти к оплате</a>
         </div>
       </div>
@@ -591,6 +647,42 @@ footer a { color: var(--mute); }
   function start() { if (!reduce) timer = setInterval(function () { show(i + 1); }, 3200); }
   dots.forEach(function (d, k) { d.addEventListener("click", function () { clearInterval(timer); show(k); start(); }); });
   start();
+
+  // 3D-туры Homestyler
+  var TOURS = ["cA116UJhhn68U3NtfENxop","38X7wvtLKrb958qhc7aYup","vaQUM4FBkqbnhakKutAPQT","v9ULygxruipkr3qUipb6Hg",
+    "vPqkCWqhMqDght1BZKnUuf","9Jnn1Me9m9hrLkJ8vUcPWo","kt5CHfGwkUUdH7Lbe4kSnf","ufxc834iWe99Q9AmGhd4J3",
+    "iK1Wsyf91GkD2ZwB1abS8c","xuTkN1qz1HGyvcxvLru1gp","hFZwts5M3JscKibqLzj7fv","rZew42U4tRzPvbb7x6fcsc",
+    "971eAJLxth323opYAppreM","62Y5dygwbyXrPo9zpBLzQh","gwQun4B52AietVutD35Lxu","5aA2KkRxVQoo1EN9vM9o3D",
+    "7F7WRkExjNQAAXs99dCzjH","kFZN5TTFhoNLL9V7QinQEF","XjBHEK7ZMVqeuPKyj3ACc","hD2CeXyiNQg6X6pG6e55e6",
+    "atniRBFegopQXNtXGRxk2k","njQPWtQ7r2D1SzRVndqE8M","iEJSKcjta8CiTzq8S8HSy6","jBaqToi3cpv44b94Qjj4sd",
+    "eY72X7m4VHK7i27WSezRpr","f55fKiZBqFwcE3yGJWE7G","uMM9rwjAxvDojeA8xPE1Jw","v72tcsW3L5JEy73RmpLWEs",
+    "uWAxnzWQv2nW1M792jcf2V","foDSb9pDQ8eeBYDAsdqPpj","aWy2fZ6VGPaFYN5R4jEHmD","2aFyTS6JfZ4fYmi97kd3cz"];
+  var tFrame = document.getElementById("tour-frame"), tOpen = document.getElementById("tour-open"),
+      tPills = document.getElementById("tour-pills"), tMore = document.getElementById("tour-more"), tLoaded = false;
+  if (tFrame && tPills) {
+    var tUrl = function (id) { return "https://panorama.homestyler.com/v2?m=p&id=" + id + "&locale=ru_RU"; };
+    var tShow = function (k) {
+      tFrame.src = tUrl(TOURS[k]); tOpen.href = tUrl(TOURS[k]); tLoaded = true;
+      Array.prototype.forEach.call(tPills.children, function (b, j) { b.setAttribute("aria-selected", j === k ? "true" : "false"); });
+    };
+    TOURS.forEach(function (id, k) {
+      var b = document.createElement("button");
+      b.type = "button"; b.setAttribute("role", "tab"); b.textContent = "Проект " + (k + 1);
+      if (k >= 8) b.hidden = true;
+      b.addEventListener("click", function () { tShow(k); });
+      tPills.appendChild(b);
+    });
+    tMore.addEventListener("click", function () {
+      Array.prototype.forEach.call(tPills.children, function (b) { b.hidden = false; });
+      tMore.hidden = true;
+    });
+    if ("IntersectionObserver" in window) {
+      var tio = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting && !tLoaded) { tShow(0); tio.disconnect(); } });
+      }, { rootMargin: "0px 0px 300px 0px" });
+      tio.observe(document.getElementById("tours"));
+    } else { tShow(0); }
+  }
 
   // нижняя кнопка на телефоне: только после первого экрана
   var dock = document.querySelector(".dock"), hero = document.querySelector(".hero");
