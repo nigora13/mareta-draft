@@ -88,11 +88,17 @@ p { margin: 0; }
   opacity: 0; transform: scale(1.06); transition: opacity 1.6s ease, transform 7s ease-out;
 }
 .hero .slides img.on { opacity: 1; transform: scale(1); }
+.hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; }
+.strip { position: relative; z-index: 2; background: var(--ink); border-block: 1px solid var(--line); }
+.strip-in { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; padding-block: 26px; }
+.strip b { display: block; font-family: var(--f-display); font-weight: 350; font-size: clamp(30px, 4vw, 48px); line-height: 1; color: var(--brass); font-variant-numeric: tabular-nums; }
+.strip span { font-size: 14px; color: var(--mute); }
+@media (max-width: 560px) { .strip-in { grid-template-columns: 1fr; gap: 14px; } .strip-in > div { display: flex; align-items: baseline; gap: 12px; } }
 .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(21,18,15,.2) 0%, rgba(21,18,15,.55) 45%, var(--ink) 100%), linear-gradient(90deg, rgba(21,18,15,.6), rgba(21,18,15,0) 70%); }
 .hero-in { position: relative; z-index: 2; padding-block: 0 clamp(36px, 6vw, 72px); display: grid; gap: 22px; }
 .mark {
   font-family: var(--f-display); font-size: clamp(96px, 24vw, 330px); line-height: .82; letter-spacing: .04em;
-  background-image: url(img/hero1.jpg); background-size: cover; background-position: 50% 50%;
+  background-image: url(img/hero-poster.jpg); background-size: cover; background-position: 50% 50%;
   -webkit-background-clip: text; background-clip: text; color: transparent;
   -webkit-text-stroke: 1px rgba(236,229,216,.35);
   filter: brightness(1.25) contrast(1.05);
@@ -193,6 +199,23 @@ section.block:nth-of-type(even) { background: var(--panel); }
 .lt-note { font-size: 13px; color: var(--mute); }
 @media (max-width: 760px) { .light { grid-template-columns: 1fr; } }
 
+/* проект ученицы: слайдер */
+.student { display: grid; gap: 14px; }
+.st-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.st-who { font-family: var(--f-display); font-size: clamp(22px, 2.6vw, 30px); }
+.st-count { font-size: 14px; color: var(--brass); font-variant-numeric: tabular-nums; }
+.st-track { display: grid; grid-auto-flow: column; grid-auto-columns: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.st-track::-webkit-scrollbar { display: none; }
+.st-track figure { margin: 0; scroll-snap-align: start; position: relative; aspect-ratio: 16 / 10; }
+.st-track img { width: 100%; height: 100%; object-fit: cover; }
+.st-track figcaption { position: absolute; left: 0; bottom: 0; padding: 30px 16px 14px; right: 0; background: linear-gradient(transparent, rgba(23,18,14,.8)); font-size: 13px; letter-spacing: .1em; text-transform: uppercase; }
+.st-nav { display: flex; gap: 10px; }
+.st-nav button { width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--line); background: transparent; color: var(--ivory); font-size: 18px; cursor: pointer; }
+.st-nav button:hover { border-color: var(--brass); color: var(--brass); }
+.more-works { margin-top: 28px; }
+#other-works { margin-top: 24px; }
+@media (max-width: 720px) { .st-track figure { aspect-ratio: 4 / 5; } }
+
 /* гардеробная с точками */
 .hs { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(20px, 4vw, 48px); align-items: center; }
 .hs-pic { position: relative; aspect-ratio: 1; overflow: hidden; }
@@ -230,7 +253,14 @@ section.block:nth-of-type(even) { background: var(--panel); }
 /* 3D-туры */
 .tour { display: grid; gap: 16px; }
 .tour-stage { background: #000; aspect-ratio: 16 / 9; }
+.tour-stage { position: relative; }
 .tour-stage iframe { width: 100%; height: 100%; border: 0; display: block; }
+.tour-cover { position: absolute; inset: 0; z-index: 2; border: 0; padding: 0; cursor: pointer; background: #000; display: grid; place-items: center; align-content: center; gap: 12px; color: var(--ivory); font-family: var(--f-body); }
+.tour-cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.45); transition: transform 1.2s ease; }
+.tour-cover:hover img { transform: scale(1.04); }
+.tc-btn { position: relative; padding: 18px 30px; border-radius: 999px; background: var(--stone); color: var(--ink); font-weight: 500; font-size: 16px; }
+.tc-sub { position: relative; font-size: 14px; color: var(--ivory); opacity: .85; }
+.tour-cover[hidden] { display: none; }
 @media (max-width: 720px) { .tour-stage { aspect-ratio: 4 / 5; } }
 .tour-bar { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; }
 .tour-pills { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -306,7 +336,8 @@ section.block:nth-of-type(even) { background: var(--panel); }
 
 /* автор */
 .author { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(24px, 5vw, 64px); align-items: center; }
-.portrait { aspect-ratio: 4/5; border: 1px dashed var(--brass); display: grid; place-items: center; text-align: center; padding: 24px; color: var(--mute); font-size: 14px; background: var(--veil); }
+.portrait { aspect-ratio: 4/5; background: var(--panel-2); }
+.portrait video { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; display: block; }
 .author .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); gap: 22px; margin-top: 28px; }
 .author .facts b { display: block; font-family: var(--f-display); font-weight: 400; font-size: 40px; color: var(--brass); line-height: 1; }
 .author .facts span { font-size: 14px; color: var(--mute); }
@@ -363,24 +394,28 @@ footer a { color: var(--mute); }
 <main id="top">
   <section class="hero" aria-label="Курс Мареты Новиковой: продумай дом до ремонта">
     <div class="slides">
-      <img class="on" src="img/hero1.jpg" alt="Светлая гостиная со столовой, визуализация ученицы курса">
-      <img src="img/hero2.jpg" alt="Светлая детская в бежевых тонах, визуализация ученицы курса">
-      <img src="img/hero3.jpg" alt="Кухня со столовой зоной, визуализация ученицы курса">
-      <img src="img/hero4.jpg" alt="Спальня с люстрой, визуализация ученицы курса">
+      <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="img/hero-poster.jpg" aria-label="Марета проходит по реальному интерьеру: кухня, камин, гардеробная">
+        <source src="img/hero.mp4" type="video/mp4">
+      </video>
     </div>
     <div class="wrap hero-in">
       <div class="mark" aria-hidden="true">Дом</div>
-      <h1>Продумай свой дом до ремонта</h1>
-      <p class="lead">Курс Мареты Новиковой для своей квартиры: планировка, свет, розетки, цвет и материалы. Короткие уроки и задания на твоём жилье.</p>
+      <h1>Увидь свой дом до ремонта</h1>
+      <p class="lead">Курс Мареты Новиковой: планировка, свет и материалы для твоей квартиры. Короткие уроки и задания на твоём жилье.</p>
       <div class="acts">
         <a class="btn" href="#price">Хочу продуманный интерьер</a>
         <a class="btn ghost" href="#program">Посмотреть программу</a>
       </div>
-      <div class="dots" role="group" aria-label="Фото первого экрана">
-        <button class="on" aria-label="Фото 1"></button><button aria-label="Фото 2"></button><button aria-label="Фото 3"></button><button aria-label="Фото 4"></button>
-      </div>
     </div>
   </section>
+
+  <div class="strip" aria-label="Цифры">
+    <div class="wrap strip-in">
+      <div><b data-to="200" data-suf="+">200+</b><span>проектов квартир и домов</span></div>
+      <div><b data-to="2.5" data-suf=" млн">2,5 млн</b><span>просмотров у ролика про шкаф</span></div>
+      <div><b data-to="14">14</b><span>уроков от обмера до бригады</span></div>
+    </div>
+  </div>
 
   <section class="block" data-scene="kitchen" aria-labelledby="h-you">
     <div class="wrap">
@@ -573,14 +608,30 @@ footer a { color: var(--mute); }
         <p class="label">Работы учениц</p>
         <h2 id="h-works">Так выглядят проекты тех, кто прошёл курс</h2>
       </div>
-      <div class="works">
-        <figure class="a rise"><img src="img/w-living.jpg" alt="Гостиная с ТВ-зоной" loading="lazy"><figcaption>Гостиная · визуализация ученицы</figcaption></figure>
-        <figure class="b rise"><img src="img/w-bath.jpg" alt="Ванная с мрамором" loading="lazy"><figcaption>Ванная · визуализация ученицы</figcaption></figure>
-        <figure class="c rise"><img src="img/w-hall.jpg" alt="Прихожая" loading="lazy"><figcaption>Прихожая</figcaption></figure>
-        <figure class="d rise"><img src="img/w-bath2.jpg" alt="Санузел с камнем" loading="lazy"><figcaption>Санузел</figcaption></figure>
-        <figure class="e rise"><img src="img/w-room.jpg" alt="Детская" loading="lazy"><figcaption>Детская</figcaption></figure>
-        <figure class="f rise"><img src="img/w-bed.jpg" alt="Спальня" loading="lazy"><figcaption>Спальня</figcaption></figure>
-        <figure class="g rise"><img src="img/w-kids.jpg" alt="Детская на двоих" loading="lazy"><figcaption>Детская на двоих</figcaption></figure>
+      <div class="student rise">
+        <div class="st-head">
+          <p class="st-who">Проект одной ученицы целиком</p>
+          <p class="st-count" id="st-count">1 / 6</p>
+        </div>
+        <div class="st-track" id="st-track">
+          <figure><img src="img/e1.jpg" alt="Кухня-столовая, проект ученицы" loading="lazy"><figcaption>Кухня-столовая</figcaption></figure>
+          <figure><img src="img/e2.jpg" alt="Гостиная, проект ученицы" loading="lazy"><figcaption>Гостиная</figcaption></figure>
+          <figure><img src="img/e3.jpg" alt="Спальня с ТВ-зоной и туалетным столиком, проект ученицы" loading="lazy"><figcaption>Спальня, ТВ-зона</figcaption></figure>
+          <figure><img src="img/e4.jpg" alt="Спальня, зона у входа с банкеткой, проект ученицы" loading="lazy"><figcaption>Спальня, зона у входа</figcaption></figure>
+          <figure><img src="img/e5.jpg" alt="Санузел, проект ученицы" loading="lazy"><figcaption>Санузел</figcaption></figure>
+          <figure><img src="img/e6.jpg" alt="Ванная, проект ученицы" loading="lazy"><figcaption>Ванная</figcaption></figure>
+        </div>
+        <div class="st-nav"><button type="button" id="st-prev" aria-label="Предыдущее фото">←</button><button type="button" id="st-next" aria-label="Следующее фото">→</button></div>
+      </div>
+      <button type="button" class="btn ghost more-works" id="more-works">Посмотреть другие работы учениц</button>
+      <div class="works" id="other-works" hidden>
+        <figure class="a"><img src="img/w-living.jpg" alt="Гостиная с ТВ-зоной" loading="lazy"><figcaption>Гостиная</figcaption></figure>
+        <figure class="b"><img src="img/w-bath.jpg" alt="Ванная с мрамором" loading="lazy"><figcaption>Ванная</figcaption></figure>
+        <figure class="c"><img src="img/w-hall.jpg" alt="Прихожая" loading="lazy"><figcaption>Прихожая</figcaption></figure>
+        <figure class="d"><img src="img/w-bath2.jpg" alt="Санузел с камнем" loading="lazy"><figcaption>Санузел</figcaption></figure>
+        <figure class="e"><img src="img/w-room.jpg" alt="Детская" loading="lazy"><figcaption>Детская</figcaption></figure>
+        <figure class="f"><img src="img/w-bed.jpg" alt="Спальня" loading="lazy"><figcaption>Спальня</figcaption></figure>
+        <figure class="g"><img src="img/w-dining.jpg" alt="Столовая" loading="lazy"><figcaption>Столовая</figcaption></figure>
       </div>
       <p class="note">Имена авторов добавим после их согласия на публикацию.</p>
     </div>
@@ -595,6 +646,7 @@ footer a { color: var(--mute); }
       </div>
       <div class="tour rise frame">
         <div class="tour-stage">
+          <button type="button" class="tour-cover" id="tour-cover"><img src="img/hero-poster.jpg" alt="" loading="lazy"><span class="tc-btn">Войти в проект</span><span class="tc-sub">3D-тур откроется здесь, комнату можно крутить</span></button>
           <iframe id="tour-frame" title="3D-тур по проекту Мареты" loading="lazy" allow="fullscreen; xr-spatial-tracking; gyroscope; accelerometer" allowfullscreen></iframe>
         </div>
         <div class="tour-bar">
@@ -608,14 +660,17 @@ footer a { color: var(--mute); }
 
   <section class="block" data-scene="plan" aria-labelledby="h-author">
     <div class="wrap author">
-      <div class="portrait rise frame">Здесь будет портрет Мареты<br>(в белом пиджаке)</div>
+      <div class="portrait rise frame">
+        <video autoplay muted loop playsinline preload="metadata" poster="img/portrait2.jpg" aria-label="Марета Новикова говорит в камеру">
+          <source src="img/portrait2.mp4" type="video/mp4">
+        </video>
+      </div>
       <div class="rise">
         <p class="label">Автор курса</p>
         <h2 id="h-author" style="margin-top:14px">Марета Новикова</h2>
         <p style="margin-top:20px;max-width:58ch;opacity:.9">Дизайнер интерьеров, руководитель студии. На консультациях Марета чаще всего видит одно и то же: люди начинают ремонт с красивой картинки, а не с планировки. Курс построен так же, как она работает с клиентами: сначала удобство, потом красота.</p>
         <div class="facts">
-          <div><b data-to="2.5" data-suf=" млн">2,5 млн</b><span>просмотров у ролика про шкаф, который не работает</span></div>
-          <div><b data-to="14">14</b><span>уроков от обмера до разговора с бригадой</span></div>
+          <div><b>690 тыс.</b><span>подписчиков в Instagram</span></div>
           <div><b>5-6</b><span>квартир сейчас в реализации</span></div>
         </div>
       </div>
@@ -704,7 +759,9 @@ footer a { color: var(--mute); }
     dots.forEach(function (d, k) { d.classList.toggle("on", k === i); });
     if (mark) mark.style.backgroundImage = "url(" + slides[i].getAttribute("src") + ")";
   }
-  function start() { if (!reduce) timer = setInterval(function () { show(i + 1); }, 3200); }
+  var hv = document.querySelector(".hero-video");
+  if (hv && reduce) { hv.removeAttribute("autoplay"); hv.pause(); }
+  function start() { if (!reduce && slides.length > 1) timer = setInterval(function () { show(i + 1); }, 3200); }
   dots.forEach(function (d, k) { d.addEventListener("click", function () { clearInterval(timer); show(k); start(); }); });
   start();
 
@@ -774,13 +831,25 @@ footer a { color: var(--mute); }
       Array.prototype.forEach.call(tPills.children, function (b) { b.hidden = false; });
       tMore.hidden = true;
     });
-    if ("IntersectionObserver" in window) {
-      var tio = new IntersectionObserver(function (es) {
-        es.forEach(function (e) { if (e.isIntersecting && !tLoaded) { tShow(0); tio.disconnect(); } });
-      }, { rootMargin: "0px 0px 300px 0px" });
-      tio.observe(document.getElementById("tours"));
-    } else { tShow(0); }
+    var tCover = document.getElementById("tour-cover");
+    var tStart = function (k) { if (tCover) tCover.hidden = true; tShow(k); };
+    if (tCover) tCover.addEventListener("click", function () { tStart(0); });
+    Array.prototype.forEach.call(tPills.children, function (b, k) { b.addEventListener("click", function () { if (tCover) tCover.hidden = true; }); });
+    tOpen.href = tUrl(TOURS[0]);
   }
+
+  // проект ученицы: слайдер
+  var stT = document.getElementById("st-track"), stC = document.getElementById("st-count");
+  if (stT) {
+    var stN = stT.children.length;
+    var stCur = function () { return Math.round(stT.scrollLeft / stT.clientWidth); };
+    var stGo = function (k) { k = (k + stN) % stN; stT.scrollTo({ left: k * stT.clientWidth, behavior: reduce ? "auto" : "smooth" }); };
+    stT.addEventListener("scroll", function () { stC.textContent = (stCur() + 1) + " / " + stN; }, { passive: true });
+    document.getElementById("st-prev").addEventListener("click", function () { stGo(stCur() - 1); });
+    document.getElementById("st-next").addEventListener("click", function () { stGo(stCur() + 1); });
+  }
+  var mw = document.getElementById("more-works"), ow = document.getElementById("other-works");
+  if (mw && ow) mw.addEventListener("click", function () { ow.hidden = false; mw.hidden = true; });
 
   // нижняя кнопка на телефоне: только после первого экрана
   var dock = document.querySelector(".dock"), hero = document.querySelector(".hero");
