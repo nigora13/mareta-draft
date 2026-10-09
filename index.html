@@ -89,6 +89,17 @@ p { margin: 0; }
 }
 .hero .slides img.on { opacity: 1; transform: scale(1); }
 .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; }
+/* текст первого экрана: внизу справа, чтобы не закрывать Марету в кадре */
+.hero::after { background: linear-gradient(180deg, rgba(23,18,14,0) 45%, rgba(23,18,14,.85) 88%, var(--ink) 100%), linear-gradient(270deg, rgba(23,18,14,.55), rgba(23,18,14,0) 55%) !important; }
+.hero-in { justify-items: end; text-align: right; }
+.hero-in .acts { justify-content: flex-end; }
+.hero .mark { font-size: clamp(64px, 12vw, 170px); margin-left: 0; }
+.hero .lead { max-width: 40ch; }
+@media (max-width: 720px) {
+  .hero-in { justify-items: start; text-align: left; }
+  .hero-in .acts { justify-content: flex-start; }
+  .hero::after { background: linear-gradient(180deg, rgba(23,18,14,0) 35%, rgba(23,18,14,.9) 80%, var(--ink) 100%) !important; }
+}
 .strip { position: relative; z-index: 2; background: var(--ink); border-block: 1px solid var(--line); }
 .strip-in { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; padding-block: 26px; }
 .strip b { display: block; font-family: var(--f-display); font-weight: 350; font-size: clamp(30px, 4vw, 48px); line-height: 1; color: var(--brass); font-variant-numeric: tabular-nums; }
@@ -122,7 +133,7 @@ p { margin: 0; }
 /* --- общие секции --- */
 section.block {
   position: relative; z-index: 2; padding-block: clamp(72px, 11vw, 140px);
-  background: var(--ink); box-shadow: 0 -40px 80px rgba(0,0,0,.55);
+  background: var(--ink);
 }
 section.block:nth-of-type(even) { background: var(--panel); }
 .head { display: grid; gap: 16px; max-width: 760px; margin-bottom: clamp(32px, 5vw, 56px); }
@@ -214,6 +225,14 @@ section.block:nth-of-type(even) { background: var(--panel); }
 .st-nav button:hover { border-color: var(--brass); color: var(--brass); }
 .more-works { margin-top: 28px; }
 #other-works { margin-top: 24px; }
+/* карточки работ как у studio-mint: фото, под ним название и круглая стрелка */
+#other-works { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 24px 16px; }
+#other-works figure { aspect-ratio: auto !important; grid-column: auto !important; display: grid; gap: 12px; overflow: visible; }
+#other-works img { aspect-ratio: 4 / 5; border-radius: 14px; height: auto; }
+#other-works figcaption { position: static; background: none; padding: 0; display: flex; justify-content: space-between; align-items: center; gap: 10px; font-family: var(--f-display); font-size: 20px; letter-spacing: 0; }
+#other-works figcaption::after { content: "→"; flex: none; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--line); font-family: var(--f-body); font-size: 16px; transition: background .3s, color .3s; }
+#other-works figure:hover figcaption::after { background: var(--brass); color: var(--ink); border-color: var(--brass); }
+.st-track img { border-radius: 14px; }
 @media (max-width: 720px) { .st-track figure { aspect-ratio: 4 / 5; } }
 
 /* гардеробная с точками */
@@ -337,7 +356,7 @@ section.block:nth-of-type(even) { background: var(--panel); }
 /* автор */
 .author { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(24px, 5vw, 64px); align-items: center; }
 .portrait { aspect-ratio: 4/5; background: var(--panel-2); }
-.portrait video { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; display: block; }
+.portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 70% 30%; display: block; }
 .author .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); gap: 22px; margin-top: 28px; }
 .author .facts b { display: block; font-family: var(--f-display); font-weight: 400; font-size: 40px; color: var(--brass); line-height: 1; }
 .author .facts span { font-size: 14px; color: var(--mute); }
@@ -420,14 +439,14 @@ footer a { color: var(--mute); }
   <section class="block" data-scene="kitchen" aria-labelledby="h-you">
     <div class="wrap">
       <div class="head rise">
-        <p class="label">Если ремонт впереди</p>
+        <p class="label">Так пишут Марете в комментариях</p>
         <h2 id="h-you">Узнаёшь себя?</h2>
       </div>
       <div class="situations rise">
-        <div>Ключи уже получили, а с чего начинать - непонятно<span>Сохранено сто картинок в Pinterest, но собрать из них свою квартиру не получается.</span></div>
-        <div>На плане всё помещается<span>Но непонятно, будет ли удобно жить: где сушить бельё, куда ставить пылесос, как открывается дверь шкафа.</span></div>
-        <div>Мастера ждут решений<span>Электрик спрашивает, где розетки, а ты ещё не знаешь, какая будет кухня.</span></div>
-        <div>Дизайн-проект не по карману<span>Хочется сделать красиво и правильно самой, но страшно ошибиться в том, что потом не переделать.</span></div>
+        <div>"Как спланировать кухню?"<span>Спрашиваешь в комментариях, а у каждого свой ответ.</span></div>
+        <div>"9 метров, и всё должно влезть"<span>Холодильник, стиралка, хранение - и чтобы ещё было удобно жить.</span></div>
+        <div>"А батарею куда девать?"<span>Электрик и сантехник ждут ответа, а кухня ещё не выбрана.</span></div>
+        <div>"Дизайн-проект не потяну"<span>Хочется сделать самой, но страшно ошибиться там, где потом не переделать.</span></div>
       </div>
     </div>
   </section>
@@ -515,7 +534,7 @@ footer a { color: var(--mute); }
       <p class="compare-cap"><span><b>До:</b> исходный план, кухня-столовая 40,49 м²</span><span><b>После:</b> планировка Мареты, + гардеробная 5,38 м²</span></p>
       <div class="story-text">
         <p class="quote rise">Сначала нужно проработать планировку хотя бы в 2D. Тогда мы правильно расставим мебель и зонирование, и только потом передадим архитектору финальные правки.</p>
-        <p class="rise">Мастер-спальня получила свою гардеробную и санузел. Детскую заложили "на вырост", для двух детей. Кухню и гостиную поменяли местами: теперь еду подают прямо на террасу, а не носят мимо дивана. Этому курс и учит - видеть такие решения в своей квартире до ремонта.</p>
+        <p class="rise">Спальня получила гардеробную, детская - место "на вырост", кухня переехала к террасе. Курс учит видеть такие решения у себя до ремонта.</p>
       </div>
     </div>
   </section>
@@ -526,7 +545,7 @@ footer a { color: var(--mute); }
       <div class="head rise">
         <p class="label">Для тех, у кого нет времени на лекции</p>
         <h2 id="h-format">Короткие уроки. Это специально</h2>
-        <p>Когда Марета училась сама, лекции шли по два часа, и к концу никто не помнил начало. Поэтому здесь выжимка: посмотрела урок, сразу применила к своей квартире. Многие пересматривают уроки, когда начинают чертить, и слышат в них уже больше.</p>
+        <p>Без двухчасовых лекций. Посмотрела урок - сразу сделала задание на своей квартире. Нужен 1 вечер на урок, а не выходные.</p>
       </div>
     </div>
   </section>
@@ -642,7 +661,7 @@ footer a { color: var(--mute); }
       <div class="head rise">
         <p class="label">Проекты Мареты в 3D</p>
         <h2 id="h-tours">Пройдись по проекту, как будто ты уже внутри</h2>
-        <p>Это 3D-туры реальных проектов Мареты. Выбери проект, крути комнату пальцем или мышкой и смотри, как решения работают вместе.</p>
+        <p>3D-туры реальных проектов Мареты. Проходи по стрелочкам и крути комнату пальцем.</p>
       </div>
       <div class="tour rise frame">
         <div class="tour-stage">
@@ -661,9 +680,7 @@ footer a { color: var(--mute); }
   <section class="block" data-scene="plan" aria-labelledby="h-author">
     <div class="wrap author">
       <div class="portrait rise frame">
-        <video autoplay muted loop playsinline preload="metadata" poster="img/portrait2.jpg" aria-label="Марета Новикова говорит в камеру">
-          <source src="img/portrait2.mp4" type="video/mp4">
-        </video>
+        <img src="img/portrait3.jpg" alt="Марета Новикова в реализованном интерьере у камина" loading="lazy">
       </div>
       <div class="rise">
         <p class="label">Автор курса</p>
