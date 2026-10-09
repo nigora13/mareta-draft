@@ -89,16 +89,37 @@ p { margin: 0; }
 }
 .hero .slides img.on { opacity: 1; transform: scale(1); }
 .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; }
-/* текст первого экрана: внизу справа, чтобы не закрывать Марету в кадре */
-.hero::after { background: linear-gradient(180deg, rgba(23,18,14,0) 45%, rgba(23,18,14,.85) 88%, var(--ink) 100%), linear-gradient(270deg, rgba(23,18,14,.55), rgba(23,18,14,0) 55%) !important; }
-.hero-in { justify-items: end; text-align: right; }
-.hero-in .acts { justify-content: flex-end; }
-.hero .mark { font-size: clamp(64px, 12vw, 170px); margin-left: 0; }
-.hero .lead { max-width: 40ch; }
+/* текст первого экрана: слева и в самом низу, Марета в видео идёт справа */
+.hero::after { background: linear-gradient(180deg, rgba(23,18,14,0) 55%, rgba(23,18,14,.88) 90%, var(--ink) 100%), linear-gradient(90deg, rgba(23,18,14,.6), rgba(23,18,14,0) 45%) !important; }
+.hero-in { gap: 14px; padding-block: 0 clamp(24px, 4vw, 44px); max-width: var(--maxw); }
+.hero-in > * { max-width: 520px; }
+.hero .mark { font-size: clamp(52px, 9vw, 130px); }
+.hero h1 { font-size: clamp(28px, 3.4vw, 44px); }
+.hero .lead { max-width: 40ch; font-size: 16px; }
+.hero .slides video { object-position: 65% 40%; }
 @media (max-width: 720px) {
-  .hero-in { justify-items: start; text-align: left; }
-  .hero-in .acts { justify-content: flex-start; }
-  .hero::after { background: linear-gradient(180deg, rgba(23,18,14,0) 35%, rgba(23,18,14,.9) 80%, var(--ink) 100%) !important; }
+  .hero { min-height: 88vh; }
+  .hero::after { background: linear-gradient(180deg, rgba(23,18,14,0) 40%, rgba(23,18,14,.92) 78%, var(--ink) 100%) !important; }
+}
+
+/* карточки проектов как у studio-mint */
+.projects { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+.pcard { display: grid; gap: 14px; min-width: 0; }
+.pc-pics { position: relative; aspect-ratio: 4 / 5; border-radius: 16px; overflow: hidden; background: var(--panel-2); }
+.pc-pics img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .6s ease; }
+.pc-pics img.on { opacity: 1; }
+.pc-big { position: absolute; z-index: 2; top: 14px; left: 16px; font-family: var(--f-display); font-size: clamp(30px, 3vw, 42px); line-height: 1; color: rgba(255,255,255,.55); mix-blend-mode: overlay; pointer-events: none; }
+.pc-dots { position: absolute; z-index: 2; left: 50%; bottom: 14px; transform: translateX(-50%); display: flex; gap: 6px; padding: 6px 10px; border-radius: 999px; background: rgba(23,18,14,.45); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.pc-dots button { width: 8px; height: 8px; border-radius: 99px; border: 0; padding: 0; background: rgba(255,255,255,.55); cursor: pointer; transition: width .3s, background .3s; }
+.pc-dots button.on { width: 22px; background: #fff; }
+.pc-foot { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.pc-foot h3 { font-size: clamp(18px, 1.6vw, 21px); line-height: 1.25; }
+.pc-next { flex: none; width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--line); background: transparent; color: var(--ivory); font-size: 16px; cursor: pointer; transition: background .3s, color .3s, border-color .3s; }
+.pc-next:hover { background: var(--brass); border-color: var(--brass); color: var(--ink); }
+@media (max-width: 980px) { .projects { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) {
+  .projects { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 82%; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; }
+  .pcard { scroll-snap-align: start; }
 }
 .strip { position: relative; z-index: 2; background: var(--ink); border-block: 1px solid var(--line); }
 .strip-in { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; padding-block: 26px; }
@@ -420,7 +441,7 @@ footer a { color: var(--mute); }
     <div class="wrap hero-in">
       <div class="mark" aria-hidden="true">Дом</div>
       <h1>Увидь свой дом до ремонта</h1>
-      <p class="lead">Курс Мареты Новиковой: планировка, свет и материалы для твоей квартиры. Короткие уроки и задания на твоём жилье.</p>
+      <p class="lead">Курс Мареты Новиковой. Сама продумаешь планировку, свет и материалы своей квартиры - до того, как придёт бригада.</p>
       <div class="acts">
         <a class="btn" href="#price">Хочу продуманный интерьер</a>
         <a class="btn ghost" href="#program">Посмотреть программу</a>
@@ -443,10 +464,10 @@ footer a { color: var(--mute); }
         <h2 id="h-you">Узнаёшь себя?</h2>
       </div>
       <div class="situations rise">
-        <div>"Как спланировать кухню?"<span>Спрашиваешь в комментариях, а у каждого свой ответ.</span></div>
-        <div>"9 метров, и всё должно влезть"<span>Холодильник, стиралка, хранение - и чтобы ещё было удобно жить.</span></div>
-        <div>"А батарею куда девать?"<span>Электрик и сантехник ждут ответа, а кухня ещё не выбрана.</span></div>
-        <div>"Дизайн-проект не потяну"<span>Хочется сделать самой, но страшно ошибиться там, где потом не переделать.</span></div>
+        <div>"Как спланировать кухню?"<span>Сначала техника и размеры, потом фасады и цвет. В уроке про кухню-гостиную - по шагам.</span></div>
+        <div>"9 метров, и всё должно влезть"<span>Забудь про угловую кухню. Высокий шкаф и выкатные ящики вмещают больше.</span></div>
+        <div>"А батарею куда девать?"<span>Такие вопросы решаются на плане, а не когда электрик уже стоит с перфоратором.</span></div>
+        <div>"Дизайн-проект не потяну"<span>Курс для тех, кто делает сам. Марета даёт порядок и инструменты, проект - твой.</span></div>
       </div>
     </div>
   </section>
@@ -455,8 +476,8 @@ footer a { color: var(--mute); }
     <div class="wrap">
       <div class="head rise">
         <p class="label">Взгляд дизайнера</p>
-        <h2 id="h-think">Стандартные решения делают неудобной даже дорогую квартиру</h2>
-        <p>Три комнаты, которые чаще всего делают "как у всех". И как их продумывает Марета.</p>
+        <h2 id="h-think">Забудь про стандартные решения</h2>
+        <p>Из-за них неудобной становится даже дорогая квартира. Три примера из роликов Мареты.</p>
       </div>
       <div class="think">
         <article class="rise">
@@ -521,8 +542,8 @@ footer a { color: var(--mute); }
     <div class="wrap">
       <div class="head rise">
         <p class="label">Реальная консультация</p>
-        <h2 id="h-story">Клиентке нужна была только расстановка мебели</h2>
-        <p>Марета посмотрела планировку частного дома и увидела ошибки, которые потом стоили бы перестройки. Работу бригады остановили и сделали планировку заново.</p>
+        <h2 id="h-story">Бригаду остановили на этапе стен</h2>
+        <p>Клиентка пришла только за расстановкой мебели. Марета посмотрела план дома, нашла ошибки - и планировку перерисовали, пока стены ещё можно было двигать.</p>
       </div>
       <div class="compare rise" id="compare">
         <img src="img/plan-after.jpg" alt="Планировка после консультации: мастер-спальня с гардеробной, детская на вырост, кухня у террасы" loading="lazy">
@@ -544,8 +565,8 @@ footer a { color: var(--mute); }
     <div class="wrap">
       <div class="head rise">
         <p class="label">Для тех, у кого нет времени на лекции</p>
-        <h2 id="h-format">Короткие уроки. Это специально</h2>
-        <p>Без двухчасовых лекций. Посмотрела урок - сразу сделала задание на своей квартире. Нужен 1 вечер на урок, а не выходные.</p>
+        <h2 id="h-format">Уроки - не часовые лекции</h2>
+        <p>Короткое видео, понятное задание, твоя квартира. Для тех, кто работает и не может сидеть над уроками часами.</p>
       </div>
     </div>
   </section>
@@ -554,8 +575,8 @@ footer a { color: var(--mute); }
     <div class="wrap">
       <div class="head rise">
         <p class="label">Попробуй сама</p>
-        <h2 id="h-light">Один и тот же свет может сделать комнату уютной или больничной</h2>
-        <p>Свет бывает тёплым, нейтральным и холодным. Его измеряют в кельвинах: чем меньше число, тем теплее. Подвинь ползунок и посмотри, как меняется спальня.</p>
+        <h2 id="h-light">Свет решает, будет спальня уютной или как в больнице</h2>
+        <p>Тёплый, нейтральный, холодный - это просто число на лампочке. Подвинь ползунок.</p>
       </div>
       <div class="light rise frame" id="light-box">
         <div class="lt-pic">
@@ -605,7 +626,7 @@ footer a { color: var(--mute); }
       <div class="head rise">
         <p class="label">На выходе</p>
         <h2 id="h-kit">Что ты соберёшь для своей квартиры</h2>
-        <p>Не папку случайных картинок, а связанный план, с которым можно идти в магазин и к мастерам.</p>
+        <p>Не папку картинок из Pinterest, а план, с которым идёшь в магазин и к мастерам.</p>
       </div>
       <div class="kit rise">
         <div><b>Обмерный план</b><span>Размеры, окна, двери, стояки</span></div>
@@ -625,34 +646,58 @@ footer a { color: var(--mute); }
     <div class="wrap">
       <div class="head rise">
         <p class="label">Работы учениц</p>
-        <h2 id="h-works">Так выглядят проекты тех, кто прошёл курс</h2>
+        <h2 id="h-works">Так делают ученицы курса</h2>
       </div>
-      <div class="student rise">
-        <div class="st-head">
-          <p class="st-who">Проект одной ученицы целиком</p>
-          <p class="st-count" id="st-count">1 / 6</p>
-        </div>
-        <div class="st-track" id="st-track">
-          <figure><img src="img/e1.jpg" alt="Кухня-столовая, проект ученицы" loading="lazy"><figcaption>Кухня-столовая</figcaption></figure>
-          <figure><img src="img/e2.jpg" alt="Гостиная, проект ученицы" loading="lazy"><figcaption>Гостиная</figcaption></figure>
-          <figure><img src="img/e3.jpg" alt="Спальня с ТВ-зоной и туалетным столиком, проект ученицы" loading="lazy"><figcaption>Спальня, ТВ-зона</figcaption></figure>
-          <figure><img src="img/e4.jpg" alt="Спальня, зона у входа с банкеткой, проект ученицы" loading="lazy"><figcaption>Спальня, зона у входа</figcaption></figure>
-          <figure><img src="img/e5.jpg" alt="Санузел, проект ученицы" loading="lazy"><figcaption>Санузел</figcaption></figure>
-          <figure><img src="img/e6.jpg" alt="Ванная, проект ученицы" loading="lazy"><figcaption>Ванная</figcaption></figure>
-        </div>
-        <div class="st-nav"><button type="button" id="st-prev" aria-label="Предыдущее фото">←</button><button type="button" id="st-next" aria-label="Следующее фото">→</button></div>
+      <div class="projects">
+        <article class="pcard rise">
+          <div class="pc-pics">
+            <span class="pc-big">6 комнат</span>
+            <img src="img/e1.jpg" alt="Кухня-столовая" loading="lazy" class="on">
+            <img src="img/e2.jpg" alt="Гостиная" loading="lazy">
+            <img src="img/e3.jpg" alt="Спальня с ТВ-зоной" loading="lazy">
+            <img src="img/e4.jpg" alt="Спальня, зона у входа" loading="lazy">
+            <img src="img/e5.jpg" alt="Санузел" loading="lazy">
+            <img src="img/e6.jpg" alt="Ванная" loading="lazy">
+            <div class="pc-dots"></div>
+          </div>
+          <div class="pc-foot"><h3>Квартира целиком: от кухни до ванной</h3><button type="button" class="pc-next" aria-label="Следующее фото">→</button></div>
+        </article>
+        <article class="pcard rise">
+          <div class="pc-pics">
+            <span class="pc-big">5 комнат</span>
+            <img src="img/w-dining.jpg" alt="Столовая" loading="lazy" class="on">
+            <img src="img/hero4.jpg" alt="Спальня" loading="lazy">
+            <img src="img/w-hall.jpg" alt="Прихожая" loading="lazy">
+            <img src="img/w-bath2.jpg" alt="Санузел" loading="lazy">
+            <img src="img/w-room.jpg" alt="Детская" loading="lazy">
+            <div class="pc-dots"></div>
+          </div>
+          <div class="pc-foot"><h3>Тёплая квартира с деревом и камнем</h3><button type="button" class="pc-next" aria-label="Следующее фото">→</button></div>
+        </article>
+        <article class="pcard rise">
+          <div class="pc-pics">
+            <span class="pc-big">4 комнаты</span>
+            <img src="img/s1.jpg" alt="Гостиная" loading="lazy" class="on">
+            <img src="img/s2.jpg" alt="Кухня-гостиная" loading="lazy">
+            <img src="img/w-bed.jpg" alt="Спальня" loading="lazy">
+            <img src="img/s3.jpg" alt="Санузел" loading="lazy">
+            <div class="pc-dots"></div>
+          </div>
+          <div class="pc-foot"><h3>Гостиная, кухня и спальня в одном стиле</h3><button type="button" class="pc-next" aria-label="Следующее фото">→</button></div>
+        </article>
+        <article class="pcard rise">
+          <div class="pc-pics">
+            <span class="pc-big">Детская</span>
+            <img src="img/k1.jpg" alt="Детская на двоих" loading="lazy" class="on">
+            <img src="img/w-kids.jpg" alt="Детская, зона сна" loading="lazy">
+            <img src="img/k2.jpg" alt="Детская, рабочие места" loading="lazy">
+            <img src="img/w-study.jpg" alt="Детская, учебная зона" loading="lazy">
+            <div class="pc-dots"></div>
+          </div>
+          <div class="pc-foot"><h3>Детская на двоих: сон, учёба и хранение</h3><button type="button" class="pc-next" aria-label="Следующее фото">→</button></div>
+        </article>
       </div>
-      <button type="button" class="btn ghost more-works" id="more-works">Посмотреть другие работы учениц</button>
-      <div class="works" id="other-works" hidden>
-        <figure class="a"><img src="img/w-living.jpg" alt="Гостиная с ТВ-зоной" loading="lazy"><figcaption>Гостиная</figcaption></figure>
-        <figure class="b"><img src="img/w-bath.jpg" alt="Ванная с мрамором" loading="lazy"><figcaption>Ванная</figcaption></figure>
-        <figure class="c"><img src="img/w-hall.jpg" alt="Прихожая" loading="lazy"><figcaption>Прихожая</figcaption></figure>
-        <figure class="d"><img src="img/w-bath2.jpg" alt="Санузел с камнем" loading="lazy"><figcaption>Санузел</figcaption></figure>
-        <figure class="e"><img src="img/w-room.jpg" alt="Детская" loading="lazy"><figcaption>Детская</figcaption></figure>
-        <figure class="f"><img src="img/w-bed.jpg" alt="Спальня" loading="lazy"><figcaption>Спальня</figcaption></figure>
-        <figure class="g"><img src="img/w-dining.jpg" alt="Столовая" loading="lazy"><figcaption>Столовая</figcaption></figure>
-      </div>
-      <p class="note">Имена авторов добавим после их согласия на публикацию.</p>
+      <p class="note">Работы учениц курса. Имена авторов добавим после их согласия на публикацию.</p>
     </div>
   </section>
 
@@ -661,7 +706,7 @@ footer a { color: var(--mute); }
       <div class="head rise">
         <p class="label">Проекты Мареты в 3D</p>
         <h2 id="h-tours">Пройдись по проекту, как будто ты уже внутри</h2>
-        <p>3D-туры реальных проектов Мареты. Проходи по стрелочкам и крути комнату пальцем.</p>
+        <p>3D-туры реальных проектов Мареты. Крути комнату пальцем или мышкой и смотри, как всё связано.</p>
       </div>
       <div class="tour rise frame">
         <div class="tour-stage">
@@ -686,10 +731,6 @@ footer a { color: var(--mute); }
         <p class="label">Автор курса</p>
         <h2 id="h-author" style="margin-top:14px">Марета Новикова</h2>
         <p style="margin-top:20px;max-width:58ch;opacity:.9">Дизайнер интерьеров, руководитель студии. На консультациях Марета чаще всего видит одно и то же: люди начинают ремонт с красивой картинки, а не с планировки. Курс построен так же, как она работает с клиентами: сначала удобство, потом красота.</p>
-        <div class="facts">
-          <div><b>690 тыс.</b><span>подписчиков в Instagram</span></div>
-          <div><b>5-6</b><span>квартир сейчас в реализации</span></div>
-        </div>
       </div>
     </div>
   </section>
@@ -699,7 +740,7 @@ footer a { color: var(--mute); }
     <div class="wrap">
       <div class="head rise">
         <p class="label">Участие</p>
-        <h2 id="h-price">Один курс. Всё внутри</h2>
+        <h2 id="h-price">Один курс, без тарифов</h2>
       </div>
       <div class="price rise frame">
         <div>
@@ -745,7 +786,7 @@ footer a { color: var(--mute); }
 
   <section class="block" data-scene="kitchen" aria-labelledby="h-final">
     <div class="wrap final rise">
-      <h2 id="h-final">Ремонт всё равно начнётся. Вопрос, кто примет решения: ты заранее или бригада на месте</h2>
+      <h2 id="h-final">Ремонт всё равно начнётся. Реши всё на плане, а не на объекте</h2>
       <p style="color:var(--mute);max-width:56ch">Передвинуть стену на плане - это минута. На объекте - недели и деньги.</p>
       <a class="btn" href="#price">Хочу продуманный интерьер</a>
     </div>
@@ -756,7 +797,6 @@ footer a { color: var(--mute); }
   <div class="wrap">
     <span>ИП Новикова Марета Валикоевна · ИНН 233304079958</span>
     <span>Оферта · Политика конфиденциальности (ссылки появятся после публикации документов)</span>
-    <span>Instagram принадлежит компании Meta, деятельность которой запрещена в РФ</span>
   </div>
 </footer>
 
@@ -862,6 +902,25 @@ footer a { color: var(--mute); }
     tOpen.href = tUrl(TOURS[0]);
   }
 
+  // карточки проектов: точки и стрелка
+  document.querySelectorAll(".pcard").forEach(function (card) {
+    var imgs = card.querySelectorAll(".pc-pics img"), dotsBox = card.querySelector(".pc-dots"), cur = 0;
+    var go = function (k) {
+      cur = (k + imgs.length) % imgs.length;
+      imgs.forEach(function (im, j) { im.classList.toggle("on", j === cur); });
+      Array.prototype.forEach.call(dotsBox.children, function (d, j) { d.classList.toggle("on", j === cur); });
+    };
+    imgs.forEach(function (im, j) {
+      var d = document.createElement("button"); d.type = "button"; d.setAttribute("aria-label", "Фото " + (j + 1));
+      d.addEventListener("click", function () { go(j); }); dotsBox.appendChild(d);
+    });
+    card.querySelector(".pc-next").addEventListener("click", function () { go(cur + 1); });
+    var sx = null, pics = card.querySelector(".pc-pics");
+    pics.addEventListener("touchstart", function (e) { sx = e.touches[0].clientX; }, { passive: true });
+    pics.addEventListener("touchend", function (e) { if (sx === null) return; var dx = e.changedTouches[0].clientX - sx; if (Math.abs(dx) > 40) go(cur + (dx < 0 ? 1 : -1)); sx = null; });
+    go(0);
+  });
+
   // проект ученицы: слайдер
   var stT = document.getElementById("st-track"), stC = document.getElementById("st-count");
   if (stT) {
@@ -903,7 +962,6 @@ footer a { color: var(--mute); }
       es.forEach(function (e) {
         if (!e.isIntersecting) return;
         e.target.classList.add("in");
-        if (e.target.dataset.to) countUp(e.target);
         fo.unobserve(e.target);
       });
     }, { rootMargin: "0px 0px -15% 0px" });
