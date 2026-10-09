@@ -761,6 +761,13 @@ footer a { color: var(--mute); }
   }
   var hv = document.querySelector(".hero-video");
   if (hv && reduce) { hv.removeAttribute("autoplay"); hv.pause(); }
+  // если браузер не запустил видео сам, запускаем без звука
+  [hv, document.querySelector(".portrait video")].forEach(function (v) {
+    if (!v || reduce) return;
+    v.muted = true;
+    var tryPlay = function () { var p = v.play(); if (p && p.catch) p.catch(function () {}); };
+    tryPlay(); document.addEventListener("visibilitychange", function () { if (!document.hidden) tryPlay(); });
+  });
   function start() { if (!reduce && slides.length > 1) timer = setInterval(function () { show(i + 1); }, 3200); }
   dots.forEach(function (d, k) { d.addEventListener("click", function () { clearInterval(timer); show(k); start(); }); });
   start();
@@ -862,6 +869,7 @@ footer a { color: var(--mute); }
     h.setAttribute("aria-label", h.textContent.trim());
     h.innerHTML = words.map(function (w, k) { return '<span class="w" aria-hidden="true" style="transition-delay:' + (k * 70) + 'ms">' + w + '</span>'; }).join(" ");
     h.classList.add("type");
+    if (h.closest(".hero")) requestAnimationFrame(function () { h.classList.add("in"); });
   });
   // счётчики
   function countUp(el) {
