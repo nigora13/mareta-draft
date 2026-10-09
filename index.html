@@ -278,6 +278,7 @@ section.block:nth-of-type(even) { background: var(--panel); }
 .price .cost { background: var(--panel); display: grid; align-content: center; gap: 18px; }
 .price .sum { font-family: var(--f-display); font-size: clamp(56px, 7vw, 84px); line-height: 1; font-variant-numeric: tabular-nums; }
 .price .sub { color: var(--mute); font-size: 15px; }
+.price .promo { margin: 0; justify-self: start; padding: 6px 12px; border: 1px solid var(--brass); color: var(--brass); font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
 .price .anchor { font-size: 14px; color: var(--mute); border-top: 1px solid var(--line); padding-top: 14px; }
 @media (max-width: 760px) { .price { grid-template-columns: 1fr; } }
 
@@ -582,8 +583,9 @@ footer a { color: var(--mute); }
           </ul>
         </div>
         <div class="cost">
+          <p class="promo">Цена по акции</p>
           <div class="sum">18 990 ₽</div>
-          <p class="sub">Есть рассрочка.</p>
+          <p class="sub">После акции курс будет стоить 24 990 ₽. Есть рассрочка.</p>
           <p class="anchor">Для сравнения: планировка, электрика и визуализации в студии Мареты стоят 4 000 ₽ за м². На курсе ты делаешь это для своей квартиры сама.</p>
           <a class="btn" href="#pay" data-pay>Перейти к оплате</a>
         </div>
