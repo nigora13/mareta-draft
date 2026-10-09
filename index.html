@@ -12,14 +12,15 @@
 <style>
 /* Layout: тёмный "вечерний" интерьер. Фон-фотография меняется при листании (сцены), поверх - спокойные блоки текста; одно яркое место - слово с фото внутри букв на первом экране. */
 :root {
-  --ink: #15120f;          /* фон, тёплый графит */
-  --panel: #1d1915;        /* подложка блоков */
-  --panel-2: #26211b;
-  --ivory: #ece5d8;        /* основной текст */
-  --mute: #a99f90;         /* второстепенный текст */
-  --brass: #c4a46e;        /* латунь, только акценты */
-  --line: rgba(236,229,216,.14);
-  --veil: rgba(21,18,15,.78);
+  --ink: #17120e;          /* фон: тёмное дерево, орех */
+  --panel: #201913;        /* подложка блоков: светлее на тон */
+  --panel-2: #2a221b;
+  --ivory: #efe7da;        /* основной текст: сливочный */
+  --mute: #ab9f8f;         /* второстепенный текст: камень */
+  --brass: #b48a5f;        /* акцент: коньяк, тёплая кожа - не жёлтое золото */
+  --stone: #d8cdbb;        /* кнопки: травертин */
+  --line: rgba(239,231,218,.14);
+  --veil: rgba(23,18,14,.78);
   --f-display: "Piazzolla", "Georgia", serif;
   --f-body: "Onest", "Segoe UI", system-ui, sans-serif;
   --f-mono: "Onest", "Segoe UI", system-ui, sans-serif;
@@ -58,11 +59,14 @@ p { margin: 0; }
 .logo small { display: block; font-family: var(--f-mono); font-size: 10px; letter-spacing: .2em; color: var(--mute); }
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-  padding: 16px 26px; border: 1px solid var(--brass); color: var(--ink); background: var(--brass);
-  font: 600 15px/1 var(--f-body); letter-spacing: .02em; text-decoration: none; cursor: pointer;
-  transition: background .25s, color .25s;
+  padding: 17px 28px; border: 1px solid var(--stone); color: var(--ink); background: var(--stone);
+  font: 500 15px/1 var(--f-body); letter-spacing: .04em; text-decoration: none; cursor: pointer;
+  border-radius: 999px; transition: background .3s, color .3s, border-color .3s;
 }
-.btn:hover { background: transparent; color: var(--brass); }
+.btn::after { content: "→"; font-size: 16px; transition: transform .3s; }
+.btn:hover { background: transparent; color: var(--stone); }
+.btn:hover::after { transform: translateX(4px); }
+.btn.ghost::after { content: none; }
 .btn.ghost { background: transparent; color: var(--ivory); border-color: var(--line); }
 .btn.ghost:hover { border-color: var(--brass); color: var(--brass); }
 .top .btn { padding: 11px 18px; font-size: 13px; }
@@ -121,22 +125,23 @@ section.block:nth-of-type(even) { background: var(--panel); }
 
 /* --- экраны-перебивки: фото закрепляется, следующий блок наезжает сверху --- */
 .screen { position: relative; height: 150vh; z-index: 1; }
-.screen .pin { position: sticky; top: 0; height: 100vh; overflow: hidden; display: grid; place-items: center; }
-.screen .pin img {
+.screen .pin {
+  position: sticky; top: 0; height: 100vh; overflow: hidden; background: var(--ink);
+  display: grid; grid-template-rows: auto 1fr auto; gap: clamp(12px, 2.5vh, 24px);
+  padding: clamp(20px, 5vh, 48px) var(--gutter);
+}
+.screen .s-top, .screen .s-cap {
+  max-width: var(--maxw); width: 100%; margin-inline: auto; display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
+  opacity: calc(.15 + var(--p, 0) * 1.4); transform: translateY(calc((1 - var(--p, 0)) * 30px));
+}
+.screen .s-top b { font-family: var(--f-display); font-weight: 350; font-size: clamp(30px, 5vw, 64px); line-height: 1; }
+.screen .s-top span, .screen .s-cap { font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--mute); }
+.screen .s-photo { position: relative; overflow: hidden; max-width: var(--maxw); width: 100%; margin-inline: auto; min-height: 0; }
+.screen .s-photo img {
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
-  transform: scale(calc(1.28 - var(--p, 0) * .28)); filter: brightness(calc(.45 + var(--p, 0) * .4));
+  transform: scale(calc(1.22 - var(--p, 0) * .22)); filter: brightness(calc(.55 + var(--p, 0) * .45));
+  clip-path: inset(calc((1 - var(--p, 0)) * 18%) calc((1 - var(--p, 0)) * 10%));
   will-change: transform;
-}
-.screen .word {
-  position: relative; z-index: 2; text-align: center; padding-inline: var(--gutter);
-  font-family: var(--f-display); font-size: clamp(64px, 15vw, 220px); line-height: .9;
-  color: transparent; -webkit-text-stroke: 1.5px rgba(236,229,216,.9);
-  opacity: calc(.2 + var(--p, 0) * 1.6);
-  transform: translateY(calc((1 - var(--p, 0)) * 90px)) scale(calc(.9 + var(--p, 0) * .1));
-}
-.screen .cap {
-  position: absolute; z-index: 2; left: var(--gutter); bottom: clamp(24px, 6vh, 64px);
-  font-family: var(--f-mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--ivory);
 }
 
 /* --- появление блоков при прокрутке --- */
@@ -172,6 +177,44 @@ section.block:nth-of-type(even) { background: var(--panel); }
 .think ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
 .think li { padding-left: 22px; position: relative; font-size: 15px; }
 .think li::before { content: ""; position: absolute; left: 0; top: .7em; width: 10px; height: 1px; background: var(--brass); }
+
+/* свет: тёплый / холодный */
+.light { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(20px, 4vw, 48px); align-items: center; }
+.lt-pic { position: relative; aspect-ratio: 4 / 3; overflow: hidden; }
+.lt-pic img { width: 100%; height: 100%; object-fit: cover; }
+.lt-warm, .lt-cold { position: absolute; inset: 0; pointer-events: none; transition: opacity .2s; }
+.lt-warm { background: #ff9a3c; mix-blend-mode: soft-light; opacity: .7; }
+.lt-cold { background: #7fb2ff; mix-blend-mode: soft-light; opacity: 0; }
+.lt-ctrl { display: grid; gap: 12px; }
+#light-range { width: 100%; accent-color: var(--brass); height: 28px; cursor: pointer; }
+.lt-scale { display: flex; justify-content: space-between; font-size: 13px; color: var(--mute); font-variant-numeric: tabular-nums; }
+.lt-k { font-family: var(--f-display); font-size: clamp(28px, 3.4vw, 40px); line-height: 1.1; margin-top: 8px; }
+.lt-d { font-size: 18px; opacity: .88; max-width: 34ch; }
+.lt-note { font-size: 13px; color: var(--mute); }
+@media (max-width: 760px) { .light { grid-template-columns: 1fr; } }
+
+/* гардеробная с точками */
+.hs { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(20px, 4vw, 48px); align-items: center; }
+.hs-pic { position: relative; aspect-ratio: 1; overflow: hidden; }
+.hs-pic img { width: 100%; height: 100%; object-fit: cover; }
+.dot {
+  position: absolute; width: 34px; height: 34px; margin: -17px 0 0 -17px; border-radius: 50%; padding: 0; cursor: pointer;
+  background: rgba(23,18,14,.55); border: 1.5px solid var(--ivory); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+}
+.dot::after { content: ""; position: absolute; inset: 9px; border-radius: 50%; background: var(--ivory); transition: background .3s; }
+.dot::before { content: ""; position: absolute; inset: -8px; border-radius: 50%; border: 1px solid var(--ivory); opacity: 0; animation: ping 2.4s ease-out infinite; }
+.dot.on { border-color: var(--brass); background: rgba(23,18,14,.8); }
+.dot.on::after { background: var(--brass); }
+@keyframes ping { 0% { transform: scale(.6); opacity: .8; } 100% { transform: scale(1.5); opacity: 0; } }
+.hs-note { display: grid; gap: 14px; align-content: center; min-height: 220px; }
+.hs-n { font-size: 13px; letter-spacing: .14em; color: var(--brass); }
+.hs-t { margin: 0; font-family: var(--f-display); font-weight: 350; font-size: clamp(28px, 3.4vw, 40px); line-height: 1.1; }
+.hs-d { color: var(--ivory); opacity: .88; font-size: 18px; max-width: 36ch; }
+.hs-nav { display: flex; gap: 10px; margin-top: 6px; }
+.hs-nav button { width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--line); background: transparent; color: var(--ivory); font-size: 18px; cursor: pointer; }
+.hs-nav button:hover { border-color: var(--brass); color: var(--brass); }
+@media (max-width: 760px) { .hs { grid-template-columns: 1fr; } .hs-note { min-height: 0; } }
+@media (prefers-reduced-motion: reduce) { .dot::before { animation: none; } }
 
 /* гардеробные */
 .wardrobe { margin-top: clamp(36px, 5vw, 56px); display: grid; gap: 16px; }
@@ -316,10 +359,6 @@ footer a { color: var(--mute); }
 <body>
 
 
-<header class="top">
-  <a class="logo" href="#top">Марета Новикова<small>Дизайн премиум-интерьеров</small></a>
-  <a class="btn" href="#price">Хочу продуманный интерьер</a>
-</header>
 
 <main id="top">
   <section class="hero" aria-label="Курс Мареты Новиковой: продумай дом до ремонта">
@@ -347,8 +386,7 @@ footer a { color: var(--mute); }
     <div class="wrap">
       <div class="head rise">
         <p class="label">Если ремонт впереди</p>
-        <h2 id="h-you">Шкаф за 300 тысяч, из которого всё падает</h2>
-        <p>Такие решения закладываются ещё на плане, до того как приходит бригада. Узнаёшь себя?</p>
+        <h2 id="h-you">Узнаёшь себя?</h2>
       </div>
       <div class="situations rise">
         <div>Ключи уже получили, а с чего начинать - непонятно<span>Сохранено сто картинок в Pinterest, но собрать из них свою квартиру не получается.</span></div>
@@ -362,7 +400,7 @@ footer a { color: var(--mute); }
   <section class="block" data-scene="kitchen" aria-labelledby="h-think">
     <div class="wrap">
       <div class="head rise">
-        <p class="label">Из роликов Мареты</p>
+        <p class="label">Взгляд дизайнера</p>
         <h2 id="h-think">Стандартные решения делают неудобной даже дорогую квартиру</h2>
         <p>Три комнаты, которые чаще всего делают "как у всех". И как их продумывает Марета.</p>
       </div>
@@ -399,18 +437,32 @@ footer a { color: var(--mute); }
         </article>
       </div>
       <div class="wardrobe">
-        <p class="label rise">Так выглядит продуманная гардеробная</p>
-        <div class="wr-strip">
-          <figure class="rise"><img src="img/wr1.jpg" alt="Гардеробная: штанги, полки с подсветкой, место под чемоданы" loading="lazy"></figure>
-          <figure class="rise"><img src="img/wr2.jpg" alt="Гардеробная: выкатные ящики и полки для белья с подсветкой" loading="lazy"></figure>
-          <figure class="rise"><img src="img/wr3.jpg" alt="Гардеробная: две штанги по высоте и полки под коробки" loading="lazy"></figure>
-          <figure class="rise"><img src="img/wr4.jpg" alt="Гардеробная: полки для сумок и подсвеченные полки для обуви" loading="lazy"></figure>
+        <div class="head rise">
+          <p class="label">Нажми на точки</p>
+          <h3>Загляни в продуманную гардеробную</h3>
+        </div>
+        <div class="hs rise">
+          <div class="hs-pic">
+            <img src="img/wr1.jpg" alt="Гардеробная: штанги-пантографы, полки с подсветкой, ящики и место под чемоданы" loading="lazy">
+            <button type="button" class="dot" style="left:22%;top:24%" data-i="0" aria-label="Пантограф"></button>
+            <button type="button" class="dot" style="left:64%;top:44%" data-i="1" aria-label="Штанга на уровне руки"></button>
+            <button type="button" class="dot" style="left:40%;top:47%" data-i="2" aria-label="Полки с подсветкой"></button>
+            <button type="button" class="dot" style="left:18%;top:60%" data-i="3" aria-label="Выкатные секции"></button>
+            <button type="button" class="dot" style="left:30%;top:77%" data-i="4" aria-label="Ящики внизу"></button>
+            <button type="button" class="dot" style="left:61%;top:79%" data-i="5" aria-label="Место под чемоданы"></button>
+          </div>
+          <div class="hs-note" aria-live="polite">
+            <p class="hs-n">1 / 6</p>
+            <h4 class="hs-t">Пантограф</h4>
+            <p class="hs-d">Штанга под потолком сама опускается вниз. Достаёшь вещи без лестницы и табуретки.</p>
+            <div class="hs-nav"><button type="button" class="hs-prev" aria-label="Предыдущая точка">←</button><button type="button" class="hs-next" aria-label="Следующая точка">→</button></div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="screen" aria-hidden="true"><div class="pin"><img src="img/w-living.jpg" alt="" loading="lazy"><div class="word">Планировка</div><div class="cap">сначала удобство, потом красота</div></div></div>
+  <div class="screen" aria-hidden="true"><div class="pin"><p class="s-top"><b>Планировка</b><span>сначала удобство</span></p><div class="s-photo"><img src="img/w-living.jpg" alt="" loading="lazy"></div><p class="s-cap"><span>Гостиная · проект ученицы курса</span></p></div></div>
   <section class="block" data-scene="plan" aria-labelledby="h-story">
     <div class="wrap">
       <div class="head rise">
@@ -433,7 +485,7 @@ footer a { color: var(--mute); }
     </div>
   </section>
 
-  <div class="screen" aria-hidden="true"><div class="pin"><img src="img/w-bed.jpg" alt="" loading="lazy"><div class="word">Свет</div><div class="cap">спальня · визуализация ученицы</div></div></div>
+  
   <section class="block" data-scene="bed" aria-labelledby="h-format">
     <div class="wrap">
       <div class="head rise">
@@ -441,27 +493,33 @@ footer a { color: var(--mute); }
         <h2 id="h-format">Короткие уроки. Это специально</h2>
         <p>Когда Марета училась сама, лекции шли по два часа, и к концу никто не помнил начало. Поэтому здесь выжимка: посмотрела урок, сразу применила к своей квартире. Многие пересматривают уроки, когда начинают чертить, и слышат в них уже больше.</p>
       </div>
-      <div class="format">
-        <div class="panel rise frame">
-          <div class="big" data-to="8">8</div>
-          <h3>видеоуроков без воды</h3>
-          <p class="sub" style="color:var(--mute)">Обмер, прихожая, кухня-гостиная, спальня, детская, ванная, цвет и визуализация.</p>
+    </div>
+  </section>
+
+  <section class="block" id="light" aria-labelledby="h-light">
+    <div class="wrap">
+      <div class="head rise">
+        <p class="label">Попробуй сама</p>
+        <h2 id="h-light">Один и тот же свет может сделать комнату уютной или больничной</h2>
+        <p>Свет бывает тёплым, нейтральным и холодным. Его измеряют в кельвинах: чем меньше число, тем теплее. Подвинь ползунок и посмотри, как меняется спальня.</p>
+      </div>
+      <div class="light rise frame" id="light-box">
+        <div class="lt-pic">
+          <img src="img/w-bed.jpg" alt="Спальня, на которой показано, как меняется свет" loading="lazy">
+          <div class="lt-warm"></div><div class="lt-cold"></div>
         </div>
-        <div class="panel rise frame">
-          <div class="big" data-to="6">6</div>
-          <h3>практикумов с PDF</h3>
-          <p style="color:var(--mute)">Перегородки, сантехника, свет, розетки, выключатели и финальная проверка. Схемы, примеры и задания, которые можно распечатать.</p>
-        </div>
-        <div class="panel rise frame">
-          <div class="big">2D/3D</div>
-          <h3>в простой программе</h3>
-          <p style="color:var(--mute)">Планировку делаешь в Remplanner. Работать в нём учат встроенные видео самой программы, а курс учит думать как дизайнер. Для заданий хватает скриншотов, платный экспорт не нужен.</p>
+        <div class="lt-ctrl">
+          <input type="range" id="light-range" min="2700" max="6500" step="50" value="2700" aria-label="Цветовая температура света">
+          <div class="lt-scale"><span>2700 K</span><span>4000 K</span><span>6500 K</span></div>
+          <p class="lt-k" id="light-k">2700 K · тёплый</p>
+          <p class="lt-d" id="light-d">Уют и отдых. Подходит для спальни и гостиной вечером.</p>
+          <p class="lt-note">На фото имитация: так проще увидеть разницу.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="screen" aria-hidden="true"><div class="pin"><img src="img/hero2.jpg" alt="" loading="lazy"><div class="word">14 уроков</div><div class="cap">кухня-гостиная · визуализация ученицы</div></div></div>
+  
   <section class="block" id="program" data-scene="kitchen" aria-labelledby="h-program">
     <div class="wrap">
       <div class="head rise">
@@ -508,7 +566,7 @@ footer a { color: var(--mute); }
     </div>
   </section>
 
-  <div class="screen" aria-hidden="true"><div class="pin"><img src="img/w-bath.jpg" alt="" loading="lazy"><div class="word">Материалы</div><div class="cap">ванная · визуализация ученицы</div></div></div>
+  <div class="screen" aria-hidden="true"><div class="pin"><p class="s-top"><b>Материалы</b><span>камень, дерево, свет</span></p><div class="s-photo"><img src="img/w-bath.jpg" alt="" loading="lazy"></div><p class="s-cap"><span>Ванная · проект ученицы курса</span></p></div></div>
   <section class="block" data-scene="bath" aria-labelledby="h-works">
     <div class="wrap">
       <div class="head rise">
@@ -564,7 +622,7 @@ footer a { color: var(--mute); }
     </div>
   </section>
 
-  <div class="screen" aria-hidden="true"><div class="pin"><img src="img/w-dining.jpg" alt="" loading="lazy"><div class="word">Твой дом</div><div class="cap">столовая · визуализация ученицы</div></div></div>
+  <div class="screen" aria-hidden="true"><div class="pin"><p class="s-top"><b>Твой дом</b><span>продуманный заранее</span></p><div class="s-photo"><img src="img/w-dining.jpg" alt="" loading="lazy"></div><p class="s-cap"><span>Столовая · проект ученицы курса</span></p></div></div>
   <section class="block" id="price" data-scene="dining" aria-labelledby="h-price">
     <div class="wrap">
       <div class="head rise">
@@ -649,6 +707,44 @@ footer a { color: var(--mute); }
   function start() { if (!reduce) timer = setInterval(function () { show(i + 1); }, 3200); }
   dots.forEach(function (d, k) { d.addEventListener("click", function () { clearInterval(timer); show(k); start(); }); });
   start();
+
+  // гардеробная: точки
+  var HS = [
+    ["Пантограф", "Штанга под потолком сама опускается вниз. Достаёшь вещи без лестницы и табуретки."],
+    ["Штанга на уровне руки", "Одежда на каждый день висит там, где её удобно взять. Ничего не живёт на стуле."],
+    ["Полки с подсветкой", "Свет внутри шкафа: каждую вещь видно сразу, не нужно перебирать стопку."],
+    ["Выкатные секции", "Для белья выкатные секции: открыла - и всё видно, ничего не падает."],
+    ["Ящики внизу", "Внизу большой модуль под одеяла, подушки и покрывала. Всё объёмное всегда под рукой."],
+    ["Место под чемоданы", "Чемоданы стоят внизу, а не под потолком. Достать перед поездкой - одно движение."]
+  ];
+  var hsDots = document.querySelectorAll(".hs .dot"), hsI = 0;
+  function hsShow(k) {
+    hsI = (k + HS.length) % HS.length;
+    hsDots.forEach(function (d, j) { d.classList.toggle("on", j === hsI); });
+    var n = document.querySelector(".hs-n"), t = document.querySelector(".hs-t"), d = document.querySelector(".hs-d");
+    if (n) { n.textContent = (hsI + 1) + " / " + HS.length; t.textContent = HS[hsI][0]; d.textContent = HS[hsI][1]; }
+  }
+  hsDots.forEach(function (d, j) { d.addEventListener("click", function () { hsShow(j); }); });
+  var hp = document.querySelector(".hs-prev"), hn = document.querySelector(".hs-next");
+  if (hp) hp.addEventListener("click", function () { hsShow(hsI - 1); });
+  if (hn) hn.addEventListener("click", function () { hsShow(hsI + 1); });
+  if (hsDots.length) hsShow(0);
+
+  // свет: ползунок температуры
+  var lr = document.getElementById("light-range");
+  if (lr) {
+    var lw = document.querySelector(".lt-warm"), lc = document.querySelector(".lt-cold"),
+        lk = document.getElementById("light-k"), ld = document.getElementById("light-d");
+    var lUpd = function () {
+      var v = +lr.value;
+      lw.style.opacity = Math.max(0, Math.min(1, (4000 - v) / 1300)) * .7;
+      lc.style.opacity = Math.max(0, Math.min(1, (v - 4000) / 2500)) * .75;
+      if (v < 3400) { lk.textContent = v + " K · тёплый"; ld.textContent = "Уют и отдых. Подходит для спальни и гостиной вечером."; }
+      else if (v < 4800) { lk.textContent = v + " K · нейтральный"; ld.textContent = "Цвета видны честно. Подходит для кухни, ванной и рабочего места."; }
+      else { lk.textContent = v + " K · холодный"; ld.textContent = "Бодрит, но в жилой комнате выглядит как в офисе. Дома - только точечно, например в гардеробе."; }
+    };
+    lr.addEventListener("input", lUpd); lUpd();
+  }
 
   // 3D-туры Homestyler
   var TOURS = ["cA116UJhhn68U3NtfENxop","38X7wvtLKrb958qhc7aYup","vaQUM4FBkqbnhakKutAPQT","v9ULygxruipkr3qUipb6Hg",
