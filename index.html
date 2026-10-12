@@ -146,7 +146,8 @@ small, b, strong, .btn, .hero-meta, .strip span, figcaption, .label, .logo small
 .hero-photo figcaption b { color: var(--ivory); font-weight: 500; }
 @media (max-width: 760px) {
   .hero-grid { grid-template-columns: 1fr; gap: 22px; }
-  .hero-photo { order: -1; width: 72%; max-width: 300px; }
+  .hero-photo { order: -1; width: 100%; max-width: 420px; justify-self: center; }
+  .hero-photo img { aspect-ratio: 1 / 1; object-position: 50% 30%; }
 }
 .author-text { grid-template-columns: 1fr; }
 
@@ -183,7 +184,7 @@ h1, h2 { color: var(--ivory); }
 .site-nav a { color: var(--ivory); text-decoration: none; font-size: 15px; font-weight: 400; }
 .site-nav a:hover { color: #cfa96b; }
 .head-btn { padding: 11px 20px; font-size: 14px; }
-@media (max-width: 760px) { .site-nav { display: none; } .brand-logo { width: 58px; height: 40px; } }
+@media (max-width: 760px) { .site-nav { gap: 16px; } .site-nav a { font-size: 14px; } .head-btn { display: none; } .brand-logo { width: 58px; height: 40px; } }
 .live { display: inline-flex; align-items: center; gap: 10px; margin: 0; color: var(--mute); font-size: 14px; font-weight: 400; }
 .live-dot { flex: none; width: 8px; height: 8px; border-radius: 50%; background: #cfa96b; box-shadow: 0 0 0 0 rgba(207,169,107,.6); animation: pulse 2s infinite; }
 @keyframes pulse { 70% { box-shadow: 0 0 0 10px rgba(207,169,107,0); } 100% { box-shadow: 0 0 0 0 rgba(207,169,107,0); } }
@@ -859,8 +860,8 @@ footer a { color: var(--mute); }
   <section class="block" id="reviews" aria-labelledby="h-reviews">
     <div class="wrap">
       <div class="head rise">
-        <h2 id="h-reviews">Что пишут ученицы <span class="acc">в&nbsp;чате курса</span></h2>
-        <p>Ученицы курса пишут из разных городов и стран:</p>
+        <h2 id="h-reviews">Отзывы <span class="acc">о&nbsp;курсе</span></h2>
+        <p>Это сообщения учениц из чата курса - дословно, без правок. Пишут из разных городов и стран:</p>
       </div>
       <div class="cities" aria-label="Города учениц: Москва, Санкт-Петербург, Московская область, Краснодар, Калининград, Ижевск, Благовещенск, Хабаровск, Швейцария"><div class="cities-track" aria-hidden="true"><span>Москва · Санкт-Петербург · Московская область · Краснодар · Калининград · Ижевск · Благовещенск · Хабаровск · Швейцария · </span><span>Москва · Санкт-Петербург · Московская область · Краснодар · Калининград · Ижевск · Благовещенск · Хабаровск · Швейцария · </span></div></div>
       <div>
