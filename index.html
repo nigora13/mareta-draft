@@ -4,26 +4,27 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>Курс Мареты Новиковой</title>
-<meta name="description" content="Курс Мареты Новиковой: продумай интерьер своей квартиры до ремонта - планировка, свет, розетки, цвет и материалы.">
+<title>Дом без ошибок - курс Мареты Новиковой</title>
+<meta name="description" content="Дом без ошибок - курс Мареты Новиковой: продумай интерьер своей квартиры до ремонта - планировка, свет, розетки, цвет и материалы.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Piazzolla:ital,opsz,wght@0,8..30,300..700;1,8..30,400&family=Onest:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Forum&family=Manrope:wght@300;400;500;600&display=swap">
 <style>
-/* Layout: тёмный "вечерний" интерьер. Фон-фотография меняется при листании (сцены), поверх - спокойные блоки текста; одно яркое место - слово с фото внутри букв на первом экране. */
+
 :root {
-  --ink: #17120e;          /* фон: тёмное дерево, орех */
-  --panel: #201913;        /* подложка блоков: светлее на тон */
-  --panel-2: #2a221b;
-  --ivory: #efe7da;        /* основной текст: сливочный */
-  --mute: #ab9f8f;         /* второстепенный текст: камень */
-  --brass: #b48a5f;        /* акцент: коньяк, тёплая кожа - не жёлтое золото */
-  --stone: #d8cdbb;        /* кнопки: травертин */
-  --line: rgba(239,231,218,.14);
-  --veil: rgba(23,18,14,.78);
-  --f-display: "Piazzolla", "Georgia", serif;
-  --f-body: "Onest", "Segoe UI", system-ui, sans-serif;
-  --f-mono: "Onest", "Segoe UI", system-ui, sans-serif;
+  --ink: #141414;          
+  --panel: #1c1c1c;
+  --panel-2: #242424;
+  --ivory: #f4f2ee;        
+  --mute: #9b9893;         
+  --brass: #f4f2ee;        
+  --gold: #c6a466;         
+  --stone: #f4f2ee;        
+  --line: rgba(244,242,238,.14);
+  --veil: rgba(20,20,20,.78);
+  --f-display: "Forum", "Georgia", serif;
+  --f-body: "Manrope", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "Manrope", "Segoe UI", system-ui, sans-serif;
   --gutter: clamp(16px, 5vw, 64px);
   --maxw: 1180px;
   color-scheme: dark;
@@ -45,15 +46,15 @@ p { margin: 0; }
 .wrap { max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); }
 :focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; }
 
-/* --- черновик --- */
+
 .draft { background: var(--brass); color: var(--ink); font-size: 13px; text-align: center; padding: 8px var(--gutter); font-weight: 500; }
 
-/* --- шапка --- */
+
 .top {
   position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
   display: flex; justify-content: space-between; align-items: center; gap: 16px;
   padding: 14px var(--gutter);
-  background: linear-gradient(var(--ink), rgba(21,18,15,0));
+  background: linear-gradient(var(--ink), rgba(20,20,20,0));
 }
 .logo { font-family: var(--f-display); font-size: 19px; letter-spacing: .2em; text-transform: uppercase; text-decoration: none; white-space: nowrap; }
 .logo small { display: block; font-family: var(--f-mono); font-size: 10px; letter-spacing: .2em; color: var(--mute); }
@@ -71,16 +72,16 @@ p { margin: 0; }
 .btn.ghost:hover { border-color: var(--brass); color: var(--brass); }
 .top .btn { padding: 11px 18px; font-size: 13px; }
 
-/* --- сцены: фото на фоне меняется при листании --- */
+
 .scenes { position: fixed; inset: 0; z-index: -1; }
 .scenes img {
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
   opacity: 0; transition: opacity 1.4s ease; filter: saturate(.85);
 }
 .scenes img.on { opacity: .34; }
-.scenes::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 30%, rgba(21,18,15,.35), var(--ink) 85%); }
+.scenes::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 30%, rgba(20,20,20,.35), var(--ink) 85%); }
 
-/* --- первый экран --- */
+
 .hero { position: relative; min-height: min(92vh, 860px); display: grid; align-items: end; overflow: hidden; }
 .hero .slides { position: absolute; inset: 0; }
 .hero .slides img {
@@ -89,8 +90,8 @@ p { margin: 0; }
 }
 .hero .slides img.on { opacity: 1; transform: scale(1); }
 .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; }
-/* текст первого экрана: слева и в самом низу, Марета в видео идёт справа */
-.hero::after { background: linear-gradient(180deg, rgba(23,18,14,0) 55%, rgba(23,18,14,.88) 90%, var(--ink) 100%), linear-gradient(90deg, rgba(23,18,14,.6), rgba(23,18,14,0) 45%) !important; }
+
+.hero::after { background: linear-gradient(180deg, rgba(20,20,20,0) 55%, rgba(20,20,20,.88) 90%, var(--ink) 100%), linear-gradient(90deg, rgba(20,20,20,.6), rgba(20,20,20,0) 45%) !important; }
 .hero-in { gap: 14px; padding-block: 0 clamp(24px, 4vw, 44px); max-width: var(--maxw); }
 .hero-in > * { max-width: 520px; }
 .hero .mark { font-size: clamp(52px, 9vw, 130px); }
@@ -99,17 +100,17 @@ p { margin: 0; }
 .hero .slides video { object-position: 65% 40%; }
 @media (max-width: 720px) {
   .hero { min-height: 88vh; }
-  .hero::after { background: linear-gradient(180deg, rgba(23,18,14,0) 40%, rgba(23,18,14,.92) 78%, var(--ink) 100%) !important; }
+  .hero::after { background: linear-gradient(180deg, rgba(20,20,20,0) 40%, rgba(20,20,20,.92) 78%, var(--ink) 100%) !important; }
 }
 
-/* карточки проектов как у studio-mint */
+
 .projects { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
 .pcard { display: grid; gap: 14px; min-width: 0; }
 .pc-pics { position: relative; aspect-ratio: 4 / 5; border-radius: 16px; overflow: hidden; background: var(--panel-2); }
 .pc-pics img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .6s ease; }
 .pc-pics img.on { opacity: 1; }
 .pc-big { position: absolute; z-index: 2; top: 14px; left: 16px; font-family: var(--f-display); font-size: clamp(30px, 3vw, 42px); line-height: 1; color: rgba(255,255,255,.55); mix-blend-mode: overlay; pointer-events: none; }
-.pc-dots { position: absolute; z-index: 2; left: 50%; bottom: 14px; transform: translateX(-50%); display: flex; gap: 6px; padding: 6px 10px; border-radius: 999px; background: rgba(23,18,14,.45); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.pc-dots { position: absolute; z-index: 2; left: 50%; bottom: 14px; transform: translateX(-50%); display: flex; gap: 6px; padding: 6px 10px; border-radius: 999px; background: rgba(20,20,20,.45); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
 .pc-dots button { width: 8px; height: 8px; border-radius: 99px; border: 0; padding: 0; background: rgba(255,255,255,.55); cursor: pointer; transition: width .3s, background .3s; }
 .pc-dots button.on { width: 22px; background: #fff; }
 .pc-foot { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
@@ -125,8 +126,103 @@ p { margin: 0; }
 .strip-in { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; padding-block: 26px; }
 .strip b { display: block; font-family: var(--f-display); font-weight: 350; font-size: clamp(30px, 4vw, 48px); line-height: 1; color: var(--brass); font-variant-numeric: tabular-nums; }
 .strip span { font-size: 14px; color: var(--mute); }
+.strip-in { grid-template-columns: repeat(2, minmax(0, 1fr)); } 
+
+h1, h2, h3, .strip b, .ifyou li b, .forwho b { font-weight: 400; }
+.hero h1, h2 { letter-spacing: .02em; }
+body { font-weight: 300; letter-spacing: .01em; }
+small, b, strong, .btn, .hero-meta, .strip span, figcaption, .label, .logo small, .faq p, .faq summary, .forwho p, .forwho-note, .forwho-no, .lt-note, .lt-d, .situations div span { font-weight: 400; }
+.btn, b, strong { font-weight: 500; }
+.author-gold, .price .sum { color: var(--gold) !important; }
+
+.hero-in { padding-block: clamp(28px, 8vh, 96px) clamp(40px, 7vw, 80px); }
+.hero h1 { font-size: clamp(34px, 5vw, 64px); max-width: 18ch; }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(24px, 5vw, 72px); align-items: center; }
+.hero-grid > * { max-width: none; }
+.hero-text { display: grid; gap: 22px; align-content: center; }
+.hero-photo { margin: 0; }
+.hero-photo img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 25%; }
+.hero-photo figcaption { margin-top: 10px; font-size: 14px; color: var(--mute); font-weight: 400; }
+.hero-photo figcaption b { color: var(--ivory); font-weight: 500; }
+@media (max-width: 760px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 22px; }
+  .hero-photo { order: -1; width: 72%; max-width: 300px; }
+}
+.author-text { grid-template-columns: 1fr; }
+
+.hero-text { gap: 14px; }
+.hero-kicker { margin: 0; font-size: 14px; color: var(--mute); font-weight: 400; letter-spacing: .02em; }
+.hero-role { margin: -4px 0 8px; font-size: 16px; color: var(--mute); font-weight: 400; }
+.hero .lead { font-size: clamp(16px, 1.4vw, 18px); }
+.pitch-in { display: grid; gap: 20px; justify-items: start; }
+.pitch-in h2 { max-width: 20ch; }
+.pitch-in .lead { max-width: 54ch; color: var(--ivory); opacity: .88; margin: 0; }
+.planbox { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 24px; align-items: start; }
+svg.planmap { width: 100%; height: auto; display: block; }
+:root { --ink: #0b0b0b; --panel: #141414; --panel-2: #1b1b1b; --ivory: #f5f5f5; --mute: #a3a3aa; --line: rgba(255,255,255,.12); --gold: #ff9a3d; --brass: #ff9a3d; --stone: #ff9a3d; --acc: linear-gradient(90deg, #ff7a00, #ffa24d); }
+h1, h2 { color: var(--ivory); }
+.acc, .strip b, .price .sum { background: var(--acc); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.btn { background: var(--acc); border-color: transparent; color: #141414; box-shadow: 0 6px 28px rgba(255,122,0,.28); }
+.btn:hover { background: transparent; border-color: #ff9a3d; color: #ff9a3d; box-shadow: none; }
+.btn.ghost { background: transparent; color: var(--ivory); border-color: var(--line); box-shadow: none; }
+.btn.ghost:hover { border-color: #ff9a3d; color: #ff9a3d; }
+.contact-card { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(20px, 4vw, 48px); align-items: center; background: var(--panel); border: 1px solid var(--line); border-radius: 24px; padding: clamp(16px, 3vw, 28px); }
+.contact-card img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 25%; border-radius: 16px; display: block; }
+.contact-who { color: #ff9a3d; font-size: 14px; font-weight: 500; }
+.contact-say { font-family: var(--f-display); font-size: clamp(26px, 3.4vw, 40px); line-height: 1.15; margin: 10px 0 22px; }
+.contact-btns { display: flex; flex-wrap: wrap; gap: 12px; }
+@media (max-width: 760px) { .contact-card { grid-template-columns: 1fr; } .contact-card img { aspect-ratio: 1 / 1; max-height: 320px; } }
+.ticker { overflow: hidden; background: var(--acc); color: #141414; font: 600 12px/1 var(--f-body); letter-spacing: .08em; text-transform: uppercase; }
+.ticker-track, .cities-track { display: flex; width: max-content; animation: marquee 40s linear infinite; }
+.ticker-track span { padding: 9px 0; white-space: nowrap; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+.site-head { position: sticky; top: 0; z-index: 25; background: rgba(11,11,11,.82); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+.site-head-in { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-block: 10px; }
+.brand-logo { display: block; width: 74px; height: 51px; background: var(--acc); -webkit-mask: url(img/logo-mn.png) center / contain no-repeat; mask: url(img/logo-mn.png) center / contain no-repeat; }
+.site-nav { display: flex; gap: 28px; }
+.site-nav a { color: var(--ivory); text-decoration: none; font-size: 15px; font-weight: 400; }
+.site-nav a:hover { color: #ff9a3d; }
+.head-btn { padding: 11px 20px; font-size: 14px; }
+@media (max-width: 760px) { .site-nav { display: none; } .brand-logo { width: 58px; height: 40px; } }
+.live { display: inline-flex; align-items: center; gap: 10px; margin: 0; color: var(--mute); font-size: 14px; font-weight: 400; }
+.live .dot { width: 8px; height: 8px; border-radius: 50%; background: #ff7a00; box-shadow: 0 0 0 0 rgba(255,122,0,.6); animation: pulse 2s infinite; }
+@keyframes pulse { 70% { box-shadow: 0 0 0 10px rgba(255,122,0,0); } 100% { box-shadow: 0 0 0 0 rgba(255,122,0,0); } }
+.cities { overflow: hidden; margin: 0 0 22px; border-block: 1px solid var(--line); -webkit-mask: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+.cities-track { animation-duration: 50s; }
+.cities-track span { padding: 14px 0; white-space: nowrap; font-family: var(--f-display); font-size: clamp(20px, 2.4vw, 28px); color: var(--ivory); }
+.final { position: relative; background: var(--panel); border: 1px solid rgba(255,154,61,.35); border-radius: 28px; padding: clamp(28px, 5vw, 64px) !important; box-shadow: 0 0 80px rgba(255,122,0,.16), inset 0 0 60px rgba(255,122,0,.05); }
+@media (prefers-reduced-motion: reduce) { .ticker-track, .cities-track, .live .dot { animation: none; } }
+section[id], [id^="h-"] { scroll-margin-top: 90px; }
+.room { cursor: pointer; }
+.room image { opacity: .72; transition: opacity .3s; }
+.room .shade { fill: rgba(20,20,20,.72); }
+.room .frame { fill: none; stroke: rgba(244,242,238,.45); stroke-width: 2; transition: stroke .3s, stroke-width .3s; }
+.room text { fill: var(--ivory); font: 400 20px var(--f-body); pointer-events: none; }
+.room:hover image, .room:focus image, .room.on image { opacity: 1; }
+.room:hover .frame, .room:focus .frame, .room.on .frame { stroke: var(--gold); stroke-width: 4; }
+.room.on text { fill: var(--gold); }
+.room:focus { outline: none; }
+.plan-extra { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.plan-extra button { padding: 8px 14px; border: 1px solid var(--line); border-radius: 999px; background: none; color: var(--ivory); cursor: pointer; font: 400 14px var(--f-body); }
+.plan-extra button.on, .plan-extra button:hover { border-color: var(--gold); color: var(--gold); }
+.plan-card { background: var(--panel); border: 1px solid var(--line); padding: 22px; min-height: 180px; }
+.plan-card .ln { color: var(--gold); font-size: 14px; font-weight: 500; }
+.plan-card h3 { margin-top: 8px; font-size: 24px; }
+.plan-card p { color: var(--mute); font-weight: 400; margin: 10px 0 0; }
+.plan-card .d { display: inline-block; margin-top: 12px; font-size: 13px; color: var(--mute); }
+.all-lessons { margin-top: 22px; }
+.all-lessons > summary { cursor: pointer; color: var(--mute); font-weight: 400; font-size: 15px; padding: 10px 0; }
+.all-lessons[open] > summary { color: var(--ivory); }
+@media (max-width: 760px) { .planbox { grid-template-columns: 1fr; } }
+.tour-cover { background: var(--panel) !important; border: 1px solid var(--line) !important; } 
+.course-sub { margin: 4px 0 14px; color: var(--mute); font-weight: 400; }
+
+.reviews { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+.reviews figure { margin: 0; padding: 24px 22px; background: var(--panel); border: 1px solid var(--line); display: grid; gap: 14px; align-content: space-between; }
+.reviews blockquote { margin: 0; font-family: var(--f-display); font-size: 21px; line-height: 1.35; }
+.reviews figcaption { font-size: 14px; color: var(--mute); font-weight: 400; }
 @media (max-width: 560px) { .strip-in { grid-template-columns: 1fr; gap: 14px; } .strip-in > div { display: flex; align-items: baseline; gap: 12px; } }
-.hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(21,18,15,.2) 0%, rgba(21,18,15,.55) 45%, var(--ink) 100%), linear-gradient(90deg, rgba(21,18,15,.6), rgba(21,18,15,0) 70%); }
+.hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,20,20,.2) 0%, rgba(20,20,20,.55) 45%, var(--ink) 100%), linear-gradient(90deg, rgba(20,20,20,.6), rgba(20,20,20,0) 70%); }
 .hero-in { position: relative; z-index: 2; padding-block: 0 clamp(36px, 6vw, 72px); display: grid; gap: 22px; }
 .mark {
   font-family: var(--f-display); font-size: clamp(96px, 24vw, 330px); line-height: .82; letter-spacing: .04em;
@@ -140,18 +236,28 @@ p { margin: 0; }
 @keyframes drift { from { background-position: 20% 40%; } to { background-position: 80% 60%; } }
 .hero .label {
   justify-self: start; color: var(--ivory); font-size: 13px; font-weight: 600;
-  padding: 9px 14px; background: rgba(21,18,15,.72); border: 1px solid rgba(196,164,110,.55);
+  padding: 9px 14px; background: rgba(20,20,20,.72); border: 1px solid rgba(244,242,238,.35);
   backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
 }
 .hero h1, .hero .lead { text-shadow: 0 2px 18px rgba(0,0,0,.65); }
 .hero h1 { font-size: clamp(30px, 4.4vw, 54px); max-width: 17ch; }
 .hero .lead { max-width: 54ch; color: var(--ivory); opacity: .88; font-size: clamp(16px, 1.6vw, 19px); }
 .hero .acts { display: flex; flex-wrap: wrap; gap: 12px; }
+
+.hero { display: block; min-height: 0; }
+.hero::after { display: none !important; }
+.hero .slides { position: relative; inset: auto; height: min(78vh, 760px); }
+.hero .slides::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 22%; background: linear-gradient(rgba(20,20,20,0), var(--ink)); }
+.hero-in { padding-block: 28px clamp(36px, 6vw, 72px); }
+.hero h1, .hero .lead { text-shadow: none; }
+
+.hero h1 { max-width: 22ch; }
+.hero-meta { font-size: 14px; color: var(--ivory); opacity: .7; margin: 0; }
 .dots { display: flex; gap: 8px; }
 .dots button { width: 34px; height: 3px; padding: 0; border: 0; background: var(--line); cursor: pointer; }
 .dots button.on { background: var(--brass); }
 
-/* --- общие секции --- */
+
 section.block {
   position: relative; z-index: 2; padding-block: clamp(72px, 11vw, 140px);
   background: var(--ink);
@@ -161,7 +267,7 @@ section.block:nth-of-type(even) { background: var(--panel); }
 .head p { color: var(--mute); max-width: 60ch; }
 .panel { background: var(--panel-2); border: 1px solid var(--line); }
 
-/* --- экраны-перебивки: фото закрепляется, следующий блок наезжает сверху --- */
+
 .screen { position: relative; height: 150vh; z-index: 1; }
 .screen .pin {
   position: sticky; top: 0; height: 100vh; overflow: hidden; background: var(--ink);
@@ -182,15 +288,15 @@ section.block:nth-of-type(even) { background: var(--panel); }
   will-change: transform;
 }
 
-/* --- появление блоков при прокрутке --- */
+
 .js .rise { transition: opacity 1s cubic-bezier(.2,.7,.2,1), transform 1s cubic-bezier(.2,.7,.2,1), clip-path 1.2s cubic-bezier(.2,.7,.2,1); }
 .js .rise:not(.in) { opacity: 0; transform: translateY(70px); }
 .js figure.rise:not(.in), .js .plan.rise:not(.in) { clip-path: inset(100% 0 0 0); transform: none; opacity: 1; }
 .js figure.rise.in, .js .plan.rise.in { clip-path: inset(0 0 0 0); }
-/* заголовки "печатаются" по словам */
+
 .js .type .w { display: inline-block; opacity: 0; transform: translateY(.45em); filter: blur(8px); transition: opacity .6s ease, transform .7s cubic-bezier(.2,.7,.2,1), filter .6s ease; }
 .js .type.in .w { opacity: 1; transform: none; filter: none; }
-/* уголки-рамки прорисовываются */
+
 .frame { position: relative; }
 .frame::before, .frame::after { content: ""; position: absolute; width: 0; height: 0; border-color: var(--brass); border-style: solid; transition: width .9s ease .3s, height .9s ease .3s; pointer-events: none; }
 .frame::before { top: -8px; left: -8px; border-width: 1px 0 0 1px; }
@@ -203,12 +309,25 @@ section.block:nth-of-type(even) { background: var(--panel); }
   .screen { height: auto; } .screen .pin { position: relative; height: 60vh; }
 }
 
-/* узнаёшь себя */
+
 .situations { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
 .situations div { background: var(--veil); padding: 28px 26px; font-family: var(--f-display); font-size: 22px; line-height: 1.3; min-width: 0; }
 .situations div span { display: block; margin-top: 12px; font-family: var(--f-body); font-size: 15px; color: var(--mute); line-height: 1.5; }
+.ifyou { list-style: none; counter-reset: n; margin: 0; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.ifyou li { counter-increment: n; display: grid; grid-template-columns: 44px 1fr; gap: 0 12px; padding: 20px 0; border-bottom: 1px solid var(--line); font-size: 17px; color: var(--mute); line-height: 1.5; }
+.ifyou li::before { content: "0" counter(n); font-family: var(--f-display); font-size: 22px; color: var(--brass); line-height: 1.2; grid-row: span 2; }
+.ifyou li b { display: block; font-family: var(--f-display); font-weight: 400; font-size: 22px; line-height: 1.25; color: var(--ivory); }
+.ifyou-end { display: grid; gap: 18px; justify-items: start; margin-top: 28px; }
+.ifyou-end p { margin: 0; font-size: 18px; }
+.forwho { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.forwho div { background: var(--veil); padding: 26px 24px; min-width: 0; }
+.forwho b { display: block; font-family: var(--f-display); font-weight: 400; font-size: 21px; line-height: 1.25; }
+.forwho p { margin: 10px 0 0; font-size: 15px; color: var(--mute); line-height: 1.55; }
+.forwho-note { margin: 24px 0 0; max-width: 60ch; }
+.forwho-no { margin: 14px 0 0; max-width: 60ch; color: var(--mute); }
+.forwho-no b { color: var(--ivory); font-weight: 500; }
 
-/* как думает Марета: три комнаты из рилс */
+
 .think { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 20px; }
 .think article { border: 1px solid var(--line); background: var(--panel-2); padding: clamp(22px, 3vw, 32px); display: grid; gap: 14px; align-content: start; min-width: 0; }
 .think .was { color: var(--mute); font-size: 15px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
@@ -216,7 +335,7 @@ section.block:nth-of-type(even) { background: var(--panel); }
 .think li { padding-left: 22px; position: relative; font-size: 15px; }
 .think li::before { content: ""; position: absolute; left: 0; top: .7em; width: 10px; height: 1px; background: var(--brass); }
 
-/* свет: тёплый / холодный */
+
 .light { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(20px, 4vw, 48px); align-items: center; }
 .lt-pic { position: relative; aspect-ratio: 4 / 3; overflow: hidden; }
 .lt-pic img { width: 100%; height: 100%; object-fit: cover; }
@@ -231,7 +350,7 @@ section.block:nth-of-type(even) { background: var(--panel); }
 .lt-note { font-size: 13px; color: var(--mute); }
 @media (max-width: 760px) { .light { grid-template-columns: 1fr; } }
 
-/* проект ученицы: слайдер */
+
 .student { display: grid; gap: 14px; }
 .st-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
 .st-who { font-family: var(--f-display); font-size: clamp(22px, 2.6vw, 30px); }
@@ -240,13 +359,13 @@ section.block:nth-of-type(even) { background: var(--panel); }
 .st-track::-webkit-scrollbar { display: none; }
 .st-track figure { margin: 0; scroll-snap-align: start; position: relative; aspect-ratio: 16 / 10; }
 .st-track img { width: 100%; height: 100%; object-fit: cover; }
-.st-track figcaption { position: absolute; left: 0; bottom: 0; padding: 30px 16px 14px; right: 0; background: linear-gradient(transparent, rgba(23,18,14,.8)); font-size: 13px; letter-spacing: .1em; text-transform: uppercase; }
+.st-track figcaption { position: absolute; left: 0; bottom: 0; padding: 30px 16px 14px; right: 0; background: linear-gradient(transparent, rgba(20,20,20,.8)); font-size: 13px; letter-spacing: .1em; text-transform: uppercase; }
 .st-nav { display: flex; gap: 10px; }
 .st-nav button { width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--line); background: transparent; color: var(--ivory); font-size: 18px; cursor: pointer; }
 .st-nav button:hover { border-color: var(--brass); color: var(--brass); }
 .more-works { margin-top: 28px; }
 #other-works { margin-top: 24px; }
-/* карточки работ как у studio-mint: фото, под ним название и круглая стрелка */
+
 #other-works { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 24px 16px; }
 #other-works figure { aspect-ratio: auto !important; grid-column: auto !important; display: grid; gap: 12px; overflow: visible; }
 #other-works img { aspect-ratio: 4 / 5; border-radius: 14px; height: auto; }
@@ -256,17 +375,20 @@ section.block:nth-of-type(even) { background: var(--panel); }
 .st-track img { border-radius: 14px; }
 @media (max-width: 720px) { .st-track figure { aspect-ratio: 4 / 5; } }
 
-/* гардеробная с точками */
+
 .hs { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(20px, 4vw, 48px); align-items: center; }
 .hs-pic { position: relative; aspect-ratio: 1; overflow: hidden; }
 .hs-pic img { width: 100%; height: 100%; object-fit: cover; }
+.hs-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.hs-list li { padding: 14px 0; border-bottom: 1px solid var(--line); color: var(--mute); font-size: 15px; line-height: 1.5; }
+.hs-list b { display: block; font-family: var(--f-display); font-weight: 400; font-size: 20px; color: var(--ivory); margin-bottom: 2px; }
 .dot {
   position: absolute; width: 34px; height: 34px; margin: -17px 0 0 -17px; border-radius: 50%; padding: 0; cursor: pointer;
-  background: rgba(23,18,14,.55); border: 1.5px solid var(--ivory); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+  background: rgba(20,20,20,.55); border: 1.5px solid var(--ivory); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
 }
 .dot::after { content: ""; position: absolute; inset: 9px; border-radius: 50%; background: var(--ivory); transition: background .3s; }
 .dot::before { content: ""; position: absolute; inset: -8px; border-radius: 50%; border: 1px solid var(--ivory); opacity: 0; animation: ping 2.4s ease-out infinite; }
-.dot.on { border-color: var(--brass); background: rgba(23,18,14,.8); }
+.dot.on { border-color: var(--brass); background: rgba(20,20,20,.8); }
 .dot.on::after { background: var(--brass); }
 @keyframes ping { 0% { transform: scale(.6); opacity: .8; } 100% { transform: scale(1.5); opacity: 0; } }
 .hs-note { display: grid; gap: 14px; align-content: center; min-height: 220px; }
@@ -279,7 +401,7 @@ section.block:nth-of-type(even) { background: var(--panel); }
 @media (max-width: 760px) { .hs { grid-template-columns: 1fr; } .hs-note { min-height: 0; } }
 @media (prefers-reduced-motion: reduce) { .dot::before { animation: none; } }
 
-/* гардеробные */
+
 .wardrobe { margin-top: clamp(36px, 5vw, 56px); display: grid; gap: 16px; }
 .wr-strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
 .wr-strip figure { margin: 0; overflow: hidden; aspect-ratio: 3 / 4; }
@@ -290,7 +412,7 @@ section.block:nth-of-type(even) { background: var(--panel); }
   .wr-strip figure { scroll-snap-align: start; }
 }
 
-/* 3D-туры */
+
 .tour { display: grid; gap: 16px; }
 .tour-stage { background: #000; aspect-ratio: 16 / 9; }
 .tour-stage { position: relative; }
@@ -313,7 +435,7 @@ section.block:nth-of-type(even) { background: var(--panel); }
 .tour-more { color: var(--mute); }
 .tour-link { color: var(--brass); font-size: 14px; text-decoration: none; margin-left: auto; }
 
-/* история: планировка до / после */
+
 .compare { position: relative; max-width: 860px; margin-inline: auto; background: #f4f1ea; border: 14px solid #f4f1ea; aspect-ratio: 1 / 1.05; overflow: hidden; touch-action: pan-y; --x: 50%; }
 .compare img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #f4f1ea; }
 .compare .before { position: absolute; inset: 0; clip-path: inset(0 calc(100% - var(--x)) 0 0); }
@@ -332,12 +454,12 @@ section.block:nth-of-type(even) { background: var(--panel); }
 .story-text p { color: var(--ivory); opacity: .9; }
 .quote { font-family: var(--f-display); font-size: clamp(24px, 2.8vw, 32px); line-height: 1.25; border-left: 1px solid var(--brass); padding-left: 22px; }
 
-/* формат */
+
 .format { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 24px; }
 .format .panel { padding: clamp(24px, 3vw, 36px); display: grid; gap: 14px; align-content: start; min-width: 0; }
 .big { font-family: var(--f-display); font-size: clamp(56px, 7vw, 88px); line-height: 1; color: var(--brass); }
 
-/* программа */
+
 .program { display: grid; gap: 0; border-top: 1px solid var(--line); }
 .program details { border-bottom: 1px solid var(--line); }
 .program summary {
@@ -356,34 +478,34 @@ section.block:nth-of-type(even) { background: var(--panel); }
   .program .body { padding-left: 4px; }
 }
 
-/* что соберёшь */
+
 .kit { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 12px; counter-reset: k; }
 .kit div { padding: 22px; border: 1px solid var(--line); background: var(--veil); min-width: 0; }
 .kit b { display: block; font-family: var(--f-display); font-weight: 400; font-size: 21px; margin-bottom: 6px; }
 .kit span { color: var(--mute); font-size: 15px; }
 
-/* работы учениц */
+
 .works { display: grid; grid-template-columns: repeat(12, 1fr); gap: 10px; }
 .works figure { margin: 0; position: relative; overflow: hidden; min-width: 0; }
 .works img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s ease; }
 .works figure:hover img { transform: scale(1.04); }
-.works figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 30px 14px 12px; background: linear-gradient(transparent, rgba(21,18,15,.85)); font-family: var(--f-mono); font-size: 11px; letter-spacing: .08em; }
+.works figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 30px 14px 12px; background: linear-gradient(transparent, rgba(20,20,20,.85)); font-family: var(--f-mono); font-size: 11px; letter-spacing: .08em; }
 .works .a { grid-column: span 7; aspect-ratio: 4/3; } .works .b { grid-column: span 5; aspect-ratio: 4/4.8; }
 .works .c { grid-column: span 4; aspect-ratio: 3/4; } .works .d { grid-column: span 4; aspect-ratio: 3/4; } .works .e { grid-column: span 4; aspect-ratio: 3/4; }
 .works .f { grid-column: span 5; aspect-ratio: 4/4.4; } .works .g { grid-column: span 7; aspect-ratio: 4/3; }
 @media (max-width: 720px) { .works > figure { grid-column: span 12 !important; aspect-ratio: 4/3 !important; } }
 .note { margin-top: 14px; font-size: 13px; color: var(--mute); }
 
-/* автор */
+
 .author { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(24px, 5vw, 64px); align-items: center; }
 .portrait { aspect-ratio: 4/5; background: var(--panel-2); }
-.portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 70% 30%; display: block; }
+.portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; display: block; } 
 .author .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); gap: 22px; margin-top: 28px; }
 .author .facts b { display: block; font-family: var(--f-display); font-weight: 400; font-size: 40px; color: var(--brass); line-height: 1; }
 .author .facts span { font-size: 14px; color: var(--mute); }
 @media (max-width: 760px) { .author { grid-template-columns: 1fr; } .portrait { max-width: 360px; } }
 
-/* цена */
+
 .price { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); border: 1px solid var(--brass); }
 .price > div { padding: clamp(26px, 4vw, 48px); min-width: 0; }
 .price ul { margin: 18px 0 0; padding: 0; list-style: none; display: grid; gap: 12px; }
@@ -396,7 +518,7 @@ section.block:nth-of-type(even) { background: var(--panel); }
 .price .anchor { font-size: 14px; color: var(--mute); border-top: 1px solid var(--line); padding-top: 14px; }
 @media (max-width: 760px) { .price { grid-template-columns: 1fr; } }
 
-/* вопросы */
+
 .faq details { border-bottom: 1px solid var(--line); }
 .faq summary { cursor: pointer; padding: 20px 4px; font-family: var(--f-display); font-size: clamp(20px, 2vw, 24px); list-style: none; display: flex; justify-content: space-between; gap: 16px; }
 .faq summary::-webkit-details-marker { display: none; }
@@ -404,7 +526,7 @@ section.block:nth-of-type(even) { background: var(--panel); }
 .faq details[open] summary::after { content: "-"; }
 .faq p { padding: 0 4px 22px; color: var(--mute); max-width: 70ch; }
 
-/* финал */
+
 .final { text-align: left; display: grid; gap: 24px; justify-items: start; }
 .final h2 { max-width: 18ch; }
 
@@ -412,12 +534,12 @@ footer { border-top: 1px solid var(--line); padding-block: 36px 90px; color: var
 footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 32px; justify-content: space-between; }
 footer a { color: var(--mute); }
 
-/* кнопка на телефоне */
+
 .dock { display: none; }
 [hidden] { display: none !important; }
 @media (max-width: 720px) {
   .top .btn { display: none; }
-  .dock { display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px)); background: rgba(21,18,15,.92); border-top: 1px solid var(--line); }
+  .dock { display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px)); background: rgba(20,20,20,.92); border-top: 1px solid var(--line); }
   .dock .btn { width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -428,46 +550,66 @@ footer a { color: var(--mute); }
 </style>
 </head>
 <body>
-
-
-
+<div class="ticker" aria-hidden="true"><div class="ticker-track"><span>14 уроков · бессрочный доступ · рассрочка · чат курса · уроки на твоей квартире · программа Remplanner · </span><span>14 уроков · бессрочный доступ · рассрочка · чат курса · уроки на твоей квартире · программа Remplanner · </span></div></div>
+<header class="site-head">
+  <div class="wrap site-head-in">
+    <a class="brand" href="#top" aria-label="Марета Новикова - наверх"><span class="brand-logo"></span></a>
+    <nav class="site-nav" aria-label="Разделы">
+      <a href="#program">Программа</a><a href="#reviews">Отзывы</a><a href="#price">Цена</a>
+    </nav>
+    <a class="btn head-btn" href="#price">Записаться</a>
+  </div>
+</header>
 <main id="top">
-  <section class="hero" aria-label="Курс Мареты Новиковой: продумай дом до ремонта">
-    <div class="slides">
-      <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="img/hero-poster.jpg" aria-label="Марета проходит по реальному интерьеру: кухня, камин, гардеробная">
-        <source src="img/hero.mp4" type="video/mp4">
-      </video>
-    </div>
-    <div class="wrap hero-in">
-      <div class="mark" aria-hidden="true">Дом</div>
-      <h1>Увидь свой дом до ремонта</h1>
-      <p class="lead">Курс Мареты Новиковой. Сама продумаешь планировку, свет и материалы своей квартиры - до того, как придёт бригада.</p>
-      <div class="acts">
-        <a class="btn" href="#price">Хочу продуманный интерьер</a>
-        <a class="btn ghost" href="#program">Посмотреть программу</a>
+  <section class="hero" aria-label="Марета Новикова, дизайнер премиальных интерьеров">
+    <div class="wrap hero-in hero-grid">
+      <div class="hero-text">
+        <p class="hero-kicker">Обо мне</p>
+        <h1>Марета <span class="acc">Новикова</span></h1>
+        <p class="hero-role">Дизайнер премиальных интерьеров, основатель студии</p>
+        <p class="lead">Для меня важно, чтобы интерьер был не просто красивым на визуализации, а удобным для конкретного человека и его жизни. Поэтому в основе каждого проекта - планировка, свет, хранение и эргономика.</p>
+        <p class="lead">Моим заказчикам не нужно ломать голову над планами в&nbsp;2D: уже на первом этапе они видят свой дом в&nbsp;3D и проверяют решения до ремонта.</p>
+        <p class="lead">На курсе моя задача - рассказать, как правильно планировать: на что обращать внимание, как подбирать вещи в&nbsp;свой бюджет, как работать с&nbsp;цветом под свою площадь. На примере твоей квартиры.</p>
       </div>
+      <figure class="hero-photo">
+        <img src="img/portrait-white.jpg" alt="Марета Новикова, дизайнер премиальных интерьеров" fetchpriority="high">
+      </figure>
+    </div>
+  </section>
+
+  <section class="block pitch" aria-labelledby="h-pitch">
+    <div class="wrap pitch-in">
+      <p class="live"><span class="dot" aria-hidden="true"></span>Курс открыт - можно начать сегодня</p>
+      <h2 id="h-pitch">Я&nbsp;не учу работать в&nbsp;программах. <span class="acc">Я&nbsp;учу планировать твою квартиру</span></h2>
+      <p class="lead">Программа - это инструмент. Я&nbsp;рассказываю, на что смотреть: планировка, хранение, свет, цвет. Коротко и&nbsp;на примере твоей квартиры.</p>
+      <div class="acts">
+        <a class="btn" href="#program">Посмотреть программу</a>
+      </div>
+      <p class="hero-meta">Курс "Дом без ошибок" · 24&nbsp;990&nbsp;₽ · доступ бессрочный</p>
     </div>
   </section>
 
   <div class="strip" aria-label="Цифры">
     <div class="wrap strip-in">
-      <div><b data-to="200" data-suf="+">200+</b><span>проектов квартир и домов</span></div>
+      <div><b>Москва - Нью-Йорк</b><span>города, где стоят мои проекты</span></div>
       <div><b data-to="2.5" data-suf=" млн">2,5 млн</b><span>просмотров у ролика про шкаф</span></div>
-      <div><b data-to="14">14</b><span>уроков от обмера до бригады</span></div>
     </div>
   </div>
 
   <section class="block" data-scene="kitchen" aria-labelledby="h-you">
     <div class="wrap">
       <div class="head rise">
-        <p class="label">Так пишут Марете в комментариях</p>
-        <h2 id="h-you">Узнаёшь себя?</h2>
+        <h2 id="h-you">С этими вопросами <span class="acc">мне пишут каждый день</span></h2>
       </div>
-      <div class="situations rise">
-        <div>"Как спланировать кухню?"<span>Сначала техника и размеры, потом фасады и цвет. В уроке про кухню-гостиную - по шагам.</span></div>
-        <div>"9 метров, и всё должно влезть"<span>Забудь про угловую кухню. Высокий шкаф и выкатные ящики вмещают больше.</span></div>
-        <div>"А батарею куда девать?"<span>Такие вопросы решаются на плане, а не когда электрик уже стоит с перфоратором.</span></div>
-        <div>"Дизайн-проект не потяну"<span>Курс для тех, кто делает сам. Марета даёт порядок и инструменты, проект - твой.</span></div>
+      <ol class="ifyou rise">
+        <li><b>Ремонт через месяц,</b> а план так и не готов.</li>
+        <li><b>Кухня 9 метров,</b> и в неё всё должно влезть.</li>
+        <li><b>Бригада спрашивает, где розетки,</b> а ты не знаешь, что ответить.</li>
+        <li><b>Дизайнер не по карману,</b> а ошибиться страшно.</li>
+      </ol>
+      <div class="ifyou-end rise">
+        <p>Если хоть один пункт про тебя, начни с плана, а не со стен.</p>
+        <a class="btn" href="#price">Хочу на курс</a>
       </div>
     </div>
   </section>
@@ -475,9 +617,8 @@ footer a { color: var(--mute); }
   <section class="block" data-scene="kitchen" aria-labelledby="h-think">
     <div class="wrap">
       <div class="head rise">
-        <p class="label">Взгляд дизайнера</p>
-        <h2 id="h-think">Забудь про стандартные решения</h2>
-        <p>Из-за них неудобной становится даже дорогая квартира. Три примера из роликов Мареты.</p>
+        <h2 id="h-think">Что я&nbsp;убираю <span class="acc">из проекта первым делом</span></h2>
+        <p>Стандартные решения, из-за которых неудобной становится даже дорогая квартира. Три примера.</p>
       </div>
       <div class="think">
         <article class="rise">
@@ -513,37 +654,30 @@ footer a { color: var(--mute); }
       </div>
       <div class="wardrobe">
         <div class="head rise">
-          <p class="label">Нажми на точки</p>
           <h3>Загляни в продуманную гардеробную</h3>
         </div>
         <div class="hs rise">
           <div class="hs-pic">
             <img src="img/wr1.jpg" alt="Гардеробная: штанги-пантографы, полки с подсветкой, ящики и место под чемоданы" loading="lazy">
-            <button type="button" class="dot" style="left:22%;top:24%" data-i="0" aria-label="Пантограф"></button>
-            <button type="button" class="dot" style="left:64%;top:44%" data-i="1" aria-label="Штанга на уровне руки"></button>
-            <button type="button" class="dot" style="left:40%;top:47%" data-i="2" aria-label="Полки с подсветкой"></button>
-            <button type="button" class="dot" style="left:18%;top:60%" data-i="3" aria-label="Выкатные секции"></button>
-            <button type="button" class="dot" style="left:30%;top:77%" data-i="4" aria-label="Ящики внизу"></button>
-            <button type="button" class="dot" style="left:61%;top:79%" data-i="5" aria-label="Место под чемоданы"></button>
           </div>
-          <div class="hs-note" aria-live="polite">
-            <p class="hs-n">1 / 6</p>
-            <h4 class="hs-t">Пантограф</h4>
-            <p class="hs-d">Штанга под потолком сама опускается вниз. Достаёшь вещи без лестницы и табуретки.</p>
-            <div class="hs-nav"><button type="button" class="hs-prev" aria-label="Предыдущая точка">←</button><button type="button" class="hs-next" aria-label="Следующая точка">→</button></div>
-          </div>
+          <ul class="hs-list">
+            <li><b>Пантограф</b> Штанга под потолком сама опускается вниз. Достаёшь вещи без лестницы и табуретки.</li>
+            <li><b>Штанга на уровне руки</b> Одежда на каждый день висит там, где её удобно взять.</li>
+            <li><b>Полки с подсветкой</b> Каждую вещь видно сразу, не нужно перебирать стопку.</li>
+            <li><b>Выкатные секции</b> Для белья: открыла - и всё видно, ничего не падает.</li>
+            <li><b>Ящики внизу</b> Большой модуль под одеяла, подушки и покрывала.</li>
+            <li><b>Место под чемоданы</b> Внизу, а не под потолком. Достать перед поездкой - одно движение.</li>
+          </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="screen" aria-hidden="true"><div class="pin"><p class="s-top"><b>Планировка</b><span>сначала удобство</span></p><div class="s-photo"><img src="img/w-living.jpg" alt="" loading="lazy"></div><p class="s-cap"><span>Гостиная · проект ученицы курса</span></p></div></div>
   <section class="block" data-scene="plan" aria-labelledby="h-story">
     <div class="wrap">
       <div class="head rise">
-        <p class="label">Реальная консультация</p>
-        <h2 id="h-story">Бригаду остановили на этапе стен</h2>
-        <p>Клиентка пришла только за расстановкой мебели. Марета посмотрела план дома, нашла ошибки - и планировку перерисовали, пока стены ещё можно было двигать.</p>
+        <h2 id="h-story">"Ей нужна была <span class="acc">просто расстановка мебели</span>"</h2>
+        <p>Я посмотрела её планировку, красными линиями расчертила недочёты и объяснила, как сделать правильно. Бригаду на объекте приостановили. И это не одна такая история.</p>
       </div>
       <div class="compare rise" id="compare">
         <img src="img/plan-after.jpg" alt="Планировка после консультации: мастер-спальня с гардеробной, детская на вырост, кухня у террасы" loading="lazy">
@@ -554,18 +688,16 @@ footer a { color: var(--mute); }
       </div>
       <p class="compare-cap"><span><b>До:</b> исходный план, кухня-столовая 40,49 м²</span><span><b>После:</b> планировка Мареты, + гардеробная 5,38 м²</span></p>
       <div class="story-text">
-        <p class="quote rise">Сначала нужно проработать планировку хотя бы в 2D. Тогда мы правильно расставим мебель и зонирование, и только потом передадим архитектору финальные правки.</p>
+        <p class="quote rise">Сначала проработали планировку - мебель, зонирование, проходы - и только потом передали архитектору финальные правки.</p>
         <p class="rise">Спальня получила гардеробную, детская - место "на вырост", кухня переехала к террасе. Курс учит видеть такие решения у себя до ремонта.</p>
       </div>
     </div>
   </section>
 
-  
   <section class="block" data-scene="bed" aria-labelledby="h-format">
     <div class="wrap">
       <div class="head rise">
-        <p class="label">Для тех, у кого нет времени на лекции</p>
-        <h2 id="h-format">Уроки - не часовые лекции</h2>
+        <h2 id="h-format">Уроки - <span class="acc">не часовые лекции</span></h2>
         <p>Короткое видео, понятное задание, твоя квартира. Для тех, кто работает и не может сидеть над уроками часами.</p>
       </div>
     </div>
@@ -574,13 +706,12 @@ footer a { color: var(--mute); }
   <section class="block" id="light" aria-labelledby="h-light">
     <div class="wrap">
       <div class="head rise">
-        <p class="label">Попробуй сама</p>
-        <h2 id="h-light">Свет решает, будет спальня уютной или как в больнице</h2>
-        <p>Тёплый, нейтральный, холодный - это просто число на лампочке. Подвинь ползунок.</p>
+        <h2 id="h-light">Тёплый свет <span class="acc">или нейтральный</span></h2>
+        <p>2700-3000 K - теплее, 3500-4000 K - нейтральнее. Подвинь ползунок и сравни.</p>
       </div>
       <div class="light rise frame" id="light-box">
         <div class="lt-pic">
-          <img src="img/w-bed.jpg" alt="Спальня, на которой показано, как меняется свет" loading="lazy">
+          <img src="img/w-room.jpg" alt="Детская со светлыми стенами, люстрой и бра: на ней видно, как меняется свет" loading="lazy">
           <div class="lt-warm"></div><div class="lt-cold"></div>
         </div>
         <div class="lt-ctrl">
@@ -594,14 +725,36 @@ footer a { color: var(--mute); }
     </div>
   </section>
 
-  
   <section class="block" id="program" data-scene="kitchen" aria-labelledby="h-program">
     <div class="wrap">
       <div class="head rise">
-        <p class="label">Программа</p>
-        <h2 id="h-program">14 уроков: от первого обмера до разговора с бригадой</h2>
+        <h2 id="h-program">Пройдись по курсу, <span class="acc">как по своей квартире</span></h2>
+        <p>14 уроков по порядку ремонта. Нажми на комнату - откроется урок про неё. Под планом - уроки про всю квартиру.</p>
       </div>
-      <div class="program rise">
+      <div class="planbox rise">
+        <div>
+          <svg class="planmap" viewBox="0 0 600 400" role="img" aria-label="План квартиры: нажми на комнату">
+            <defs>
+              <clipPath id="cp2"><rect x="10" y="250" width="150" height="140"/></clipPath>
+              <clipPath id="cp3"><rect x="10" y="10" width="330" height="230"/></clipPath>
+              <clipPath id="cp4"><rect x="350" y="10" width="240" height="180"/></clipPath>
+              <clipPath id="cp5"><rect x="350" y="200" width="240" height="190"/></clipPath>
+              <clipPath id="cp6"><rect x="170" y="250" width="170" height="140"/></clipPath>
+            </defs>
+            <g class="room" data-l="2" tabindex="0"><image href="img/w-hall.jpg" x="10" y="250" width="150" height="140" preserveAspectRatio="xMidYMid slice" clip-path="url(#cp2)"/><rect class="shade" x="10" y="350" width="150" height="40"/><rect class="frame" x="10" y="250" width="150" height="140"/><text x="85" y="377" text-anchor="middle">Прихожая</text></g>
+            <g class="room" data-l="3" tabindex="0"><image href="img/s1.jpg" x="10" y="10" width="330" height="230" preserveAspectRatio="xMidYMid slice" clip-path="url(#cp3)"/><rect class="shade" x="10" y="200" width="330" height="40"/><rect class="frame" x="10" y="10" width="330" height="230"/><text x="175" y="227" text-anchor="middle">Кухня-гостиная</text></g>
+            <g class="room" data-l="4" tabindex="0"><image href="img/w-bed.jpg" x="350" y="10" width="240" height="180" preserveAspectRatio="xMidYMid slice" clip-path="url(#cp4)"/><rect class="shade" x="350" y="150" width="240" height="40"/><rect class="frame" x="350" y="10" width="240" height="180"/><text x="470" y="177" text-anchor="middle">Спальня</text></g>
+            <g class="room" data-l="5" tabindex="0"><image href="img/k1.jpg" x="350" y="200" width="240" height="190" preserveAspectRatio="xMidYMid slice" clip-path="url(#cp5)"/><rect class="shade" x="350" y="350" width="240" height="40"/><rect class="frame" x="350" y="200" width="240" height="190"/><text x="470" y="377" text-anchor="middle">Детская</text></g>
+            <g class="room" data-l="6" tabindex="0"><image href="img/w-bath.jpg" x="170" y="250" width="170" height="140" preserveAspectRatio="xMidYMid slice" clip-path="url(#cp6)"/><rect class="shade" x="170" y="350" width="170" height="40"/><rect class="frame" x="170" y="250" width="170" height="140"/><text x="255" y="377" text-anchor="middle">Ванная</text></g>
+          </svg>
+          <div class="plan-extra">
+            <button type="button" data-l="1">Обмер</button><button type="button" data-l="7">Цвет</button><button type="button" data-l="8">Визуализация</button><button type="button" data-l="9">Демонтаж</button><button type="button" data-l="10">Сантехника</button><button type="button" data-l="11">Свет</button><button type="button" data-l="12">Розетки</button><button type="button" data-l="13">Выключатели</button><button type="button" data-l="14">Финал</button>
+          </div>
+        </div>
+        <div class="plan-card" id="plan-card" aria-live="polite"><span class="ln">Нажми на комнату</span><p>Или на кнопку под планом - там уроки про всю квартиру: обмер, цвет, свет, розетки.</p></div>
+      </div>
+      <details class="all-lessons rise"><summary>Все 14 уроков списком</summary>
+      <div class="program">
         <details><summary><span class="n">01</span><span class="t">Начало: обмеры и первый план</span><span class="d">видео + задание</span></summary><div class="body">Как снять размеры квартиры и собрать обмерный план. PDF, который можно распечатать и взять с собой на замер.</div></details>
         <details><summary><span class="n">02</span><span class="t">Прихожая: удобный вход и хранение</span><span class="d">видео + задание</span></summary><div class="body">Где хранить одежду, обувь и сумки, как не упереться дверью в шкаф.</div></details>
         <details><summary><span class="n">03</span><span class="t">Кухня-гостиная: красиво и удобно</span><span class="d">видео + задание</span></summary><div class="body">Зонирование, расстановка техники, обеденная зона и маршруты, чтобы не ходить с тарелками мимо дивана.</div></details>
@@ -618,15 +771,15 @@ footer a { color: var(--mute); }
         <details><summary><span class="n">14</span><span class="t">Финальная проверка: готов ли проект к ремонту</span><span class="d">текст + PDF</span></summary><div class="body">Поиск мебели по фото, список покупок, выбор бригады и вопросы, которые нужно закрыть до начала работ.</div></details>
         <details><summary><span class="n">+</span><span class="t">Бонусы: реальные проекты</span><span class="d">5 PDF</span></summary><div class="body">Полные проекты, в том числе квартира 45 м² и детская, чтобы видеть, как выглядит готовый результат.</div></details>
       </div>
+      </details>
     </div>
   </section>
 
   <section class="block" data-scene="dining" aria-labelledby="h-kit">
     <div class="wrap">
       <div class="head rise">
-        <p class="label">На выходе</p>
-        <h2 id="h-kit">Что ты соберёшь для своей квартиры</h2>
-        <p>Не папку картинок из Pinterest, а план, с которым идёшь в магазин и к мастерам.</p>
+        <h2 id="h-kit">Что будет <span class="acc">у тебя на руках</span></h2>
+        <p>Восемь документов для своей квартиры - от обмерного плана до списка покупок.</p>
       </div>
       <div class="kit rise">
         <div><b>Обмерный план</b><span>Размеры, окна, двери, стояки</span></div>
@@ -645,8 +798,7 @@ footer a { color: var(--mute); }
   <section class="block" data-scene="bath" aria-labelledby="h-works">
     <div class="wrap">
       <div class="head rise">
-        <p class="label">Работы учениц</p>
-        <h2 id="h-works">Так делают ученицы курса</h2>
+        <h2 id="h-works">Лучшее сообщение в&nbsp;моём чате: <span class="acc">"Это мой первый в&nbsp;жизни дизайн проект"</span></h2>
       </div>
       <div class="projects">
         <article class="pcard rise">
@@ -697,20 +849,39 @@ footer a { color: var(--mute); }
           <div class="pc-foot"><h3>Детская на двоих: сон, учёба и хранение</h3><button type="button" class="pc-next" aria-label="Следующее фото">→</button></div>
         </article>
       </div>
-      <p class="note">Работы учениц курса. Имена авторов добавим после их согласия на публикацию.</p>
+      <p class="note">Работы учениц курса.</p>
+    </div>
+  </section>
+
+  <section class="block" id="reviews" aria-labelledby="h-reviews">
+    <div class="wrap">
+      <div class="head rise">
+        <h2 id="h-reviews">Что пишут ученицы <span class="acc">в&nbsp;чате курса</span></h2>
+        <p>Ученицы курса пишут из разных городов и стран:</p>
+      </div>
+      <div class="cities" aria-label="Города учениц: Москва, Санкт-Петербург, Московская область, Краснодар, Калининград, Ижевск, Благовещенск, Хабаровск, Швейцария"><div class="cities-track" aria-hidden="true"><span>Москва · Санкт-Петербург · Московская область · Краснодар · Калининград · Ижевск · Благовещенск · Хабаровск · Швейцария · </span><span>Москва · Санкт-Петербург · Московская область · Краснодар · Калининград · Ижевск · Благовещенск · Хабаровск · Швейцария · </span></div></div>
+      <div>
+      </div>
+      <div class="reviews rise">
+        <figure><blockquote>"Казалось сначала всё сложно, а потом как начала чертить, вошла в азарт, не могла остановиться."</blockquote><figcaption>Ученица курса, январь 2026</figcaption></figure>
+        <figure><blockquote>"Если честно, у нас с супругом аж глаза горят, когда стало что-то получаться у самих... А тут постепенно шаг за шагом получается и вроде очень даже неплохо."</blockquote><figcaption>Ученица курса, апрель 2026</figcaption></figure>
+        <figure><blockquote>"Нужно видео пересматривать. Я вот смотрела, когда только начала - одно услышала. Сейчас, когда уже план есть, ещё раз пересматривала и как по новой, столько нового подчеркнула."</blockquote><figcaption>Ученица курса, июнь 2025</figcaption></figure>
+        <figure><blockquote>"Так рада, что у меня всё получилось, мы с мужем рассматривали два варианта, но потом решили сделать планировку как вам прислала... Я ещё больше вдохновилась на продолжение своего проекта."</blockquote><figcaption>Ученица курса, август 2025</figcaption></figure>
+        <figure><blockquote>"Здесь классно, и Марет от души старается и помогает, но за вас она не будет делать. А помочь, конечно, поможет."</blockquote><figcaption>Ученица курса, ноябрь 2025</figcaption></figure>
+        <figure><blockquote>"Честно, мне всё даётся нелегко. Завела специально тетрадь и всё конспектирую. Но мне нравится."</blockquote><figcaption>Ученица курса, июль 2025</figcaption></figure>
+      </div>
     </div>
   </section>
 
   <section class="block" id="tours" aria-labelledby="h-tours">
     <div class="wrap">
       <div class="head rise">
-        <p class="label">Проекты Мареты в 3D</p>
-        <h2 id="h-tours">Пройдись по проекту, как будто ты уже внутри</h2>
+        <h2 id="h-tours">Пройдись по проекту, <span class="acc">как будто ты уже внутри</span></h2>
         <p>3D-туры реальных проектов Мареты. Крути комнату пальцем или мышкой и смотри, как всё связано.</p>
       </div>
       <div class="tour rise frame">
         <div class="tour-stage">
-          <button type="button" class="tour-cover" id="tour-cover"><img src="img/hero-poster.jpg" alt="" loading="lazy"><span class="tc-btn">Войти в проект</span><span class="tc-sub">3D-тур откроется здесь, комнату можно крутить</span></button>
+          <button type="button" class="tour-cover" id="tour-cover"><span class="tc-btn">Войти в проект</span><span class="tc-sub">3D-тур откроется здесь, комнату можно крутить</span></button>
           <iframe id="tour-frame" title="3D-тур по проекту Мареты" loading="lazy" allow="fullscreen; xr-spatial-tracking; gyroscope; accelerometer" allowfullscreen></iframe>
         </div>
         <div class="tour-bar">
@@ -722,29 +893,30 @@ footer a { color: var(--mute); }
     </div>
   </section>
 
-  <section class="block" data-scene="plan" aria-labelledby="h-author">
-    <div class="wrap author">
-      <div class="portrait rise frame">
-        <img src="img/portrait3.jpg" alt="Марета Новикова в реализованном интерьере у камина" loading="lazy">
+  <section class="block" data-scene="kitchen" aria-labelledby="h-forwho">
+    <div class="wrap">
+      <div class="head rise">
+        <h2 id="h-forwho">Для кого <span class="acc">я записала этот курс</span></h2>
       </div>
-      <div class="rise">
-        <p class="label">Автор курса</p>
-        <h2 id="h-author" style="margin-top:14px">Марета Новикова</h2>
-        <p style="margin-top:20px;max-width:58ch;opacity:.9">Дизайнер интерьеров, руководитель студии. На консультациях Марета чаще всего видит одно и то же: люди начинают ремонт с красивой картинки, а не с планировки. Курс построен так же, как она работает с клиентами: сначала удобство, потом красота.</p>
+      <div class="forwho rise">
+        <div><b>Ты делаешь ремонт сама</b><p>Дизайн-проект под ключ сейчас не по бюджету, а ремонт ждать не будет. Курс даёт порядок: что решать сначала, что потом и что отдать бригаде.</p></div>
+        <div><b>Ты будешь работать с дизайнером или бригадой</b><p>И хочешь понимать, о чём они говорят: читать план, задавать нужные вопросы и замечать ошибку до того, как её заштукатурят.</p></div>
+        <div><b>Хочешь понять, как дизайнер думает о планировке</b><p>На примере своей квартиры - без долгой учёбы.</p></div>
       </div>
+      <p class="forwho-note rise">Уроки короткие. Посмотрела, сделала у себя, вернулась и пересмотрела. Со второго раза доходит больше, и это нормально.</p>
+      <p class="forwho-no rise"><b>Не подойдёт,</b> если хочешь, чтобы всё продумали за тебя. Тогда тебе нужен дизайнер, а не курс.</p>
     </div>
   </section>
 
-  <div class="screen" aria-hidden="true"><div class="pin"><p class="s-top"><b>Твой дом</b><span>продуманный заранее</span></p><div class="s-photo"><img src="img/w-dining.jpg" alt="" loading="lazy"></div><p class="s-cap"><span>Столовая · проект ученицы курса</span></p></div></div>
   <section class="block" id="price" data-scene="dining" aria-labelledby="h-price">
     <div class="wrap">
       <div class="head rise">
-        <p class="label">Участие</p>
-        <h2 id="h-price">Один курс, без тарифов</h2>
+        <h2 id="h-price">Одна цена, <span class="acc">бессрочный доступ</span></h2>
       </div>
       <div class="price rise frame">
         <div>
-          <h3>Курс Мареты Новиковой</h3>
+          <h3>Дом без ошибок</h3>
+          <p class="course-sub">Создай проект своего дома</p>
           <ul>
             <li>14 уроков: видео, тексты и практикумы с PDF</li>
             <li>Задания на твоей квартире</li>
@@ -754,10 +926,9 @@ footer a { color: var(--mute); }
           </ul>
         </div>
         <div class="cost">
-          <p class="promo">Цена по акции</p>
-          <div class="sum">18 990 ₽</div>
-          <p class="sub">После акции курс будет стоить 24 990 ₽. Есть рассрочка.</p>
-          <p class="anchor">Для сравнения: планировка, электрика и визуализации в студии Мареты стоят 4 000 ₽ за м². На курсе ты делаешь это для своей квартиры сама.</p>
+          <div class="sum">24&nbsp;990&nbsp;₽</div>
+          <p class="sub">Есть рассрочка.</p>
+          <p class="anchor">Для сравнения: дизайн-проект в студии Мареты стоит 9&nbsp;000&nbsp;₽ за м². На курсе ты продумываешь свою квартиру сама.</p>
           <a class="btn" href="#pay" data-pay>Перейти к оплате</a>
         </div>
       </div>
@@ -767,27 +938,46 @@ footer a { color: var(--mute); }
   <section class="block" data-scene="bed" aria-labelledby="h-faq">
     <div class="wrap">
       <div class="head rise">
-        <p class="label">Вопросы</p>
-        <h2 id="h-faq">О чём спрашивают перед покупкой</h2>
+        <h2 id="h-faq">Вопросы, <span class="acc">которые мне задают в&nbsp;чате</span></h2>
       </div>
       <div class="faq rise">
         <details><summary>Я никогда не занималась дизайном. Получится?</summary><p>Курс сделан для своего ремонта, а не для профессии. Каждый урок - один шаг на твоей квартире, по порядку.</p></details>
-        <details><summary>В какой программе работать? Нужно платить?</summary><p>Основная программа - Remplanner, в ней есть свои обучающие видео. Для заданий хватает скриншотов, платный экспорт не нужен.</p></details>
-        <details><summary>Подойдёт для дома или большой квартиры?</summary><p>Курс рассчитан на типовые квартиры от 20 до 150 м². Для частного дома или нестандартного объекта лучше индивидуальная консультация.</p></details>
+        <details><summary>В какой программе работать? Нужно платить?</summary><p>Основная программа - Remplanner, в ней есть свои обучающие видео. У неё несколько тарифов, в том числе платные, - подробно на сайте Remplanner. Для заданий хватает скриншотов.</p></details>
+        <details><summary>А если у меня частный дом?</summary><p>Подойдёт. Планировка, хранение, свет, сантехника и электрика разбираются по комнатам - это работает и в квартире, и в доме.</p></details>
         <details><summary>У меня свободная планировка. С чего начать?</summary><p>С урока про демонтаж и перегородки: там разобрано, что можно менять и какие вопросы задать специалисту по перепланировке.</p></details>
         <details><summary>Сколько времени займёт курс?</summary><p>Примерно 1,5 месяца в своём темпе. Уроки короткие, а доступ не ограничен по времени: можно вернуться к нужному уроку, когда начнётся ремонт.</p></details>
         <details><summary>Нужен мощный компьютер?</summary><p>Нет. Хватит обычного ноутбука: программа для планировки не требует мощного железа.</p></details>
-        <details><summary>А если я застряну на задании?</summary><p>В курсе есть чат, где можно задать вопрос. Марета отвечает ученицам, а самым активным может дать личный разбор.</p></details>
+        <details><summary>А если я застряну на задании?</summary><p>В курсе есть чат, где можно задать вопрос. Марета отвечает, когда может: сроки и объём ответов не гарантируются.</p></details>
         <details><summary>Это точно мой курс?</summary><p>Если ремонт впереди и ты хочешь сама понимать, что и где будет стоять, - да. Если хочешь полностью отдать проект дизайнеру, лучше заказать его в студии.</p></details>
         <details><summary>Можно потом отдать планы мастерам?</summary><p>Да, планы помогают объяснить мастерам, что ты хочешь. Расчёты, согласования и монтаж делают профильные специалисты.</p></details>
       </div>
     </div>
   </section>
 
+  <section class="block" id="contact" aria-labelledby="h-contact">
+    <div class="wrap">
+      <div class="head rise">
+        <h2 id="h-contact">Остались <span class="acc">вопросы?</span></h2>
+        <p>Напиши мне - помогу понять, подойдёт ли курс именно тебе, и подскажу, как удобнее оплатить.</p>
+      </div>
+      <div class="contact-card rise">
+        <img src="img/portrait-white.jpg" alt="Марета Новикова" loading="lazy">
+        <div class="contact-body">
+          <span class="contact-who">Марета Новикова, автор курса</span>
+          <p class="contact-say">Отвечаю сама. Пиши как удобно</p>
+          <div class="contact-btns">
+            <a class="btn" href="https://wa.me/79531000212" target="_blank" rel="noopener">Написать в WhatsApp</a>
+            <a class="btn ghost" href="tel:+79531000212">Позвонить: +7&nbsp;953&nbsp;100-02-12</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="block" data-scene="kitchen" aria-labelledby="h-final">
     <div class="wrap final rise">
-      <h2 id="h-final">Ремонт всё равно начнётся. Реши всё на плане, а не на объекте</h2>
-      <p style="color:var(--mute);max-width:56ch">Передвинуть стену на плане - это минута. На объекте - недели и деньги.</p>
+      <h2 id="h-final">Начни с обмерного плана. <span class="acc">Рулетка у&nbsp;тебя уже есть</span></h2>
+      <p style="color:var(--mute);max-width:56ch">Передвинуть стену на плане - минута. На объекте - недели и деньги.</p>
       <a class="btn" href="#price">Хочу продуманный интерьер</a>
     </div>
   </section>
@@ -795,7 +985,7 @@ footer a { color: var(--mute); }
 
 <footer>
   <div class="wrap">
-    <span>ИП Новикова Марета Валикоевна · ИНН 233304079958</span>
+    <span>ИП Новикова Марета Валикоевна · ИНН 233304079958 · ОГРНИП 325237500186756</span>
     <span>Оферта · Политика конфиденциальности (ссылки появятся после публикации документов)</span>
   </div>
 </footer>
@@ -805,7 +995,6 @@ footer a { color: var(--mute); }
 <script>
 (function () {
   var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
-  // слайдер первого экрана
   var slides = document.querySelectorAll(".hero .slides img");
   var dots = document.querySelectorAll(".dots button");
   var mark = document.querySelector(".mark");
@@ -818,7 +1007,6 @@ footer a { color: var(--mute); }
   }
   var hv = document.querySelector(".hero-video");
   if (hv && reduce) { hv.removeAttribute("autoplay"); hv.pause(); }
-  // если браузер не запустил видео сам, запускаем без звука
   [hv, document.querySelector(".portrait video")].forEach(function (v) {
     if (!v || reduce) return;
     v.muted = true;
@@ -829,7 +1017,6 @@ footer a { color: var(--mute); }
   dots.forEach(function (d, k) { d.addEventListener("click", function () { clearInterval(timer); show(k); start(); }); });
   start();
 
-  // гардеробная: точки
   var HS = [
     ["Пантограф", "Штанга под потолком сама опускается вниз. Достаёшь вещи без лестницы и табуретки."],
     ["Штанга на уровне руки", "Одежда на каждый день висит там, где её удобно взять. Ничего не живёт на стуле."],
@@ -851,7 +1038,6 @@ footer a { color: var(--mute); }
   if (hn) hn.addEventListener("click", function () { hsShow(hsI + 1); });
   if (hsDots.length) hsShow(0);
 
-  // свет: ползунок температуры
   var lr = document.getElementById("light-range");
   if (lr) {
     var lw = document.querySelector(".lt-warm"), lc = document.querySelector(".lt-cold"),
@@ -867,7 +1053,6 @@ footer a { color: var(--mute); }
     lr.addEventListener("input", lUpd); lUpd();
   }
 
-  // 3D-туры Homestyler
   var TOURS = ["cA116UJhhn68U3NtfENxop","38X7wvtLKrb958qhc7aYup","vaQUM4FBkqbnhakKutAPQT","v9ULygxruipkr3qUipb6Hg",
     "vPqkCWqhMqDght1BZKnUuf","9Jnn1Me9m9hrLkJ8vUcPWo","kt5CHfGwkUUdH7Lbe4kSnf","ufxc834iWe99Q9AmGhd4J3",
     "iK1Wsyf91GkD2ZwB1abS8c","xuTkN1qz1HGyvcxvLru1gp","hFZwts5M3JscKibqLzj7fv","rZew42U4tRzPvbb7x6fcsc",
@@ -900,10 +1085,18 @@ footer a { color: var(--mute); }
     if (tCover) tCover.addEventListener("click", function () { tStart(0); });
     Array.prototype.forEach.call(tPills.children, function (b, k) { b.addEventListener("click", function () { if (tCover) tCover.hidden = true; }); });
     tOpen.href = tUrl(TOURS[0]);
+    var tSec = document.getElementById("tours");
+    if (tSec && "IntersectionObserver" in window) {
+      var tIO = new IntersectionObserver(function (es) {
+        if (!es[0].isIntersecting) return;
+        var l = document.createElement("link"); l.rel = "preconnect"; l.href = "https://panorama.homestyler.com"; document.head.appendChild(l);
+        tIO.disconnect();
+      }, { rootMargin: "600px 0px" });
+      tIO.observe(tSec);
+    }
   }
 
-  // карточки проектов: точки и стрелка
-  document.querySelectorAll(".pcard").forEach(function (card) {
+  document.querySelectorAll(".pcard").forEach(function (card, ci) {
     var imgs = card.querySelectorAll(".pc-pics img"), dotsBox = card.querySelector(".pc-dots"), cur = 0;
     var go = function (k) {
       cur = (k + imgs.length) % imgs.length;
@@ -919,9 +1112,16 @@ footer a { color: var(--mute); }
     pics.addEventListener("touchstart", function (e) { sx = e.touches[0].clientX; }, { passive: true });
     pics.addEventListener("touchend", function (e) { if (sx === null) return; var dx = e.changedTouches[0].clientX - sx; if (Math.abs(dx) > 40) go(cur + (dx < 0 ? 1 : -1)); sx = null; });
     go(0);
+    var seen = false, userAt = 0, mark = function () { userAt = Date.now(); };
+    card.addEventListener("click", mark); pics.addEventListener("touchstart", mark, { passive: true });
+    if ("IntersectionObserver" in window) new IntersectionObserver(function (es) { seen = es[0].isIntersecting; }, { threshold: .4 }).observe(card);
+    if (!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) {
+      setTimeout(function () {
+        setInterval(function () { if (seen && Date.now() - userAt > 8000 && !document.hidden) go(cur + 1); }, 3500);
+      }, ci * 900);
+    }
   });
 
-  // проект ученицы: слайдер
   var stT = document.getElementById("st-track"), stC = document.getElementById("st-count");
   if (stT) {
     var stN = stT.children.length;
@@ -934,20 +1134,16 @@ footer a { color: var(--mute); }
   var mw = document.getElementById("more-works"), ow = document.getElementById("other-works");
   if (mw && ow) mw.addEventListener("click", function () { ow.hidden = false; mw.hidden = true; });
 
-  // нижняя кнопка на телефоне: только после первого экрана
   var dock = document.querySelector(".dock"), hero = document.querySelector(".hero");
   if (dock && hero && "IntersectionObserver" in window) {
-    new IntersectionObserver(function (es) { dock.hidden = es[0].isIntersecting; }).observe(hero);
+    var zones = [hero, document.getElementById("price"), document.getElementById("contact"), document.querySelector(".final")].filter(Boolean);
+    function dockCheck() {
+      dock.hidden = zones.some(function (el) { var r = el.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight; });
+    }
+    addEventListener("scroll", dockCheck, { passive: true });
+    addEventListener("resize", dockCheck);
+    dockCheck();
   } else if (dock) { dock.hidden = false; }
-  // заголовки по словам
-  document.querySelectorAll(".hero h1, h2").forEach(function (h) {
-    var words = h.textContent.trim().split(/\s+/);
-    h.setAttribute("aria-label", h.textContent.trim());
-    h.innerHTML = words.map(function (w, k) { return '<span class="w" aria-hidden="true" style="transition-delay:' + (k * 70) + 'ms">' + w + '</span>'; }).join(" ");
-    h.classList.add("type");
-    if (h.closest(".hero")) requestAnimationFrame(function () { h.classList.add("in"); });
-  });
-  // счётчики
   function countUp(el) {
     var to = parseFloat(el.dataset.to), suf = el.dataset.suf || "", dec = (el.dataset.to.split(".")[1] || "").length;
     var t0 = null, dur = 1400;
@@ -968,7 +1164,6 @@ footer a { color: var(--mute); }
     fx.forEach(function (el) { fo.observe(el); });
   } else { fx.forEach(function (el) { el.classList.add("in"); }); }
 
-  // ползунок до/после
   var cmp = document.getElementById("compare"), rng = document.getElementById("compare-range");
   if (cmp && rng) {
     var setX = function (v) { cmp.style.setProperty("--x", v + "%"); };
@@ -987,7 +1182,6 @@ footer a { color: var(--mute); }
     }
   }
 
-  // появление блоков
   document.documentElement.classList.add("js");
   var rises = document.querySelectorAll(".rise");
   rises.forEach(function (el) {
@@ -1003,7 +1197,6 @@ footer a { color: var(--mute); }
     });
   } else { rises.forEach(function (el) { el.classList.add("in"); }); }
 
-  // экраны-перебивки: прогресс прокрутки в переменную --p
   var screens = document.querySelectorAll(".screen");
   var ticking = false;
   function upd() {
@@ -1021,6 +1214,31 @@ footer a { color: var(--mute); }
     addEventListener("resize", upd);
     upd();
   } else { screens.forEach(function (s) { s.style.setProperty("--p", "1"); }); }
+})();
+</script>
+<script>
+(function () {
+  var items = [].slice.call(document.querySelectorAll("#program .program details")).slice(0, 14);
+  var card = document.getElementById("plan-card");
+  if (!card || !items.length) return;
+  function txt(el, s) { var x = el.querySelector(s); return x ? x.textContent : ""; }
+  function show(n) {
+    var it = items[n - 1]; if (!it) return;
+    card.innerHTML = '<span class="ln">Урок ' + txt(it, ".n") + '</span><h3></h3><p></p><span class="d"></span>';
+    card.querySelector("h3").textContent = txt(it, ".t");
+    card.querySelector("p").textContent = txt(it, ".body");
+    card.querySelector(".d").textContent = txt(it, ".d");
+    [].forEach.call(document.querySelectorAll(".room"), function (r) { r.classList.toggle("on", +r.getAttribute("data-l") === n); });
+    [].forEach.call(document.querySelectorAll(".plan-extra button"), function (b) { b.classList.toggle("on", +b.getAttribute("data-l") === n); });
+    var cr = card.getBoundingClientRect(); if (cr.bottom > innerHeight - 80 || cr.top < 0) card.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+  [].forEach.call(document.querySelectorAll(".room"), function (r) {
+    r.addEventListener("click", function () { show(+r.getAttribute("data-l")); });
+    r.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); show(+r.getAttribute("data-l")); } });
+  });
+  [].forEach.call(document.querySelectorAll(".plan-extra button"), function (b) {
+    b.addEventListener("click", function () { show(+b.getAttribute("data-l")); });
+  });
 })();
 </script>
 </body>
