@@ -176,7 +176,7 @@ h1, h2 { color: var(--ivory); }
 .ticker-track, .cities-track { display: flex; width: max-content; animation: marquee 40s linear infinite; }
 .ticker-track span { padding: 9px 0; white-space: nowrap; }
 @keyframes marquee { to { transform: translateX(-50%); } }
-.site-head { position: sticky; top: 0; z-index: 25; background: rgba(11,11,11,.82); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+.site-head { position: relative; z-index: 25; background: rgba(11,11,11,.82); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
 .site-head-in { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-block: 10px; }
 .brand-logo { display: block; width: 74px; height: 51px; background: var(--acc); -webkit-mask: url(img/logo-mn.png) center / contain no-repeat; mask: url(img/logo-mn.png) center / contain no-repeat; }
 .site-nav { display: flex; gap: 28px; }
@@ -192,7 +192,7 @@ h1, h2 { color: var(--ivory); }
 .cities-track span { padding: 14px 0; white-space: nowrap; font-family: var(--f-display); font-size: clamp(20px, 2.4vw, 28px); color: var(--ivory); }
 .final { position: relative; background: var(--panel); border: 1px solid rgba(207,169,107,.35); border-radius: 28px; padding: clamp(28px, 5vw, 64px) !important; box-shadow: 0 0 80px rgba(207,169,107,.16), inset 0 0 60px rgba(207,169,107,.05); }
 @media (prefers-reduced-motion: reduce) { .ticker-track, .cities-track, .live-dot { animation: none; } }
-section[id], [id^="h-"] { scroll-margin-top: 90px; }
+section[id], [id^="h-"] { scroll-margin-top: 16px; }
 .strip b { white-space: nowrap; }
 .strip span { display: block; margin-top: 6px; max-width: 36ch; }
 @media (max-width: 560px) { .strip-in > div { display: block !important; } .strip b { font-size: 34px; } }
