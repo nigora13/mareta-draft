@@ -185,14 +185,17 @@ h1, h2 { color: var(--ivory); }
 .head-btn { padding: 11px 20px; font-size: 14px; }
 @media (max-width: 760px) { .site-nav { display: none; } .brand-logo { width: 58px; height: 40px; } }
 .live { display: inline-flex; align-items: center; gap: 10px; margin: 0; color: var(--mute); font-size: 14px; font-weight: 400; }
-.live .dot { width: 8px; height: 8px; border-radius: 50%; background: #ff7a00; box-shadow: 0 0 0 0 rgba(255,122,0,.6); animation: pulse 2s infinite; }
+.live-dot { flex: none; width: 8px; height: 8px; border-radius: 50%; background: #ff7a00; box-shadow: 0 0 0 0 rgba(255,122,0,.6); animation: pulse 2s infinite; }
 @keyframes pulse { 70% { box-shadow: 0 0 0 10px rgba(255,122,0,0); } 100% { box-shadow: 0 0 0 0 rgba(255,122,0,0); } }
 .cities { overflow: hidden; margin: 0 0 22px; border-block: 1px solid var(--line); -webkit-mask: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
 .cities-track { animation-duration: 50s; }
 .cities-track span { padding: 14px 0; white-space: nowrap; font-family: var(--f-display); font-size: clamp(20px, 2.4vw, 28px); color: var(--ivory); }
 .final { position: relative; background: var(--panel); border: 1px solid rgba(255,154,61,.35); border-radius: 28px; padding: clamp(28px, 5vw, 64px) !important; box-shadow: 0 0 80px rgba(255,122,0,.16), inset 0 0 60px rgba(255,122,0,.05); }
-@media (prefers-reduced-motion: reduce) { .ticker-track, .cities-track, .live .dot { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .ticker-track, .cities-track, .live-dot { animation: none; } }
 section[id], [id^="h-"] { scroll-margin-top: 90px; }
+.strip b { white-space: nowrap; }
+.strip span { display: block; margin-top: 6px; max-width: 36ch; }
+@media (max-width: 560px) { .strip-in > div { display: block !important; } .strip b { font-size: 34px; } }
 .room { cursor: pointer; }
 .room image { opacity: .72; transition: opacity .3s; }
 .room .shade { fill: rgba(20,20,20,.72); }
@@ -579,7 +582,7 @@ footer a { color: var(--mute); }
 
   <section class="block pitch" aria-labelledby="h-pitch">
     <div class="wrap pitch-in">
-      <p class="live"><span class="dot" aria-hidden="true"></span>Курс открыт - можно начать сегодня</p>
+      <p class="live"><span class="live-dot" aria-hidden="true"></span>Курс открыт - можно начать сегодня</p>
       <h2 id="h-pitch">Я&nbsp;не учу работать в&nbsp;программах. <span class="acc">Я&nbsp;учу планировать твою квартиру</span></h2>
       <p class="lead">Программа - это инструмент. Я&nbsp;рассказываю, на что смотреть: планировка, хранение, свет, цвет. Коротко и&nbsp;на примере твоей квартиры.</p>
       <div class="acts">
@@ -591,8 +594,8 @@ footer a { color: var(--mute); }
 
   <div class="strip" aria-label="Цифры">
     <div class="wrap strip-in">
-      <div><b>Москва - Нью-Йорк</b><span>города, где стоят мои проекты</span></div>
-      <div><b data-to="2.5" data-suf=" млн">2,5 млн</b><span>просмотров у ролика про шкаф</span></div>
+      <div><b>Москва → Нью-Йорк</b><span>мои проекты - от Москвы и Петербурга до Нью-Йорка, Рима и Риги</span></div>
+      <div><b data-to="2.5" data-suf=" млн">2,5 млн</b><span>просмотров у моего ролика про шкаф до потолка</span></div>
     </div>
   </div>
 
@@ -976,9 +979,9 @@ footer a { color: var(--mute); }
 
   <section class="block" data-scene="kitchen" aria-labelledby="h-final">
     <div class="wrap final rise">
-      <h2 id="h-final">Начни с обмерного плана. <span class="acc">Рулетка у&nbsp;тебя уже есть</span></h2>
-      <p style="color:var(--mute);max-width:56ch">Передвинуть стену на плане - минута. На объекте - недели и деньги.</p>
-      <a class="btn" href="#price">Хочу продуманный интерьер</a>
+      <h2 id="h-final">Хочешь научиться так&nbsp;же <span class="acc">продумывать свой дом?</span></h2>
+      <p style="color:var(--mute);max-width:56ch">Пока всё на чертежах, решения можно проверить и поменять. После отделки - это уже переделки. Начни с первого урока: рулетка у тебя уже есть.</p>
+      <a class="btn" href="#price">Записаться на курс</a>
     </div>
   </section>
 </main>
