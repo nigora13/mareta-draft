@@ -196,7 +196,7 @@ h1, h2 { color: var(--ivory); }
 section[id], [id^="h-"] { scroll-margin-top: 16px; }
 .strip b { white-space: nowrap; }
 .strip span { display: block; margin-top: 6px; max-width: 36ch; }
-@media (max-width: 560px) { .strip-in > div { display: block !important; } .strip b { font-size: 34px; } }
+@media (max-width: 560px) { .strip-in > div { display: block !important; } .strip b { font-size: clamp(26px, 9vw, 34px); } }
 .room { cursor: pointer; }
 .room image { opacity: .72; transition: opacity .3s; }
 .room .shade { fill: rgba(20,20,20,.72); }
@@ -787,14 +787,14 @@ footer a { color: var(--mute); }
       </div>
       <div class="kit rise">
         <div><b>Обмерный план</b><span>Размеры, окна, двери, стояки</span></div>
-        <div><b>Планировку</b><span>Мебель и техника по местам</span></div>
+        <div><b>Планировка</b><span>Мебель и техника по местам</span></div>
           <div><b>План демонтажа</b><span>Что снести, где новые перегородки</span></div>
           <div><b>План сантехники</b><span>Выводы воды и канализации</span></div>
         <div><b>План света</b><span>Светильники и сценарии</span></div>
         <div><b>План розеток</b><span>Под конкретную технику</span></div>
           <div><b>План выключателей</b><span>Группы света и проходные</span></div>
-        <div><b>Палитру и мудборд</b><span>Цвета, материалы, фактуры</span></div>
-        <div><b>Визуализацию</b><span>Как будет выглядеть комната</span></div>
+        <div><b>Палитра и мудборд</b><span>Цвета, материалы, фактуры</span></div>
+        <div><b>Визуализация</b><span>Как будет выглядеть комната</span></div>
         <div><b>Список покупок</b><span>С ценами и аналогами</span></div>
         <div><b>Вопросы бригаде</b><span>Что закрыть до старта работ</span></div>
       </div>
