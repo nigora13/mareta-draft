@@ -172,6 +172,7 @@ h1, h2 { color: var(--ivory); }
 .contact-who { color: #cfa96b; font-size: 14px; font-weight: 500; }
 .contact-say { font-family: var(--f-display); font-size: clamp(26px, 3.4vw, 40px); line-height: 1.15; margin: 10px 0 22px; }
 .contact-btns { display: flex; flex-wrap: wrap; gap: 12px; }
+@media (max-width: 560px) { .contact-btns .btn { width: 100%; justify-content: center; text-align: center; } }
 @media (max-width: 760px) { .contact-card { grid-template-columns: 1fr; } .contact-card img { aspect-ratio: 1 / 1; max-height: 320px; } }
 .ticker { overflow: hidden; background: var(--acc); color: #141414; font: 600 12px/1 var(--f-body); letter-spacing: .08em; text-transform: uppercase; }
 .ticker-track, .cities-track { display: flex; width: max-content; animation: marquee 40s linear infinite; }
@@ -922,6 +923,7 @@ footer a { color: var(--mute); }
           <div class="contact-btns">
             <a class="btn" href="https://wa.me/79531000212" target="_blank" rel="noopener">Написать в WhatsApp</a>
             <a class="btn ghost" href="https://t.me/+79531000212" target="_blank" rel="noopener">Написать в Telegram</a>
+            <a class="btn ghost" href="https://max.ru/u/f9LHodD0cOINwt3aGb_vk77Wv1W_gOZ87dC9YC_4GKaWf3jMfEnAtQRWbuU" target="_blank" rel="noopener">Написать в MAX</a>
           </div>
         </div>
       </div>
