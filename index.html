@@ -430,6 +430,10 @@ section.block:nth-of-type(even) { background: var(--panel); }
 @media (max-width: 720px) { .tour-stage { aspect-ratio: 4 / 5; } }
 .tour-bar { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; }
 .tour-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.cmp-tabs { max-width: 860px; margin: 0 auto 12px; display: flex; flex-wrap: wrap; gap: 8px; }
+.cmp-tabs button { font: 500 13px/1 var(--f-body); padding: 10px 14px; cursor: pointer; background: transparent; color: var(--ivory); border: 1px solid var(--line); }
+.cmp-tabs button[aria-selected="true"] { border-color: var(--brass); color: var(--brass); }
+.compare.single .before, .compare.single .tag, .compare.single .bar, .compare.single .knob, .compare.single input { display: none; }
 .tour-pills button, .tour-more {
   font: 500 13px/1 var(--f-body); padding: 10px 14px; cursor: pointer;
   background: transparent; color: var(--ivory); border: 1px solid var(--line);
@@ -683,6 +687,7 @@ footer a { color: var(--mute); }
         <h2 id="h-story">"Ей нужна была <span class="acc">просто расстановка мебели</span>"</h2>
         <p>Я посмотрела её планировку, красными линиями расчертила недочёты и объяснила, как сделать правильно. Бригаду на объекте приостановили. И это не одна такая история.</p>
       </div>
+      <div class="cmp-tabs" id="cmp-tabs" role="tablist" aria-label="Проекты до и после"><button type="button" role="tab" aria-selected="true">До и после</button><button type="button" role="tab" aria-selected="false">Мой разбор</button><button type="button" role="tab" aria-selected="false">Другая студия и я</button></div>
       <div class="compare rise" id="compare">
         <img src="img/plan-after.jpg" alt="Планировка после консультации: мастер-спальня с гардеробной, детская на вырост, кухня у террасы" loading="lazy">
         <div class="before"><img src="img/plan-before.jpg" alt="Исходная планировка дома с размерами" loading="lazy"></div>
@@ -690,7 +695,7 @@ footer a { color: var(--mute); }
         <input type="range" id="compare-range" min="0" max="100" value="50" aria-label="Сдвиньте, чтобы сравнить планировку до и после">
         <div class="bar"></div><div class="knob" aria-hidden="true">&#8249;&#8250;</div>
       </div>
-      <p class="compare-cap"><span><b>До:</b> исходный план, кухня-столовая 40,49 м²</span><span><b>После:</b> моя планировка, + гардеробная 5,38 м²</span></p>
+      <p class="compare-cap" id="compare-cap"><span><b>До:</b> исходный план, кухня-столовая 40,49 м²</span><span><b>После:</b> моя планировка, + гардеробная 5,38 м²</span></p>
       <div class="story-text">
         <p class="quote rise">Сначала проработали планировку - мебель, зонирование, проходы - и только потом передали архитектору финальные правки.</p>
         <p class="rise">Спальня получила гардеробную, детская - место "на вырост", кухня переехала к террасе. Курс учит видеть такие решения у себя до ремонта.</p>
@@ -801,64 +806,6 @@ footer a { color: var(--mute); }
     </div>
   </section>
 
-  <div class="screen" aria-hidden="true"><div class="pin"><p class="s-top"><b>Материалы</b><span>камень, дерево, свет</span></p><div class="s-photo"><img src="img/w-bath.jpg" alt="" loading="lazy"></div><p class="s-cap"><span>Ванная</span></p></div></div>
-  <section class="block" data-scene="bath" aria-labelledby="h-works">
-    <div class="wrap">
-      <div class="head rise">
-        <h2 id="h-works">Лучшее сообщение в&nbsp;моём чате: <span class="acc">"Это мой первый в&nbsp;жизни дизайн проект"</span></h2>
-      </div>
-      <div class="projects">
-        <article class="pcard rise">
-          <div class="pc-pics">
-            <span class="pc-big">6 комнат</span>
-            <img src="img/e1.jpg" alt="Кухня-столовая" loading="lazy" class="on">
-            <img src="img/e2.jpg" alt="Гостиная" loading="lazy">
-            <img src="img/e3.jpg" alt="Спальня с ТВ-зоной" loading="lazy">
-            <img src="img/e4.jpg" alt="Спальня, зона у входа" loading="lazy">
-            <img src="img/e5.jpg" alt="Санузел" loading="lazy">
-            <img src="img/e6.jpg" alt="Ванная" loading="lazy">
-            <div class="pc-dots"></div>
-          </div>
-          <div class="pc-foot"><h3>Квартира целиком: от кухни до ванной</h3><button type="button" class="pc-next" aria-label="Следующее фото">→</button></div>
-        </article>
-        <article class="pcard rise">
-          <div class="pc-pics">
-            <span class="pc-big">5 комнат</span>
-            <img src="img/w-dining.jpg" alt="Столовая" loading="lazy" class="on">
-            <img src="img/hero4.jpg" alt="Спальня" loading="lazy">
-            <img src="img/w-hall.jpg" alt="Прихожая" loading="lazy">
-            <img src="img/w-bath2.jpg" alt="Санузел" loading="lazy">
-            <img src="img/w-room.jpg" alt="Детская" loading="lazy">
-            <div class="pc-dots"></div>
-          </div>
-          <div class="pc-foot"><h3>Тёплая квартира с деревом и камнем</h3><button type="button" class="pc-next" aria-label="Следующее фото">→</button></div>
-        </article>
-        <article class="pcard rise">
-          <div class="pc-pics">
-            <span class="pc-big">4 комнаты</span>
-            <img src="img/s1.jpg" alt="Гостиная" loading="lazy" class="on">
-            <img src="img/s2.jpg" alt="Кухня-гостиная" loading="lazy">
-            <img src="img/w-bed.jpg" alt="Спальня" loading="lazy">
-            <img src="img/s3.jpg" alt="Санузел" loading="lazy">
-            <div class="pc-dots"></div>
-          </div>
-          <div class="pc-foot"><h3>Гостиная, кухня и спальня в одном стиле</h3><button type="button" class="pc-next" aria-label="Следующее фото">→</button></div>
-        </article>
-        <article class="pcard rise">
-          <div class="pc-pics">
-            <span class="pc-big">Детская</span>
-            <img src="img/k1.jpg" alt="Детская на двоих" loading="lazy" class="on">
-            <img src="img/w-kids.jpg" alt="Детская, зона сна" loading="lazy">
-            <img src="img/k2.jpg" alt="Детская, рабочие места" loading="lazy">
-            <img src="img/w-study.jpg" alt="Детская, учебная зона" loading="lazy">
-            <div class="pc-dots"></div>
-          </div>
-          <div class="pc-foot"><h3>Детская на двоих: сон, учёба и хранение</h3><button type="button" class="pc-next" aria-label="Следующее фото">→</button></div>
-        </article>
-      </div>
-      <p class="note">Работы учениц курса.</p>
-    </div>
-  </section>
 
   <section class="block" id="reviews" aria-labelledby="h-reviews">
     <div class="wrap">
@@ -1169,6 +1116,25 @@ footer a { color: var(--mute); }
   } else { fx.forEach(function (el) { el.classList.add("in"); }); }
 
   var cmp = document.getElementById("compare"), rng = document.getElementById("compare-range");
+  var cTabs = document.getElementById("cmp-tabs"), cCap = document.getElementById("compare-cap");
+  if (cmp && cTabs && cCap) {
+    var cAfter = cmp.querySelector(":scope > img"), cBefore = cmp.querySelector(".before img"), cL = cmp.querySelector(".tag.l"), cR = cmp.querySelector(".tag.r");
+    var CMP = [
+      { b: "img/plan-before.jpg", a: "img/plan-after.jpg", l: "До", r: "После", alt: "Исходная планировка дома и моя планировка после консультации", cap: cCap.innerHTML },
+      { one: "img/plan-razbor.jpg", alt: "Мой разбор исходного плана: недочёты отмечены красными линиями", cap: "<span><b>Мой разбор:</b> красными линиями - что я бы поменяла в исходном плане</span>" },
+      { b: "img/plan2-other.jpg", a: "img/plan2-mine.jpg", l: "Другая студия", r: "Мой план", alt: "Планировка другой студии и моя планировка того же объекта", cap: "<span><b>Слева:</b> проект другой студии</span><span><b>Справа:</b> моя планировка, 116,5 м²</span>" }
+    ];
+    Array.prototype.forEach.call(cTabs.children, function (btn, k) {
+      btn.addEventListener("click", function () {
+        var d = CMP[k];
+        Array.prototype.forEach.call(cTabs.children, function (b, j) { b.setAttribute("aria-selected", j === k ? "true" : "false"); });
+        cmp.classList.toggle("single", !!d.one);
+        if (d.one) { cAfter.src = d.one; } else { cAfter.src = d.a; cBefore.src = d.b; cL.textContent = d.l; cR.textContent = d.r; cmp.style.setProperty("--x", "50%"); rng.value = 50; }
+        cAfter.alt = d.alt; cCap.innerHTML = d.cap;
+        var st = document.querySelector(".story-text"); if (st) st.hidden = k === 2;
+      });
+    });
+  }
   if (cmp && rng) {
     var setX = function (v) { cmp.style.setProperty("--x", v + "%"); };
     rng.addEventListener("input", function () { setX(rng.value); });
