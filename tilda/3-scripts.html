@@ -1,0 +1,265 @@
+<script>
+(function () {
+  var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var slides = document.querySelectorAll(".hero .slides img");
+  var dots = document.querySelectorAll(".dots button");
+  var mark = document.querySelector(".mark");
+ var i = 0, timer = null;
+  function show(n) {
+    i = (n + slides.length) % slides.length;
+    slides.forEach(function (s, k) { s.classList.toggle("on", k === i); });
+    dots.forEach(function (d, k) { d.classList.toggle("on", k === i); });
+    if (mark) mark.style.backgroundImage = "url(" + slides[i].getAttribute("src") + ")";
+  }
+  var hv = document.querySelector(".hero-video");
+  if (hv && reduce) { hv.removeAttribute("autoplay"); hv.pause(); }
+  [hv, document.querySelector(".portrait video")].forEach(function (v) {
+    if (!v || reduce) return;
+    v.muted = true;
+    var tryPlay = function () { var p = v.play(); if (p && p.catch) p.catch(function () {}); };
+    tryPlay(); document.addEventListener("visibilitychange", function () { if (!document.hidden) tryPlay(); });
+  });
+  function start() { if (!reduce && slides.length > 1) timer = setInterval(function () { show(i + 1); }, 3200); }
+  dots.forEach(function (d, k) { d.addEventListener("click", function () { clearInterval(timer); show(k); start(); }); });
+  start();
+
+  var HS = [
+    ["Пантограф", "Штанга под потолком сама опускается вниз. Достаёшь вещи без лестницы и табуретки."],
+    ["Штанга на уровне руки", "Одежда на каждый день висит там, где её удобно взять. Ничего не живёт на стуле."],
+    ["Полки с подсветкой", "Свет внутри шкафа: каждую вещь видно сразу, не нужно перебирать стопку."],
+    ["Выкатные секции", "Для белья выкатные секции: открываешь - и всё видно, ничего не падает."],
+    ["Ящики внизу", "Внизу большой модуль под одеяла, подушки и покрывала. Всё объёмное всегда под рукой."],
+    ["Место под чемоданы", "Чемоданы стоят внизу, а не под потолком. Достать перед поездкой - одно движение."]
+  ];
+  var hsDots = document.querySelectorAll(".hs .dot"), hsI = 0;
+  function hsShow(k) {
+    hsI = (k + HS.length) % HS.length;
+    hsDots.forEach(function (d, j) { d.classList.toggle("on", j === hsI); });
+    var n = document.querySelector(".hs-n"), t = document.querySelector(".hs-t"), d = document.querySelector(".hs-d");
+    if (n) { n.textContent = (hsI + 1) + " / " + HS.length; t.textContent = HS[hsI][0]; d.textContent = HS[hsI][1]; }
+  }
+  hsDots.forEach(function (d, j) { d.addEventListener("click", function () { hsShow(j); }); });
+  var hp = document.querySelector(".hs-prev"), hn = document.querySelector(".hs-next");
+  if (hp) hp.addEventListener("click", function () { hsShow(hsI - 1); });
+  if (hn) hn.addEventListener("click", function () { hsShow(hsI + 1); });
+  if (hsDots.length) hsShow(0);
+
+  var lr = document.getElementById("light-range");
+  if (lr) {
+    var lw = document.querySelector(".lt-warm"), lc = document.querySelector(".lt-cold"),
+        lk = document.getElementById("light-k"), ld = document.getElementById("light-d");
+    var lUpd = function () {
+      var v = +lr.value;
+      lw.style.opacity = Math.max(0, Math.min(1, (4000 - v) / 1300)) * .7;
+      lc.style.opacity = Math.max(0, Math.min(1, (v - 4000) / 2500)) * .75;
+      if (v < 3400) { lk.textContent = v + " K · тёплый"; ld.textContent = "Уют и отдых. Подходит для спальни и гостиной вечером."; }
+      else if (v < 4800) { lk.textContent = v + " K · нейтральный"; ld.textContent = "Цвета видны честно. Подходит для кухни, ванной и рабочего места."; }
+      else { lk.textContent = v + " K · холодный"; ld.textContent = "Бодрит, но в жилой комнате выглядит как в офисе. Дома - только точечно, например в гардеробе."; }
+    };
+    lr.addEventListener("input", lUpd); lUpd();
+  }
+
+  var TOURS = ["f55fKiZBqFwcE3yGJWE7G","9Jnn1Me9m9hrLkJ8vUcPWo","uMM9rwjAxvDojeA8xPE1Jw","cA116UJhhn68U3NtfENxop","foDSb9pDQ8eeBYDAsdqPpj","38X7wvtLKrb958qhc7aYup"
+   ,"vaQUM4FBkqbnhakKutAPQT","v9ULygxruipkr3qUipb6Hg","vPqkCWqhMqDght1BZKnUuf","kt5CHfGwkUUdH7Lbe4kSnf","ufxc834iWe99Q9AmGhd4J3","iK1Wsyf91GkD2ZwB1abS8c"
+   ,"XjBHEK7ZMVqeuPKyj3ACc","hD2CeXyiNQg6X6pG6e55e6","atniRBFegopQXNtXGRxk2k","njQPWtQ7r2D1SzRVndqE8M","iEJSKcjta8CiTzq8S8HSy6","jBaqToi3cpv44b94Qjj4sd"
+   ,"eY72X7m4VHK7i27WSezRpr","v72tcsW3L5JEy73RmpLWEs","uWAxnzWQv2nW1M792jcf2V","aWy2fZ6VGPaFYN5R4jEHmD","2aFyTS6JfZ4fYmi97kd3cz"];
+  var TOUR_NAMES = ["Гостиная", "Кухня-гостиная", "Ванная", "Гардеробная", "Кабинет"];
+  var tFrame = document.getElementById("tour-frame"), tOpen = document.getElementById("tour-open"),
+      tPills = document.getElementById("tour-pills"), tMore = document.getElementById("tour-more"), tLoaded = false;
+  if (tFrame && tPills) {
+    var tUrl = function (id) { return "https://panorama.homestyler.com/v2?m=p&id=" + id + "&locale=ru_RU"; };
+    var tShow = function (k) {
+      tFrame.src = tUrl(TOURS[k]); tOpen.href = tUrl(TOURS[k]); tLoaded = true;
+      Array.prototype.forEach.call(tPills.children, function (b, j) { b.setAttribute("aria-selected", j === k ? "true" : "false"); });
+    };
+    TOURS.forEach(function (id, k) {
+      var b = document.createElement("button");
+      b.type = "button"; b.setAttribute("role", "tab"); b.textContent = TOUR_NAMES[k] || "Проект " + (k + 1);
+      if (k >= 5) b.hidden = true;
+      b.addEventListener("click", function () { tShow(k); });
+      tPills.appendChild(b);
+    });
+    tMore.addEventListener("click", function () {
+      Array.prototype.forEach.call(tPills.children, function (b) { b.hidden = false; });
+      tMore.hidden = true;
+    });
+    var tCover = document.getElementById("tour-cover");
+    var tStart = function (k) { if (tCover) tCover.hidden = true; tShow(k); };
+    if (tCover) tCover.addEventListener("click", function () { tStart(0); });
+    Array.prototype.forEach.call(tPills.children, function (b, k) { b.addEventListener("click", function () { if (tCover) tCover.hidden = true; }); });
+    tOpen.href = tUrl(TOURS[0]);
+    var tSec = document.getElementById("tours");
+    if (tSec && "IntersectionObserver" in window) {
+      var tIO = new IntersectionObserver(function (es) {
+        if (!es[0].isIntersecting) return;
+        var l = document.createElement("link"); l.rel = "preconnect"; l.href = "https://panorama.homestyler.com"; document.head.appendChild(l);
+        tIO.disconnect();
+      }, { rootMargin: "600px 0px" });
+      tIO.observe(tSec);
+    }
+  }
+
+  document.querySelectorAll(".pcard").forEach(function (card, ci) {
+    var imgs = card.querySelectorAll(".pc-pics img"), dotsBox = card.querySelector(".pc-dots"), cur = 0;
+    var go = function (k) {
+      cur = (k + imgs.length) % imgs.length;
+      imgs.forEach(function (im, j) { im.classList.toggle("on", j === cur); });
+      Array.prototype.forEach.call(dotsBox.children, function (d, j) { d.classList.toggle("on", j === cur); });
+    };
+    imgs.forEach(function (im, j) {
+      var d = document.createElement("button"); d.type = "button"; d.setAttribute("aria-label", "Фото " + (j + 1));
+      d.addEventListener("click", function () { go(j); }); dotsBox.appendChild(d);
+    });
+    card.querySelector(".pc-next").addEventListener("click", function () { go(cur + 1); });
+    var sx = null, pics = card.querySelector(".pc-pics");
+    pics.addEventListener("touchstart", function (e) { sx = e.touches[0].clientX; }, { passive: true });
+    pics.addEventListener("touchend", function (e) { if (sx === null) return; var dx = e.changedTouches[0].clientX - sx; if (Math.abs(dx) > 40) go(cur + (dx < 0 ? 1 : -1)); sx = null; });
+    go(0);
+    var seen = false, userAt = 0, mark = function () { userAt = Date.now(); };
+    card.addEventListener("click", mark); pics.addEventListener("touchstart", mark, { passive: true });
+    if ("IntersectionObserver" in window) new IntersectionObserver(function (es) { seen = es[0].isIntersecting; }, { threshold: .4 }).observe(card);
+    if (!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) {
+      setTimeout(function () {
+        setInterval(function () { if (seen && Date.now() - userAt > 8000 && !document.hidden) go(cur + 1); }, 3500);
+      }, ci * 900);
+    }
+  });
+
+  var stT = document.getElementById("st-track"), stC = document.getElementById("st-count");
+  if (stT) {
+    var stN = stT.children.length;
+    var stCur = function () { return Math.round(stT.scrollLeft / stT.clientWidth); };
+    var stGo = function (k) { k = (k + stN) % stN; stT.scrollTo({ left: k * stT.clientWidth, behavior: reduce ? "auto" : "smooth" }); };
+    stT.addEventListener("scroll", function () { stC.textContent = (stCur() + 1) + " / " + stN; }, { passive: true });
+    document.getElementById("st-prev").addEventListener("click", function () { stGo(stCur() - 1); });
+    document.getElementById("st-next").addEventListener("click", function () { stGo(stCur() + 1); });
+  }
+  var mw = document.getElementById("more-works"), ow = document.getElementById("other-works");
+  if (mw && ow) mw.addEventListener("click", function () { ow.hidden = false; mw.hidden = true; });
+
+  var dock = document.querySelector(".dock"), hero = document.querySelector(".hero");
+  if (dock && hero && "IntersectionObserver" in window) {
+    var zones = [hero, document.getElementById("price"), document.getElementById("contact"), document.querySelector(".final")].filter(Boolean);
+    function dockCheck() {
+      dock.hidden = zones.some(function (el) { var r = el.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight; });
+    }
+    addEventListener("scroll", dockCheck, { passive: true });
+    addEventListener("resize", dockCheck);
+    dockCheck();
+  } else if (dock) { dock.hidden = false; }
+  function countUp(el) {
+    var to = parseFloat(el.dataset.to), suf = el.dataset.suf || "", dec = (el.dataset.to.split(".")[1] || "").length;
+    var t0 = null, dur = 1400;
+    function fmt(v) { var s = v.toFixed(dec).replace(".", ","); return s.replace(/\B(?=(\d{3})+(?!\d))/g, " ") + suf; }
+    if (reduce) { el.textContent = fmt(to); return; }
+    function step(ts) { if (!t0) t0 = ts; var k = Math.min(1, (ts - t0) / dur); k = 1 - Math.pow(1 - k, 3); el.textContent = fmt(to * k); if (k < 1) requestAnimationFrame(step); }
+    requestAnimationFrame(step);
+  }
+  var fx = document.querySelectorAll(".type, .frame, [data-to]");
+  if ("IntersectionObserver" in window) {
+    var fo = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add("in");
+        fo.unobserve(e.target);
+      });
+    }, { rootMargin: "0px 0px -15% 0px" });
+    fx.forEach(function (el) { fo.observe(el); });
+  } else { fx.forEach(function (el) { el.classList.add("in"); }); }
+
+  var cmp = document.getElementById("compare"), rng = document.getElementById("compare-range");
+  var cTabs = document.getElementById("cmp-tabs"), cCap = document.getElementById("compare-cap");
+  if (cmp && cTabs && cCap) {
+    var cAfter = cmp.querySelector(":scope > img"), cBefore = cmp.querySelector(".before img"), cL = cmp.querySelector(".tag.l"), cR = cmp.querySelector(".tag.r");
+    var CMP = [
+      { b: "https://nigora13.github.io/mareta-draft/img/plan-before.jpg", a: "https://nigora13.github.io/mareta-draft/img/plan-after.jpg", l: "До", r: "После", alt: "Исходная планировка дома и моя планировка после консультации", cap: cCap.innerHTML },
+      { one: "https://nigora13.github.io/mareta-draft/img/plan-razbor.jpg", alt: "Мой разбор исходного плана: недочёты отмечены красными линиями", cap: "<span><b>Мой разбор:</b> красными линиями - что я бы поменяла в исходном плане</span>" },
+      { b: "https://nigora13.github.io/mareta-draft/img/plan2-other.jpg", a: "https://nigora13.github.io/mareta-draft/img/plan2-mine.jpg", l: "Другая студия", r: "Мой план", alt: "Планировка другой студии и моя планировка того же объекта", cap: "<span><b>Слева:</b> проект другой студии</span><span><b>Справа:</b> моя планировка, 116,5 м²</span>" }
+    ];
+    Array.prototype.forEach.call(cTabs.children, function (btn, k) {
+      btn.addEventListener("click", function () {
+        var d = CMP[k];
+        Array.prototype.forEach.call(cTabs.children, function (b, j) { b.setAttribute("aria-selected", j === k ? "true" : "false"); });
+        cmp.classList.toggle("single", !!d.one);
+        if (d.one) { cAfter.src = d.one; } else { cAfter.src = d.a; cBefore.src = d.b; cL.textContent = d.l; cR.textContent = d.r; cmp.style.setProperty("--x", "50%"); rng.value = 50; }
+        cAfter.alt = d.alt; cCap.innerHTML = d.cap;
+        var st = document.querySelector(".story-text"); if (st) st.hidden = k === 2;
+      });
+    });
+  }
+  if (cmp && rng) {
+    var setX = function (v) { cmp.style.setProperty("--x", v + "%"); };
+    rng.addEventListener("input", function () { setX(rng.value); });
+    if (!reduce && "IntersectionObserver" in window) {
+      var hinted = false;
+      new IntersectionObserver(function (es, o) {
+        es.forEach(function (e) {
+          if (!e.isIntersecting || hinted) return; hinted = true; o.disconnect();
+          var t0 = null;
+          (function an(ts) { if (!t0) t0 = ts; var k = Math.min(1, (ts - t0) / 2200);
+            var v = 50 + 32 * Math.sin(k * Math.PI * 2) * (1 - k); setX(v.toFixed(1)); rng.value = v;
+            if (k < 1) requestAnimationFrame(an); else { setX(50); rng.value = 50; } })(performance.now());
+        });
+      }, { threshold: .5 }).observe(cmp);
+    }
+  }
+
+  document.documentElement.classList.add("js");
+  var rises = document.querySelectorAll(".rise");
+  rises.forEach(function (el) {
+    var kids = el.parentElement ? Array.prototype.indexOf.call(el.parentElement.children, el) : 0;
+    el.style.transitionDelay = Math.min(kids, 6) * 90 + "ms";
+  });
+  if ("IntersectionObserver" in window) {
+    var ro = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); ro.unobserve(e.target); } });
+    }, { rootMargin: "0px 0px -12% 0px" });
+    rises.forEach(function (el) {
+      if (el.getBoundingClientRect().top < innerHeight) el.classList.add("in"); else ro.observe(el);
+    });
+  } else { rises.forEach(function (el) { el.classList.add("in"); }); }
+
+  var screens = document.querySelectorAll(".screen");
+  var ticking = false;
+  function upd() {
+    ticking = false;
+    var h = innerHeight;
+    screens.forEach(function (s) {
+      var r = s.getBoundingClientRect();
+      var p = (h - r.top) / (r.height);
+      p = Math.max(0, Math.min(1, p));
+      s.style.setProperty("--p", p.toFixed(3));
+    });
+  }
+  if (!reduce) {
+    addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(upd); } }, { passive: true });
+    addEventListener("resize", upd);
+    upd();
+  } else { screens.forEach(function (s) { s.style.setProperty("--p", "1"); }); }
+})();
+</script>
+<script>
+(function () {
+  var items = [].slice.call(document.querySelectorAll("#program .program details")).slice(0, 14);
+  var card = document.getElementById("plan-card");
+  if (!card || !items.length) return;
+  function txt(el, s) { var x = el.querySelector(s); return x ? x.textContent : ""; }
+  function show(n) {
+    var it = items[n - 1]; if (!it) return;
+    card.innerHTML = '<span class="ln">Урок ' + txt(it, ".n") + '</span><h3></h3><p></p><span class="d"></span>';
+    card.querySelector("h3").textContent = txt(it, ".t");
+    card.querySelector("p").textContent = txt(it, ".body");
+    card.querySelector(".d").textContent = txt(it, ".d");
+    [].forEach.call(document.querySelectorAll(".room"), function (r) { r.classList.toggle("on", +r.getAttribute("data-l") === n); });
+    [].forEach.call(document.querySelectorAll(".plan-extra button"), function (b) { b.classList.toggle("on", +b.getAttribute("data-l") === n); });
+    var cr = card.getBoundingClientRect(); if (cr.bottom > innerHeight - 80 || cr.top < 0) card.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+  [].forEach.call(document.querySelectorAll(".room"), function (r) {
+    r.addEventListener("click", function () { show(+r.getAttribute("data-l")); });
+    r.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); show(+r.getAttribute("data-l")); } });
+  });
+  [].forEach.call(document.querySelectorAll(".plan-extra button"), function (b) {
+    b.addEventListener("click", function () { show(+b.getAttribute("data-l")); });
+  });
+})();
+</script>
