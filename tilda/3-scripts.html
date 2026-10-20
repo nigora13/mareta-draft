@@ -174,9 +174,9 @@
   if (cmp && cTabs && cCap) {
     var cAfter = cmp.querySelector(":scope > img"), cBefore = cmp.querySelector(".before img"), cL = cmp.querySelector(".tag.l"), cR = cmp.querySelector(".tag.r");
     var CMP = [
-      { b: "https://nigora13.github.io/mareta-draft/img/plan-before.jpg", a: "https://nigora13.github.io/mareta-draft/img/plan-after.jpg", l: "До", r: "После", alt: "Исходная планировка дома и моя планировка после консультации", cap: cCap.innerHTML },
-      { one: "https://nigora13.github.io/mareta-draft/img/plan-razbor.jpg", alt: "Мой разбор исходного плана: недочёты отмечены красными линиями", cap: "<span><b>Мой разбор:</b> красными линиями - что я бы поменяла в исходном плане</span>" },
-      { b: "https://nigora13.github.io/mareta-draft/img/plan2-other.jpg", a: "https://nigora13.github.io/mareta-draft/img/plan2-mine.jpg", l: "Другая студия", r: "Мой план", alt: "Планировка другой студии и моя планировка того же объекта", cap: "<span><b>Слева:</b> проект другой студии</span><span><b>Справа:</b> моя планировка, 116,5 м²</span>" }
+      { b: "https://static.tildacdn.com/tild6339-3035-4861-a232-363361366633/plan-before.jpg", a: "https://static.tildacdn.com/tild3165-3965-4038-b866-353666623738/plan-after.jpg", l: "До", r: "После", alt: "Исходная планировка дома и моя планировка после консультации", cap: cCap.innerHTML },
+      { one: "https://static.tildacdn.com/tild3534-6431-4330-b064-323261616663/plan-razbor.jpg", alt: "Мой разбор исходного плана: недочёты отмечены красными линиями", cap: "<span><b>Мой разбор:</b> красными линиями - что я бы поменяла в исходном плане</span>" },
+      { b: "https://static.tildacdn.com/tild3437-6462-4237-b230-633566356462/plan2-other.jpg", a: "https://static.tildacdn.com/tild3262-3264-4162-b031-383135363763/plan2-mine.jpg", l: "Другая студия", r: "Мой план", alt: "Планировка другой студии и моя планировка того же объекта", cap: "<span><b>Слева:</b> проект другой студии</span><span><b>Справа:</b> моя планировка, 116,5 м²</span>" }
     ];
     Array.prototype.forEach.call(cTabs.children, function (btn, k) {
       btn.addEventListener("click", function () {
