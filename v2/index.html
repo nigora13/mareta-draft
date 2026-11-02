@@ -563,6 +563,20 @@ footer a { color: var(--mute); }
 .stw figure { margin: 0; border: 1px solid var(--line); background: var(--panel); }
 .stw img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
 .stw figcaption { padding: 10px 14px; font-size: 14px; color: var(--mute); }
+.case-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 10px; margin: 12px 0 14px; }
+.case-facts div { padding: 16px 18px; border: 1px solid var(--line); background: var(--panel); min-width: 0; }
+.case-facts b { display: block; color: var(--gold); font-weight: 400; font-size: 14px; margin-bottom: 6px; }
+.case-facts p { margin: 0; font-size: 15px; line-height: 1.5; }
+.stw-grid.two { grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }
+.stw-grid.two img { aspect-ratio: auto; object-fit: contain; background: #fff; }
+.flow { list-style: none; margin: 0 0 18px; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 10px; counter-reset: fl; }
+.flow li { counter-increment: fl; padding: 18px 20px; border: 1px solid var(--line); background: var(--panel); font-family: var(--f-display); font-size: 21px; line-height: 1.25; }
+.flow li::before { content: counter(fl) " →"; display: block; font-family: var(--f-mono); font-size: 13px; color: var(--gold); margin-bottom: 8px; }
+.flow li:last-child::before { content: counter(fl); }
+.flow b { font-weight: 400; }
+.video-slot { aspect-ratio: 16 / 9; max-width: 760px; display: grid; place-items: center; text-align: center; padding: 20px; border: 1px dashed var(--gold); color: var(--mute); margin-bottom: 18px; }
+.ld-more > summary { cursor: pointer; color: var(--gold); padding: 12px 0; font-size: 16px; }
+.ld-more[open] > summary { margin-bottom: 12px; }
 .lesson-demo { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 16px; }
 .ld-col { background: var(--panel); border: 1px solid var(--line); padding: clamp(18px, 3vw, 28px); min-width: 0; }
 .ld-tag { display: inline-block; margin-bottom: 14px; color: var(--gold); font-size: 14px; }
@@ -650,14 +664,17 @@ footer a { color: var(--mute); }
         <div><b>Вопросы бригаде</b><span>Что закрыть до старта работ</span></div>
       </div>
       <div class="stw rise">
-        <h3>Работы учениц курса</h3>
-        <p>Визуализации из проектов четырёх учениц.</p>
-        <div class="stw-grid">
-          <figure><img src="img/st1.jpg" alt="Работа ученицы: детская на двоих" loading="lazy"><figcaption>Детская</figcaption></figure>
-          <figure><img src="img/st2.jpg" alt="Работа ученицы: кухня-столовая" loading="lazy"><figcaption>Кухня-столовая</figcaption></figure>
-          <figure><img src="img/st3.jpg" alt="Работа ученицы: гостиная с кухней" loading="lazy"><figcaption>Гостиная с кухней</figcaption></figure>
-          <figure><img src="img/st4.jpg" alt="Работа ученицы: спальня" loading="lazy"><figcaption>Спальня</figcaption></figure>
+        <h3>Работа ученицы: Анна, Тюмень</h3>
+        <div class="case-facts">
+          <div><b>С какой задачей пришла</b><p>Продумать две квартиры: сестры - уже сдана, и свою - ещё строится.</p></div>
+          <div><b>Что сделала сама</b><p>Обмерный план и расстановку мебели по комнатам в Remplanner, два варианта ванной.</p></div>
+          <div><b>Что решили</b><p>На вопрос, какой вариант ванной лучше, Марета подсказала: "Можно поменять расположение двери, чтоб не переделывать канализацию".</p></div>
         </div>
+        <div class="stw-grid two">
+          <figure><img src="img/an1.jpg" alt="Обмерный план квартиры, сделанный ученицей в Remplanner" loading="lazy"><figcaption>Обмерный план - задание первого урока</figcaption></figure>
+          <figure><img src="img/an2.jpg" alt="Расстановка мебели по комнатам, сделанная ученицей в Remplanner" loading="lazy"><figcaption>Расстановка мебели по комнатам</figcaption></figure>
+        </div>
+        <p class="compare-cap">Из чата курса, январь - февраль 2026. Планы - скриншоты Анны из Remplanner.</p>
       </div>
       <div class="student-slot rise">
         <h3>"Это мой первый в жизни дизайн проект"</h3>
@@ -699,7 +716,14 @@ footer a { color: var(--mute); }
         <h2 id="h-lesson">Так ты будешь работать <span class="acc">со своей планировкой</span></h2>
         <p>Кусочек первого урока, коротко. Уроки - не часовые лекции: понятные шаги и задание на твоём доме или квартире. Для тех, кто работает и не может сидеть над уроками часами.</p>
       </div>
-      <div class="lesson-demo rise">
+      <ol class="flow rise">
+        <li><b>Смотришь объяснение</b></li>
+        <li><b>Повторяешь на своём доме или квартире</b></li>
+        <li><b>Сохраняешь готовый этап</b></li>
+      </ol>
+      <div class="video-slot rise">Здесь будет фрагмент видео первого урока, 30-60 секунд: действие в программе и результат.</div>
+      <details class="ld-more rise"><summary>Подробно: шаги и задание первого урока</summary>
+      <div class="lesson-demo">
         <div class="ld-col">
           <span class="ld-tag">Урок 1. Обмеры и первый план</span>
           <ol class="ld-steps">
@@ -722,6 +746,7 @@ footer a { color: var(--mute); }
           <p class="ld-note">Если что-то не получается - отправь в чат курса скриншот того места и конкретный вопрос. Не нужно откладывать всё задание из-за одного непонятного инструмента.</p>
         </div>
       </div>
+      </details>
     </div>
   </section>
 
@@ -743,7 +768,7 @@ footer a { color: var(--mute); }
         <li><span class="n">09</span><div><b>Демонтаж, возведение и согласования</b><span>План демонтажа и новых перегородок, какие вопросы задать специалисту по перепланировке.</span></div><span class="d">текст + PDF</span></li>
         <li><span class="n">10</span><div><b>Сантехника: от расстановки до подключений</b><span>Перенос приборов, выводы воды и канализации, задание для сантехника.</span></div><span class="d">текст + PDF</span></li>
         <li><span class="n">11</span><div><b>Освещение: свет для жизни</b><span>Сценарии света, рабочий и декоративный свет, план светильников.</span></div><span class="d">текст + PDF</span></li>
-        <li><span class="n">12</span><div><b>Розетки: сначала техника и мебель</b><span>Почему розетки ставят после выбора техники и как отдать понятный план электрику.</span></div><span class="d">текст + PDF</span></li>
+        <li><span class="n">12</span><div><b>Розетки: сначала техника и мебель</b><span>Как спланировать розетки под конкретную мебель и технику и отдать понятный план электрику.</span></div><span class="d">текст + PDF</span></li>
         <li><span class="n">13</span><div><b>Выключатели: понятное управление светом</b><span>Группы света, проходные выключатели, нумерация для электрика.</span></div><span class="d">текст + PDF</span></li>
         <li><span class="n">14</span><div><b>Финальная проверка: готов ли проект к ремонту</b><span>Поиск мебели по фото, список покупок, выбор бригады и вопросы, которые нужно закрыть до начала работ.</span></div><span class="d">видео + PDF</span></li>
         <li><span class="n">+</span><div><b>Бонусы: реальные проекты</b><span>Полные проекты, в том числе квартира 45 м² и детская, чтобы видеть, как выглядит готовый результат.</span></div><span class="d">5 PDF</span></li>
