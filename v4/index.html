@@ -314,7 +314,7 @@ addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd
 
   var dock = document.querySelector(".dock"), hero = document.querySelector(".hero");
   if (dock && hero && "IntersectionObserver" in window) {
-    var zones = [hero, document.getElementById("price"), document.getElementById("contact"), document.querySelector(".final")].filter(Boolean);
+    var zones = [document.getElementById("price"), document.getElementById("contact"), document.querySelector(".final")].filter(Boolean);
     function dockCheck() {
       dock.hidden = zones.some(function (el) { var r = el.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight; });
     }
